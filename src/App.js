@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container } from "react-bootstrap";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import {BrowserRouter as Router,Route} from 'react-router-dom'
+import HomeScreen from './screens/HomeScreen'
+import Office from './screens/Office'
+import OutGoingPackage from './screens/OutGoingPackage'
+import IncomingPackage from './screens/IncomingPackage'
+import Contact from './components/Contact'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <main className="py-3" >
+        <Container>
+          <Route path='/' component={HomeScreen} exact />
+          <Route path='/mypage' component={Office} exact />
+          <Route path='/incoming' component={IncomingPackage}  exact/>
+          <Route path='/outgoing' component={OutGoingPackage}  exact/>
+          <Route path='/contact' component={Contact}  exact/>
+        </Container>
+      </main>
+      <Footer />
+    </Router>
   );
 }
 
