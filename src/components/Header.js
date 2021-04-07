@@ -61,6 +61,22 @@ function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
+        <Container className="text-center">
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="m-auto">
+              <Nav.Link href="/mypage">My Page</Nav.Link>
+              <Nav.Link href="/incoming">Incoming Package</Nav.Link>
+              <Nav.Link href="/outgoing">OutGoing Package</Nav.Link>
+            </Nav>
+            <Nav className="inline ml-3">
+              <Nav.Link href="/balance"><i className="fas fa-wallet"></i>Balance $75.0</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+          </Navbar>
     </header>
   );
 }
