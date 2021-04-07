@@ -7,6 +7,7 @@ import Office from './screens/Office'
 import OutGoingPackage from './screens/OutGoingPackage'
 import IncomingPackage from './screens/IncomingPackage'
 import Contact from './components/Contact'
+import AddNewIncomingPck from './screens/AddNewIncomingPck'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/incoming' component={IncomingPackage}  exact/>
           <Route path='/outgoing' component={OutGoingPackage}  exact/>
           <Route path='/contact' component={Contact}  exact/>
+          <Route path='/add-incoming' component={AddNewIncomingPck} exact />
         </Container>
       </main>
       <Footer />
