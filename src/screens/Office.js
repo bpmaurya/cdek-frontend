@@ -16,7 +16,7 @@ function Office() {
               <div>
                 <p>New incoming packages and packages in stock</p>
                 <h2 style={{ color: "#1ab248" }}>
-                  <i class="fas fa-box-open"></i> Incoming Packages
+                  <i className="fas fa-box-open"></i> Incoming Packages
                 </h2>
               </div>
 
@@ -43,35 +43,35 @@ function Office() {
             <div className="m-5 text-center">
               <div className="profile">
                 <div className="info-client">
-                  <div class="num m-4">Customer number: #51463</div>
-                  <div class="fio">Nvidia Shield</div>
+                  <div className="num m-4">Customer number: #51463</div>
+                  <div className="fio">Nvidia Shield</div>
                   <li>
-                    <a href="/office/profile" class="profile-link">
+                    <a href="/office/profile" className="profile-link">
                       Profile
                     </a>
                   </li>
                   <li>
-                    <a href="/office/tariff" class="tariff">
+                    <a href="/office/tariff" className="tariff">
                       Tariff: Standard
                     </a>
                   </li>
                   <li>
-                    <a href="/office/recipient" class="recipients">
+                    <a href="/office/recipient" className="recipients">
                       Recipients
                     </a>
                   </li>
                   <li>
-                    <a href="/office/address" class="address">
+                    <a href="/office/address" className="address">
                       Delivery addresses
                     </a>
                   </li>
                   <li>
-                    <a href="/office/profile/password" class="change-password">
+                    <a href="/office/profile/password" className="change-password">
                       Change password
                     </a>
                   </li>
-                  <div class="line">
-                    <a href="/logout" class="exit">
+                  <div className="line">
+                    <a href="/logout" className="exit">
                       Log out
                     </a>
                   </div>
@@ -90,7 +90,7 @@ function Office() {
                 <p>New incoming packages and packages in stock</p>
                 <h2 style={{ color: "#1ab248" }}>
                   {" "}
-                  <i class="fas fa-box-open"></i> OutGoing Packages
+                  <i className="fas fa-box-open"></i> OutGoing Packages
                 </h2>
               </div>
 
@@ -119,7 +119,7 @@ function Office() {
                 style={{ background: "#e5fae8" }}
                 className="text-center text-align-center item-align-center">
                 <div className="m-3" style={{color:"red"}}>
-                  <i class="fas fa-hand-paper fa-9x"></i>
+                  <i className="fas fa-hand-paper fa-9x"></i>
                 </div>
                 <div className="m-3">
                   <p>Prohibited Shipping Items</p>
@@ -139,10 +139,10 @@ function Office() {
                 className="text-center"
                 style={{ background: "#dff5ff" }}>
                 <div className="m-3" style={{color:"red"}}>
-                  <i class="fas fa-hand-paper fa-9x "></i>
+                  <i className="fas fa-hand-paper fa-9x "></i>
                 </div>
                 <div className="m-3">
-                  <p>customer Limit Russia</p>
+                  <p>customer Limit In Russia</p>
                 </div>
                 <div className="m-3">
                   <Button
@@ -166,7 +166,7 @@ function Office() {
         <Col>
           <Col className="col-md-12 col-sm-6 col-xs-12" style={{ height: "40vh" }}>
             <h2>
-              <i class="fas fa-location"></i>Your warehouse location:
+              <i className="fas fa-location"></i>Your warehouse location:
             </h2>
             <p>No News Feed Till now</p>
           </Col>

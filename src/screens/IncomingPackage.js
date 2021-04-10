@@ -1,21 +1,27 @@
-import React, { useState, useEffect } from "react";
+import { useDispatch,useSelector } from 'react-redux'
 import axios from "axios";
+import React, { useState, useEffect } from "react";
+import {Link} from 'react-router-dom'
 import { Row, Col, Form, FormControl, Button, Card,Collapse} from "react-bootstrap";
-import API from "../apiUrl.json";
-function IncomingPackage() {
-  const [incomingPackages, setIncomingPackages] = useState([]);
+import { listIncomingPackage } from "../actions/incomimgPackageActions"
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+
+function IncomingPackage({}) {
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch()
+  const incomingPackageList = useSelector(state=> state.incomingPackageList)
+  const {error,loading, incomingPackages} = incomingPackageList
 
   useEffect(() => {
-    async function fetchIncomingPackage() {
-      var url = API.baseUrl + API.incomingPackage;
-      const { data } = await axios.get(url);
-      setIncomingPackages(data);
-      console.log(data);
-    }
 
-    fetchIncomingPackage();
-  }, []);
+    dispatch(listIncomingPackage())
+    // fetchProduct()
+
+  }, [dispatch]);
+
+  console.log(incomingPackages);
+  
 
   return (
     <div>
@@ -46,17 +52,22 @@ function IncomingPackage() {
           </Form>
         </Col>
         <Col md={3} className="text-center align-items-center">
-          <p> arriving 2 items </p>
+          {/* <p> arriving {incomingPackages.length} items </p> */}
         </Col>
       </Row>
 
-      <Row>
+
+
+      {loading ? <Loader/>
+        : error ? <Message variant='danger' >{error} </Message>
+        :  <Row>
         {incomingPackages.map((product) => (
           <Card className="container p-md-3 m-3">
+              <Link to={`/incoming/${product._id}`} >
             <Row>
               <Col
                 md={4}
-                onClick={() => setOpen(!open)}
+                // onClick={() => setOpen(!open)}
                 aria-controls="example-collapse-text"
                 aria-expanded={open}>
                 <a  style={{ color: "#4bbf73", fontWeight: "bold" }}>
@@ -73,6 +84,7 @@ function IncomingPackage() {
                 <p> 20 </p>
               </Col>
             </Row>
+            </Link> 
             <Row>
               <Col md={12}>
                 <Collapse in={open}>
@@ -88,6 +100,8 @@ function IncomingPackage() {
           </Card>
         ))}
       </Row>
+       }
+     
 
       <Row>
         <Card className="container p-md-3 m-3">
@@ -107,7 +121,7 @@ function IncomingPackage() {
         </Card>
       </Row>
 
-      <Row className="text-center">
+      {/* <Row className="text-center">
         {incomingPackages.map((product) => (
           <Col sm={12} md={6} lg={4} xl={3}>
             <h3> {product.name} </h3>
@@ -119,7 +133,7 @@ function IncomingPackage() {
             <p>{product.product} </p>
           </Col>
         ))}
-      </Row>
+      </Row> */}
     </div>
   );
 }

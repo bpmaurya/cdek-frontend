@@ -71,8 +71,8 @@ function AddNewIncomingPck() {
                 </Col>
                 <Col md={3}>
                   <Form.Group controlId="exampleForm.ControlInput1">
-                    <Form.Label>Product Name(in English)</Form.Label>
-                    <Form.Control type="text" placeholder="package name" />
+                    <Form.Label>Product Price</Form.Label>
+                    <Form.Control type="number" placeholder="product price" />
                   </Form.Group>
                 </Col>
               </Row>
@@ -85,7 +85,7 @@ function AddNewIncomingPck() {
                 </Col>
                 <Col>
                   <Form.Group controlId="exampleForm.ControlInput1">
-                    <Form.Label>Product Colour</Form.Label>
+                    <Form.Label>Product Quantity</Form.Label>
                     <Form.Control type="text" placeholder="" />
                   </Form.Group>
                 </Col>

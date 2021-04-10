@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector,useDispatch } from 'react-redux'
 import {
   Navbar,
   Nav,
@@ -8,10 +9,28 @@ import {
   Form,
   FormControl,
   Button,
-  NavDropdown
+  NavDropdown,
 } from "react-bootstrap";
+import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from "react-router-dom";
 import logo from "../logo.svg";
+import { logout } from '../actions/userActions'
 function Header() {
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
+  const dispatch = useDispatch()
+
+  const logoutHandler = ()=>{
+    console.log('logout');
+    dispatch(logout())
+    
+  }
+
+
+
+
   return (
     <header>
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
@@ -25,7 +44,9 @@ function Header() {
             <Nav className="mr-auto">
               <Nav.Link href="/News">News</Nav.Link>
               <Nav.Link href="/fee">Service fee</Nav.Link>
-              <Nav.Link href="/contact">contact</Nav.Link>
+              <Nav.Link>
+                <Link to="/contact">contact</Link>
+              </Nav.Link>
             </Nav>
             {/* <Form inline>
               <FormControl
@@ -36,10 +57,17 @@ function Header() {
               <Button variant="outline-success">Search</Button>
             </Form> */}
             <Nav className="inline">
-              <Nav.Link href="/country"><i className="fas fa-location-arrow"></i>Country</Nav.Link>
+              <Nav.Link href="/country">
+                <i className="fas fa-location-arrow"></i>Country
+              </Nav.Link>
               <Nav.Link href="/language">En</Nav.Link>
+
+             
+
+              {userInfo ? (
+
               <NavDropdown title="Profile" id="basic-nav-dropdown">
-                <NavDropdown.Item >ACCOUNT NUMBER #51463 </NavDropdown.Item>
+                <NavDropdown.Item >{userInfo.name} #51463 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/mypage">
                 <i className="fas fa-id-badge m-2"></i>My Page
@@ -56,7 +84,19 @@ function Header() {
                 <NavDropdown.Item href="/setting">
                 <i className="fas fa-unlock m-2"></i> Change Password
                 </NavDropdown.Item>
+                <NavDropdown.Item onClick={logoutHandler} >
+                <i className="fas fa-unlock m-2"></i> Log out
+                </NavDropdown.Item>
               </NavDropdown>
+              ):(
+                <Nav.Link>
+                <Link to="/login"><Button variant="success">Login</Button>{' '}</Link>
+              </Nav.Link>
+
+              )
+              
+              }
+
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -72,11 +112,13 @@ function Header() {
               <Nav.Link href="/outgoing">OutGoing Package</Nav.Link>
             </Nav>
             <Nav className="inline ml-3">
-              <Nav.Link href="/balance"><i className="fas fa-wallet"></i>Balance $75.0</Nav.Link>
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-          </Navbar>
+              <Nav.Link href="/balance">
+                <i className="fas fa-wallet"></i>Balance $75.0
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     </header>
   );
 }

@@ -8,6 +8,9 @@ import OutGoingPackage from './screens/OutGoingPackage'
 import IncomingPackage from './screens/IncomingPackage'
 import Contact from './components/Contact'
 import AddNewIncomingPck from './screens/AddNewIncomingPck'
+import IncomingPackageDetails from './screens/IncomingPackageDetails'
+import Login from './screens/Login'
+import Register from './screens/Register'
 
 function App() {
   return (
@@ -16,11 +19,15 @@ function App() {
       <main className="py-3" >
         <Container>
           <Route path='/' component={HomeScreen} exact />
+          <Route path ='/login' component={Login} exact />
+          <Route path ='/register' component={Register} exact />
+
           <Route path='/mypage' component={Office} exact />
           <Route path='/incoming' component={IncomingPackage}  exact/>
           <Route path='/outgoing' component={OutGoingPackage}  exact/>
           <Route path='/contact' component={Contact}  exact/>
           <Route path='/add-incoming' component={AddNewIncomingPck} exact />
+          <Route path='/incoming/:_id' component={IncomingPackageDetails} exact/>
         </Container>
       </main>
       <Footer />
