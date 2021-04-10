@@ -16,7 +16,7 @@ export const listIncomingPackage = () => async(dispatch) => {
     try {
         dispatch({type:INCOMING_PACKAGE_REQUEST})
         var url = API.baseUrl 
-        const  {data} = await axios.get(`${url}/incoming`,{
+        const  {data} = await axios.get(`${url}/incoming/`,{
             headers: {'Access-Control-Allow-Origin': '*'}
         });
 
