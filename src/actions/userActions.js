@@ -10,6 +10,7 @@ import {
     USER_REGISTER_FAIL
 
  } from '../constants/userConstant'
+ import API from '../apiUrl.json'
 
 export const login = (email,password) => async(dispatch)=>{
     try{
@@ -22,7 +23,8 @@ export const login = (email,password) => async(dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        const {data} = await axios.post('/users/login/',{
+        var url = API.baseUrl 
+        const {data} = await axios.post(`${url}/users/login/`,{
             'username':email,'password':password
         },config)
 
@@ -67,7 +69,8 @@ export const register = (name,email,password) => async(dispatch)=>{
                 'Content-type':'application/json'
             }
         }
-        const {data} = await axios.post('/users/register/',{
+        var url = API.baseUrl 
+        const {data} = await axios.post(`${url}/users/register/`,{
             'name':name,'email':email,'password':password
         },config)
 

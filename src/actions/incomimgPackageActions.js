@@ -15,8 +15,8 @@ import API from '../apiUrl.json'
 export const listIncomingPackage = () => async(dispatch) => {
     try {
         dispatch({type:INCOMING_PACKAGE_REQUEST})
-        // var url = API.baseUrl + API.incomingPackage;
-        const  {data} = await axios.get('/incoming',{
+        var url = API.baseUrl 
+        const  {data} = await axios.get(`${url}/incoming`,{
             headers: {'Access-Control-Allow-Origin': '*'}
         });
 
@@ -45,8 +45,8 @@ export const listIncomingPackage = () => async(dispatch) => {
 export const listIncomingPackageDetails = (_id) => async(dispatch) => {
     try {
         dispatch({type:INCOMING_PACKAGE_DETAIL_REQUEST})
-        // var url = API.baseUrl + API.incomingPackage;
-        const  {data} = await axios.get(`/incoming/${_id}`,{
+        var url = API.baseUrl
+        const  {data} = await axios.get(`${url}/incoming/${_id}`,{
             headers: {'Access-Control-Allow-Origin': '*'}
         });
 
