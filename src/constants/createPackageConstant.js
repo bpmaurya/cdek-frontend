@@ -1,0 +1,5 @@
+//FOR create incoming package constant
+
+export const CREATE_PACKAGE_REQUEST = 'CREATE_PACKAGE_REQUEST'
+export const CREATE_PACKAGE_SUCCESS ='CREATE_PACKAGE_SUCCESS'
+export const CREATE_PACKAGE_FAIL ='CREATE_PACKAGE_FAIL'

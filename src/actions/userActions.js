@@ -7,7 +7,17 @@ import {
 
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
-    USER_REGISTER_FAIL
+    USER_REGISTER_FAIL,
+
+    USER_DETAILS_REQUEST,
+    USER_DETAILS_SUCCESS,
+    USER_DETAILS_FAIL,
+    USER_DETAILS_RESET,
+
+    USER_PROFILE_UPDATE_REQUEST,
+    USER_PROFILE_UPDATE_SUCCESS,
+    USER_PROFILE_UPDATE_FAIL,
+    USER_PROFILE_RESET
 
  } from '../constants/userConstant'
  import API from '../apiUrl.json'
@@ -53,6 +63,10 @@ export const logout = ()=> async(dispatch)=>{
         type:USER_LOGOUT,
 
     })
+    dispatch({
+        type:USER_DETAILS_RESET,
+
+    })
 }
 
 
@@ -83,12 +97,104 @@ export const register = (name,email,password) => async(dispatch)=>{
             type:USER_LOGIN_SUCCESS,
             payload:data
         })
-        
+        // localStorage.setItem('userInfo',JSON.stringify(data))
 
     }
     catch(error){
         dispatch({
             type:USER_REGISTER_FAIL,
+            payload:error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+        })
+
+    }
+}
+
+
+//for user details actions
+export const getUserDetails = (_id) => async(dispatch,getState)=>{
+    try{
+        dispatch({
+            type:USER_DETAILS_REQUEST,
+
+        })
+
+        const {
+            userLogin:{userInfo},
+
+        } = getState()
+
+
+
+        const config={
+            headers:{
+                'Content-type':'application/json',
+                Authorization: `Bearer ${userInfo.token} `
+            }
+        }
+        var url = API.baseUrl 
+        const {data} = await axios.get(`${url}/users/${_id}/`,config)
+
+        dispatch({
+            type:USER_DETAILS_SUCCESS,
+            payload:data
+        })
+
+    }
+    catch(error){
+        dispatch({
+            type:USER_DETAILS_FAIL,
+            payload:error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+        })
+
+    }
+}
+
+//for user update details actions
+export const updateUserProfile = (user) => async(dispatch,getState)=>{
+    try{
+        dispatch({
+            type:USER_PROFILE_UPDATE_REQUEST,
+
+        })
+
+        const {
+            userLogin:{userInfo},
+
+        } = getState()
+
+
+
+        const config={
+            headers:{
+                'Content-type':'application/json',
+                Authorization: `Bearer ${userInfo.token} `
+            }
+        }
+        var url = API.baseUrl 
+        const {data} = await axios.put(`${url}/users/profile/update/`,
+        user,
+        config)
+
+        dispatch({
+            type:USER_PROFILE_UPDATE_SUCCESS,
+            payload:data
+        })
+
+        dispatch({
+            type:USER_LOGIN_SUCCESS,
+            payload:data
+        })
+
+        localStorage.setItem('userInfo',JSON.stringify(data))
+
+    }
+    catch(error){
+        dispatch({
+            type:USER_PROFILE_UPDATE_FAIL,
             payload:error.response && error.response.data.message
             ? error.response.data.message
             : error.message,

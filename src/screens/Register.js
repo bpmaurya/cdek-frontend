@@ -35,7 +35,7 @@ function Register({location,history}) {
     const submitHandler = (e)=>{
         e.preventDefault()
 
-        if(password != confirmPassword){
+        if(password !== confirmPassword){
             setMessage('password do not match')
         }else{
             dispatch(register( name,email,password))

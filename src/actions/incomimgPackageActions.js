@@ -12,11 +12,22 @@ import {
 import API from '../apiUrl.json'
 
 //This is for list of all incoming package
-export const listIncomingPackage = () => async(dispatch) => {
+export const listIncomingPackage = () => async(dispatch,getState) => {
     try {
         dispatch({type:INCOMING_PACKAGE_REQUEST})
+        const {
+            userLogin:{userInfo},
+
+        } = getState()
+
+        const config={
+            headers:{
+                'Content-type':'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
         var url = API.baseUrl
-        const  {data} = await axios.get(`${url}/incoming/`);
+        const  {data} = await axios.get(`${url}/incoming/`,config);
 
         dispatch({
             type:INCOMING_PACKAGE_SUCCESS,
@@ -44,7 +55,7 @@ export const listIncomingPackageDetails = (_id) => async(dispatch) => {
     try {
         dispatch({type:INCOMING_PACKAGE_DETAIL_REQUEST})
         var url = API.baseUrl
-        const  {data} = await axios.get(`${url}/incoming/${_id}`);
+        const  {data} = await axios.get(`${url}/incoming/${_id}/`);
 
         dispatch({
             type:INCOMING_PACKAGE_DETAIL_SUCCESS,

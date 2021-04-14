@@ -11,6 +11,8 @@ import AddNewIncomingPck from './screens/AddNewIncomingPck'
 import IncomingPackageDetails from './screens/IncomingPackageDetails'
 import Login from './screens/Login'
 import Register from './screens/Register'
+import UserProfile from './screens/UserProfile'
+import ProfileScreen from './screens/ProfileScreen'
 
 function App() {
   return (
@@ -23,6 +25,7 @@ function App() {
           <Route path ='/register' component={Register} exact />
 
           <Route path='/mypage' component={Office} exact />
+          <Route path='/profile' component={ProfileScreen} exact />
           <Route path='/incoming' component={IncomingPackage}  exact/>
           <Route path='/outgoing' component={OutGoingPackage}  exact/>
           <Route path='/contact' component={Contact}  exact/>

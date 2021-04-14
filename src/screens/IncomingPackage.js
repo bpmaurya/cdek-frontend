@@ -2,7 +2,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import {Link} from 'react-router-dom'
-import { Row, Col, Form, FormControl, Button, Card,Collapse} from "react-bootstrap";
+import { Row, Col, Form, FormControl, Button, Card,Collapse,Image} from "react-bootstrap";
 import { listIncomingPackage } from "../actions/incomimgPackageActions"
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -81,7 +81,8 @@ function IncomingPackage({}) {
               </Col>
               <Col md={4}>
                 <h4>Product </h4>
-                <p> 20 </p>
+                <p>25</p>
+                {/* <p> {product.user.profile.id} </p> */}
               </Col>
             </Row>
             </Link> 

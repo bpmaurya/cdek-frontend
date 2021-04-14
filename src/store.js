@@ -4,13 +4,17 @@ import thunk from 'redux-thunk'
 
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { incomingPackageReducers,incomingPackageDetailsReducers } from './reducers/incomingPackageReducer'
-import { userLoginReducers,userRegistrationReducers } from './reducers/userReducer'
+import { userLoginReducers,userRegistrationReducers, userDetailsReducers,userUpdateProfileReducers } from './reducers/userReducer'
+import { createPackageReducers } from './reducers/createPackageReduser'
 
 const reducer = combineReducers({
       incomingPackageList : incomingPackageReducers,
       incomingPackageDetails : incomingPackageDetailsReducers,
       userLogin:userLoginReducers,
-      userRegister:userRegistrationReducers
+      userRegister:userRegistrationReducers,
+      userDetails:userDetailsReducers,
+      userUpdateProfile:userUpdateProfileReducers,
+      createPackage:createPackageReducers
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?

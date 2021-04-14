@@ -40,11 +40,11 @@ function IncomingPackageDetails({ match }) {
           <br />
           created_at= {incomingPackage.created_at}
           <br />
-          warehouse_id= {incomingPackage.warehouse}
+          {/* warehouse_id= {incomingPackage.warehouse.warehouse_name} */}
           <br />
-          product_id = {incomingPackage.product}
+          {/* product_id = {incomingPackage.user.username} */}
           <br />
-          user_id= {incomingPackage.user}
+          {/* user_id= {incomingPackage.user.username} */}
           <br />
         </div>
       )}
