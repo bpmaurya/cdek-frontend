@@ -93,9 +93,24 @@ function Header() {
                 <Link to="/login"><Button variant="success">Login</Button>{' '}</Link>
               </Nav.Link>
 
-              )
-              
-              }
+              )}
+
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title='Admin' id= 'adminmenue'>
+                  <LinkContainer to='/admin/userlist' >
+                    <NavDropdown.Item>Users </NavDropdown.Item>
+                  </LinkContainer>
+
+                  <LinkContainer to='/admin/package' >
+                    <NavDropdown.Item>incoming package </NavDropdown.Item>
+                  </LinkContainer>
+
+                  <LinkContainer to='/admin/outgoing' >
+                    <NavDropdown.Item>OutGoing package </NavDropdown.Item>
+                  </LinkContainer>
+
+                </NavDropdown>
+              ) }
 
             </Nav>
           </Navbar.Collapse>

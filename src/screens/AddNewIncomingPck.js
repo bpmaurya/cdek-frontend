@@ -18,11 +18,9 @@ function AddNewIncomingPck() {
 
     console.log(packageName);
     console.log(productType);
-    
-    
 
     console.log('submit');
-    
+
 }
 
 

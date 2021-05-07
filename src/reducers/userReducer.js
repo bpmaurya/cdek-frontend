@@ -4,12 +4,10 @@ import {
     USER_LOGIN_FAIL,
     USER_LOGOUT,
 
-
     USER_REGISTER_REQUEST,
     USER_REGISTER_SUCCESS,
     USER_REGISTER_FAIL,
 
-   
     USER_DETAILS_REQUEST,
     USER_DETAILS_SUCCESS,
     USER_DETAILS_FAIL,
@@ -18,8 +16,18 @@ import {
     USER_PROFILE_UPDATE_REQUEST,
     USER_PROFILE_UPDATE_SUCCESS,
     USER_PROFILE_UPDATE_FAIL,
-    USER_PROFILE_RESET
-     
+    USER_PROFILE_RESET,
+
+    USER_LIST_REQUEST,
+    USER_LIST_SUCCESS,
+    USER_LIST_FAIL,
+    USER_LIST_RESET,
+
+    USER_DELETE_REQUEST,
+    USER_DELETE_SUCCESS,
+    USER_DELETE_FAIL,
+
+    
  } from '../constants/userConstant'
 
 //FOR USER LOGIN REDUCERS
@@ -47,13 +55,13 @@ export const userLoginReducers =  ( state = { },action)=>{
 }
 
 //FOR USER REGISTRATIONS REDUCER
-export const userRegistrationReducers =  ( state = { },action)=>{
+export const userRegistrationReducers =  ( state = {  },action)=>{
     switch(action.type){
         case USER_REGISTER_REQUEST:
-            return{ loading:true }
+            return{ loading: true }
 
         case USER_REGISTER_SUCCESS:
-            return{ loading:false,userInfo: action.payload } 
+            return{ loading:false, userInfo: action.payload }
 
 
         case USER_REGISTER_FAIL:
@@ -65,26 +73,27 @@ export const userRegistrationReducers =  ( state = { },action)=>{
 
         default:
             return state
-
     }
 
 }
 
 //FOR USER DETAILS REDUCER
-export const userDetailsReducers =  ( state = { user:{} },action)=>{
+export const userDetailsReducers = ( state = { user:{ } },action)=>{
     switch(action.type){
+
         case USER_DETAILS_REQUEST:
             return{ ...state, loading:true }
 
+
         case USER_DETAILS_SUCCESS:
-            return{ loading:false,user: action.payload } 
+            return{ loading:false, user: action.payload }
 
 
         case USER_DETAILS_FAIL:
-            return{ loading:false, error:action.payload}
+            return{ loading:false, error: action.payload}
 
         case USER_DETAILS_RESET:
-            return{ user:{ }}
+            return{ user : { } }
 
         default:
             return state
@@ -109,6 +118,53 @@ export const userUpdateProfileReducers =  ( state = {  },action)=>{
 
         case USER_PROFILE_RESET:
             return { }
+
+        default: 
+            return state
+
+    }
+
+}
+
+
+
+//FOR GET ALL  USER LIST DETAILS REDUCER
+export const userListReducers =  ( state = { users:[] },action)=>{
+    switch(action.type){
+        case USER_LIST_REQUEST:
+            return{ loading:true }
+
+        case USER_LIST_SUCCESS:
+            return{ loading:false, users: action.payload } 
+
+
+        case USER_LIST_FAIL:
+            return{ loading:false, error:action.payload}
+
+        case USER_LIST_RESET:
+            return { users:[] }
+
+        default: 
+            return state
+
+    }
+
+}
+
+
+
+//FOR Delete selected USER REDUCER
+export const userDeleteReducers =  ( state = { users:[] },action)=>{
+    switch(action.type){
+        case USER_DELETE_REQUEST:
+            return{ loading:true }
+
+        case USER_DELETE_SUCCESS:
+            return{ loading:false, users: action.payload } 
+
+
+        case USER_DELETE_FAIL:
+            return{ loading:false, success:true }
 
         default: 
             return state

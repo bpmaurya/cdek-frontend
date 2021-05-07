@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { incomingPackageReducers,incomingPackageDetailsReducers } from './reducers/incomingPackageReducer'
-import { userLoginReducers,userRegistrationReducers, userDetailsReducers,userUpdateProfileReducers } from './reducers/userReducer'
+import { userLoginReducers,userRegistrationReducers, userDetailsReducers,userUpdateProfileReducers,userListReducers,userDeleteReducers } from './reducers/userReducer'
 import { createPackageReducers } from './reducers/createPackageReduser'
 
 const reducer = combineReducers({
@@ -14,6 +14,8 @@ const reducer = combineReducers({
       userRegister:userRegistrationReducers,
       userDetails:userDetailsReducers,
       userUpdateProfile:userUpdateProfileReducers,
+      userList:userListReducers,
+      userDelete:userDeleteReducers,
       createPackage:createPackageReducers
 })
 

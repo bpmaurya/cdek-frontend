@@ -13,6 +13,8 @@ import Login from './screens/Login'
 import Register from './screens/Register'
 import UserProfile from './screens/UserProfile'
 import ProfileScreen from './screens/ProfileScreen'
+import UserListScreen  from './screens/UserListScreen'
+import UserEditScreen from './screens/UserEditScreen'
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path='/' component={HomeScreen} exact />
           <Route path ='/login' component={Login} exact />
           <Route path ='/register' component={Register} exact />
+          <Route path='/admin/userlist' component={UserListScreen} exact />
+          <Route path='/admin/user/:_id/edit' component={UserEditScreen} exact />
 
           <Route path='/mypage' component={Office} exact />
           <Route path='/profile' component={ProfileScreen} exact />

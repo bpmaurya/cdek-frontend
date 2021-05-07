@@ -13,7 +13,7 @@ export const createPackageReducers = ( state = { },action)=>{
             return{ loading:true }
 
         case CREATE_PACKAGE_SUCCESS:
-            return{ loading:false,createPackage: action.payload }
+            return{ loading:false, success:true, createPackage: action.payload }
 
 
         case CREATE_PACKAGE_FAIL:
