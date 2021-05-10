@@ -8,7 +8,7 @@ import { login, register, getUserDetails } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
 
 function UserEditScreen({ match, history }) {
-  const userId = match.params.id;
+  const userId = match.params._id;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -24,9 +24,9 @@ function UserEditScreen({ match, history }) {
       if(!user.name || user._id !== Number(userId)){
           dispatch(getUserDetails(userId))
       }else{
-      //     setName(user.name)
-      //     setEmail(user.email)
-      //     setIsAdmin(user.isAdmin)
+          setName(user.name)
+          setEmail(user.email)
+          setIsAdmin(user.isAdmin)
       }
   }, [user,userId]);
 
