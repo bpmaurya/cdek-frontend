@@ -3,6 +3,10 @@ import { Card, Button, Row, Col } from "react-bootstrap";
 import logo from "../img/girl.png";
 import good from "../img/goods.png";
 import girl from "../img/girl.jpg";
+import how1 from "../img/how-1.svg";
+import how2 from "../img/how-2.svg";
+import how3 from "../img/how-3.svg";
+import how4 from "../img/how-4.svg";
 
 function HomeScreen() {
   return (
@@ -25,8 +29,8 @@ function HomeScreen() {
           </div>
         </Col>
         <Col md={6}>
-          <div >
-            <img src={logo}  className="img-fluid"/>
+          <div>
+            <img src={logo} className="img-fluid" />
           </div>
         </Col>
       </Row>
@@ -34,7 +38,7 @@ function HomeScreen() {
       <Row className="m-3">
         <Col md={6}>
           <div>
-            <img  className="img-fluid" src={good} />
+            <img className="img-fluid" src={good} />
           </div>
         </Col>
         <Col md={6}>
@@ -55,6 +59,7 @@ function HomeScreen() {
           </div>
         </Col>
       </Row>
+
       <Row>
         <Col md={12}>
           <Card>
@@ -68,20 +73,20 @@ function HomeScreen() {
                   <p>Join us!</p>
                 </div>
                 <Row>
-                  <Col md={6} >
-                      <div className="m-4">
-                    <div style={{ color: "#1ab248" }}>
-                      <i className="fas fa-box-open fa-9x"></i>
-                    </div>
-                    <p>How can you find discounts up to 50%-80%?</p>
+                  <Col md={6}>
+                    <div className="m-4">
+                      <div style={{ color: "#1ab248" }}>
+                        <i className="fas fa-box-open fa-9x"></i>
+                      </div>
+                      <p>How can you find discounts up to 50%-80%?</p>
                     </div>
                   </Col>
                   <Col md={6}>
-                       <div className="m-4">
-                    <div style={{ color: "#1ab248" }}>
-                      <i className="fas fa-box-open fa-9x"></i>
-                    </div>
-                    <p>What can you buy favourably in the United States?</p>
+                    <div className="m-4">
+                      <div style={{ color: "#1ab248" }}>
+                        <i className="fas fa-box-open fa-9x"></i>
+                      </div>
+                      <p>What can you buy favourably in the United States?</p>
                     </div>
                   </Col>
                 </Row>
@@ -91,11 +96,71 @@ function HomeScreen() {
               </Col>
               <Col md={6}>
                 <div>
-                  <img  className="img-fluid" src={girl} />
+                  <img className="img-fluid" src={girl} />
                 </div>
               </Col>
             </Row>
           </Card>
+        </Col>
+      </Row>
+      <div className="text-center m-4">
+        {" "}
+        <h1>How does It Word</h1>
+      </div>
+      <Row className="m-4">
+        {/* <h1>How does it work?</h1> */}
+        <Col md={3}>
+          <div>
+            <img src={how1} className="img-fluid" />
+          </div>
+          <div>
+            <h3>1. Create an account</h3>
+          </div>
+          <div>
+            <p>Get an address for shipping your purchases from abroad</p>
+          </div>
+        </Col>
+        <Col md={3}>
+          <div>
+            <img src={how2} className="img-fluid" />
+          </div>
+          <div>
+            <h3>2. Do Shopping</h3>
+          </div>
+          <div>
+            <p>
+              Buy products in online stores from North America, Europe and Asia
+              and send them to our warehouse
+            </p>
+          </div>
+        </Col>
+        <Col md={3}>
+          <div>
+            <img src={how3} className="img-fluid" />
+          </div>
+          <div>
+            <h3>3. Consolidate packages</h3>
+          </div>
+          <div>
+            <p>
+              After receiving your orders in the warehouse, you can consolidate
+              them and send to yourself, friends or directly to your customer
+            </p>
+          </div>
+        </Col>
+        <Col md={3}>
+          <div>
+            <img src={how4} className="img-fluid" />
+          </div>
+          <div>
+            <h3>4. Receive</h3>
+          </div>
+          <div>
+            <p>
+              The parcel will be delivered door-to-door or to the nearest CDEK
+              pick-up point
+            </p>
+          </div>
         </Col>
       </Row>
     </div>
