@@ -25,8 +25,8 @@ function HomeScreen() {
           </div>
         </Col>
         <Col md={6}>
-          <div>
-            <img src={logo} />
+          <div >
+            <img src={logo}  className="img-fluid"/>
           </div>
         </Col>
       </Row>
@@ -34,7 +34,7 @@ function HomeScreen() {
       <Row className="m-3">
         <Col md={6}>
           <div>
-            <img src={good} />
+            <img  className="img-fluid" src={good} />
           </div>
         </Col>
         <Col md={6}>
@@ -91,7 +91,7 @@ function HomeScreen() {
               </Col>
               <Col md={6}>
                 <div>
-                  <img src={girl} />
+                  <img  className="img-fluid" src={girl} />
                 </div>
               </Col>
             </Row>
