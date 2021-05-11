@@ -25,7 +25,7 @@ function HomeScreen() {
             </p>
           </div>
           <div className="my-5">
-            <Button className=" btn btn-primary btn-lg">Sign Up</Button>
+            <Button className=" btn btn-success btn-lg p-3">Sign Up</Button>
           </div>
         </Col>
         <Col md={6}>
@@ -55,7 +55,7 @@ function HomeScreen() {
             </p>
           </div>
           <div className="my-5">
-            <Button className=" btn btn-primary btn-lg">Sign Up</Button>
+            <Button className=" btn btn-success btn-lg p-3">Sign Up</Button>
           </div>
         </Col>
       </Row>
@@ -91,7 +91,7 @@ function HomeScreen() {
                   </Col>
                 </Row>
                 <div className="m-5">
-                  <Button className=" btn btn-primary btn-lg">Sign Up</Button>
+                  <Button className=" btn btn-success btn-lg p-3">Sign Up</Button>
                 </div>
               </Col>
               <Col md={6}>
@@ -107,7 +107,7 @@ function HomeScreen() {
         {" "}
         <h1>How does It Word</h1>
       </div>
-      <Row className="m-4">
+      <Row className="m-5 ">
         {/* <h1>How does it work?</h1> */}
         <Col md={3}>
           <div>
