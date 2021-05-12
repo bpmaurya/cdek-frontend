@@ -16,7 +16,7 @@ const reducer = combineReducers({
       userUpdateProfile:userUpdateProfileReducers,
       userList:userListReducers,
       userDelete:userDeleteReducers,
-      createPackage:createPackageReducers
+      createIncomingPackage:createPackageReducers
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?

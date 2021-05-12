@@ -10,7 +10,7 @@ import API from '../apiUrl.json'
 
 
 //for create package action 
-export const createPackage = ( package ) => async(dispatch,getState)=>{
+export const createPackage = ( package1={} ) => async(dispatch,getState)=>{
     try{
         dispatch({
             type:CREATE_PACKAGE_REQUEST,
@@ -28,7 +28,7 @@ export const createPackage = ( package ) => async(dispatch,getState)=>{
             }
         }
         var url = API.baseUrl
-        const {data} = await axios.post(`${url}/add/create/`,package, config)
+        const {data} = await axios.post(`${url}/add/create/`,package1, config)
 
         dispatch({
             type:CREATE_PACKAGE_SUCCESS,
