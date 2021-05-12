@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import logo from "../img/girl.png";
 import good from "../img/goods.png";
 import girl from "../img/girl.jpg";
@@ -25,7 +26,7 @@ function HomeScreen() {
             </p>
           </div>
           <div className="my-5">
-            <Button className=" btn btn-success btn-lg p-3">Sign Up</Button>
+            <Link to='/register'  className=" btn btn-success btn-lg p-3">Sign Up</Link>
           </div>
         </Col>
         <Col md={6}>
@@ -55,7 +56,7 @@ function HomeScreen() {
             </p>
           </div>
           <div className="my-5">
-            <Button className=" btn btn-success btn-lg p-3">Sign Up</Button>
+          <Link to='/register'  className=" btn btn-success btn-lg p-3">Sign Up</Link>
           </div>
         </Col>
       </Row>
@@ -91,7 +92,7 @@ function HomeScreen() {
                   </Col>
                 </Row>
                 <div className="m-5">
-                  <Button className=" btn btn-success btn-lg p-3">Sign Up</Button>
+                <Link to='/register'  className=" btn btn-success btn-lg p-3">Sign Up</Link>
                 </div>
               </Col>
               <Col md={6}>
