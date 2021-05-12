@@ -63,7 +63,7 @@ function HomeScreen() {
       <Row>
         <Col md={12}>
           <Card>
-            <Row>
+            <Row className="m-3">
               <Col md={6} className="">
                 <div className="m-4">
                   <h1>
