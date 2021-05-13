@@ -227,12 +227,7 @@ function AddNewIncomingPck({ location, history }) {
                   </Form.Group>
                 </Col>
               </Row>
-              <Col className="m-3">
-                <Button type="submit" variant="primary">
-                  Save
-                </Button>{" "}
-                <Button variant="danger">Cancel</Button>{" "}
-              </Col>
+              
             </Form>
             <Col md={4}>
               {/* <Button href="" variant="outline-success btn-block" type="button">
@@ -243,6 +238,7 @@ function AddNewIncomingPck({ location, history }) {
               onClick={() => handleRemoveClick(i)} variant="outline-danger btn-block" type="button">Remove</Button>}
                {inputList.length - 1 === i && <Button onClick={handleAddClick} variant="outline-success btn-block" type="button"> +Add New Product </Button>}
             </Col>
+           
           </Card>
         </Col>
       </Row>
@@ -250,6 +246,14 @@ function AddNewIncomingPck({ location, history }) {
   
       );
     })}
+    <Row>
+    <Col className="m-3">
+                <Button type="submit" variant="primary">
+                  Save
+                </Button>{" "}
+                <Button variant="danger">Cancel</Button>{" "}
+              </Col>
+    </Row>
     </div>
   );
 }
