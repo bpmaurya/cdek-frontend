@@ -248,10 +248,10 @@ function AddNewIncomingPck({ location, history }) {
     })}
     <Row>
     <Col className="m-3">
-                <Button type="submit" variant="primary">
+                <Button type="submit" className="btn btn-primary btn-lg">
                   Save
                 </Button>{" "}
-                <Button variant="danger">Cancel</Button>{" "}
+                <Button className="btn btn-danger btn-lg">Cancel</Button>{" "}
               </Col>
     </Row>
     </div>
