@@ -57,27 +57,29 @@ function AddNewIncomingPck({ location, history }) {
   );
   const { error, loading, success } = createIncomingPackage;
 
+  
+
   const savePackage = {
-    // name: packageName,
-    // trackingNumber: trackingNumber,
-    // countInStock: "12",
-    // comment: comment,
-    // product: [
-    //   {
-    //     name: productType,
-    //     type: productType,
-    //     brand: productBrand,
-    //     size: "122",
-    //     price: productPrice,
-    //     quantity: productQuantity,
-    //   }
-    // ],
-    // user: {
-    //   username: "admin1@gmail.com",
-    //   email: "admin1@gmail.com",
-    //   name: "admin1@gmail.com",
-    //   isAdmin: true,
-    // },
+    name: packageName,
+    trackingNumber: trackingNumber,
+    countInStock: "12",
+    comment: comment,
+    product: [
+      {
+        // name: productType,
+        // type: productType,
+        // brand: productBrand,
+        // size: "122",
+        // price: productPrice,
+        // quantity: productQuantity,
+      }
+    ],
+    user: {
+      username: "admin1@gmail.com",
+      email: "admin1@gmail.com",
+      name: "admin1@gmail.com",
+      isAdmin: true,
+    },
   };
 
   useEffect(() => {}, []);
@@ -85,7 +87,8 @@ function AddNewIncomingPck({ location, history }) {
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(packageName);
-    // console.log(productType);
+    console.log(inputList);
+    console.log(inputList.productBrand);
     dispatch(createPackage(savePackage));
     console.log("submit");
   };
