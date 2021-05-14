@@ -25,7 +25,7 @@ function Header() {
   const logoutHandler = ()=>{
     console.log('logout');
     dispatch(logout())
-    
+
   }
 
 
@@ -116,7 +116,8 @@ function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
+       
+       {userInfo && 
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
         <Container className="text-center">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -134,6 +135,7 @@ function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      }
     </header>
   );
 }
