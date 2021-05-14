@@ -45,7 +45,7 @@ function Header() {
               <Nav.Link href="/News">News</Nav.Link>
               <Nav.Link href="/fee">Service fee</Nav.Link>
               <Nav.Link>
-                <Link to="/contact">contact</Link>
+                <Link to="/contact">Contact</Link>
               </Nav.Link>
             </Nav>
             {/* <Form inline>
