@@ -1,5 +1,5 @@
 {
-    "baseUrl": "https://cdek-backend.herokuapp.com",
+    "baseUrl": "http://cdek-backend.herokuapp.com",
     "incomingPackage":"/incoming/"
 
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
+import { useSelector,useDispatch } from 'react-redux'
 import { Link } from "react-router-dom";
 import logo from "../img/girl.png";
 import good from "../img/goods.png";
@@ -10,6 +11,9 @@ import how3 from "../img/how-3.svg";
 import how4 from "../img/how-4.svg";
 
 function HomeScreen() {
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+
   return (
     <div>
       <Row className="align-items-center">
@@ -25,9 +29,11 @@ function HomeScreen() {
               customers directly.
             </p>
           </div>
+          { !userInfo && 
           <div className="my-5">
             <Link to='/register'  className=" btn btn-success btn-lg p-3">Sign Up</Link>
           </div>
+          }
         </Col>
         <Col md={6}>
           <div>
@@ -55,9 +61,11 @@ function HomeScreen() {
               customers. At lower prices: from $9.
             </p>
           </div>
+          { !userInfo && 
           <div className="my-5">
           <Link to='/register'  className=" btn btn-success btn-lg p-3">Sign Up</Link>
           </div>
+         }
         </Col>
       </Row>
 
@@ -91,9 +99,11 @@ function HomeScreen() {
                     </div>
                   </Col>
                 </Row>
+                { !userInfo && 
                 <div className="m-5">
                 <Link to='/register'  className=" btn btn-success btn-lg p-3">Sign Up</Link>
                 </div>
+               }
               </Col>
               <Col md={6}>
                 <div>

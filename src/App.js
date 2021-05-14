@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -17,6 +18,19 @@ import UserListScreen  from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
 
 function App() {
+
+  const [LoggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userInfo = localStorage.getItem("userInfo");
+
+    if (userInfo === undefined || userInfo === null) {
+      setLoggedIn(false);
+    } else {
+      setLoggedIn(true);
+    }
+  });
+
   return (
     <Router>
       <Header />
@@ -25,14 +39,15 @@ function App() {
           <Route path='/' component={HomeScreen} exact />
           <Route path ='/login' component={Login} exact />
           <Route path ='/register' component={Register} exact />
+          <Route path='/contact' component={Contact}  exact/>
+
+
           <Route path='/admin/userlist' component={UserListScreen} exact />
           <Route path='/admin/user/:_id/edit' component={UserEditScreen} exact />
-
           <Route path='/mypage' component={Office} exact />
           <Route path='/profile' component={ProfileScreen} exact />
           <Route path='/incoming' component={IncomingPackage}  exact/>
           <Route path='/outgoing' component={OutGoingPackage}  exact/>
-          <Route path='/contact' component={Contact}  exact/>
           <Route path='/add-incoming' component={AddNewIncomingPck} exact />
           <Route path='/incoming/:_id' component={IncomingPackageDetails} exact/>
         </Container>

@@ -12,7 +12,7 @@ function Login({location,history}) {
     const [password, setPassword] = useState('')
     const dispatch = useDispatch( )
 
-    const redirect = location.search ? location.search.split('=')[1]:'/'
+    const redirect = location.search ? location.search.split('=')[1]:'/mypage'
     
     const userLogin = useSelector(state=>state.userLogin)
 
@@ -22,7 +22,6 @@ function Login({location,history}) {
         if(userInfo){
             history.push(redirect)
         }
-        
     }, [history,userInfo,redirect])
 
 
@@ -32,7 +31,6 @@ function Login({location,history}) {
         e.preventDefault()
         console.log('submit');
         dispatch(login(email,password))
-        
     }
 
 
@@ -80,7 +78,7 @@ function Login({location,history}) {
            <Row className='py-3' >
                <Col>
                New Customer ? <Link 
-               to={redirect ? `/register?redirect=${redirect}`:'/register'}
+                 to={redirect ? `/register?redirect=${redirect}`:'/register'}
                 >
                   Register
                </Link>

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useSelector,useDispatch } from 'react-redux'
 import {
   Navbar,
@@ -17,6 +17,7 @@ import logo from "../logo.svg";
 import { logout } from '../actions/userActions'
 function Header() {
 
+  
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
@@ -27,8 +28,6 @@ function Header() {
     dispatch(logout())
 
   }
-
-
 
 
   return (
@@ -42,8 +41,8 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="/News">News</Nav.Link>
-              <Nav.Link href="/fee">Service fee</Nav.Link>
+              <Nav.Link to="/News">News</Nav.Link>
+              <Nav.Link to="/fee">Service fee</Nav.Link>
               <Nav.Link>
                 <Link to="/contact">Contact</Link>
               </Nav.Link>
@@ -57,10 +56,10 @@ function Header() {
               <Button variant="outline-success">Search</Button>
             </Form> */}
             <Nav className="inline">
-              <Nav.Link href="/country">
+              {/* <Nav.Link href="/country">
                 <i className="fas fa-location-arrow"></i>Country
               </Nav.Link>
-              <Nav.Link href="/language">En</Nav.Link>
+              <Nav.Link href="/language">En</Nav.Link> */}
 
              
 
@@ -84,8 +83,10 @@ function Header() {
                 <NavDropdown.Item href="/setting">
                 <i className="fas fa-unlock m-2"></i> Change Password
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={logoutHandler} >
-                <i className="fas fa-unlock m-2"></i> Log out
+                <NavDropdown.Item >
+                  <Link onClick={logoutHandler} to='/'>
+                <i className="fas fa-unlock m-2"></i>  Log out
+                </Link>
                 </NavDropdown.Item>
               </NavDropdown>
               ):(
@@ -117,7 +118,7 @@ function Header() {
         </Container>
       </Navbar>
        
-       {userInfo && 
+       {/* {userInfo && 
       <Navbar bg="light" variant="light" expand="lg" collapseOnSelect>
         <Container className="text-center">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -129,13 +130,13 @@ function Header() {
             </Nav>
             <Nav className="inline ml-3">
               <Nav.Link href="/balance">
-                <i className="fas fa-wallet"></i>Balance $75.0
+                <i className="fas fa-wallet"></i>Balance $0.0
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      }
+      } */}
     </header>
   );
 }

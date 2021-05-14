@@ -1,13 +1,45 @@
-import React from "react";
+import { useDispatch,useSelector } from 'react-redux'
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Button, Card } from "react-bootstrap";
+import { listIncomingPackage } from "../actions/incomimgPackageActions"
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+import { logout } from '../actions/userActions'
 
-function Office() {
+function Office({location,history}) {
+
+  const dispatch = useDispatch()
+  const incomingPackageList = useSelector(state=> state.incomingPackageList)
+  const {error,loading, incomingPackages} = incomingPackageList
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
+  const redirect = location.search ? location.search.split('=')[1]:'/'
+
+  
+
+  const logoutHandler = ()=>{
+    console.log('logout');
+    dispatch(logout())
+  }
+  
+  useEffect(() => {
+    dispatch(listIncomingPackage())
+    // fetchProduct()
+  //   if(!userInfo){
+  //     history.push(redirect)
+  //  }
+
+  }, [dispatch,history,userInfo,redirect]);
+
+
+
   return (
     <div>
-      <Link to="/" className="btn btn-light my-3">
+      {/* <Link to="/" className="btn btn-light my-3">
         MY Page
-      </Link>
+      </Link> */}
 
       <Row>
         <Col  className="col-md-6 col-sm-6 col-xs-12">
@@ -20,8 +52,11 @@ function Office() {
                 </h2>
               </div>
 
+              {loading ? <Loader/>
+             : error ? <Message variant='danger' >{error} </Message>
+             : <div>
               <div>
-                <p>New Incoming: 4 items</p>
+                <p>New Incoming: {incomingPackages.length} items</p>
               </div>
               <div>
                 <p>In stock: 0 items</p>
@@ -35,6 +70,9 @@ function Office() {
                 </Button>
               </div>
             </div>
+            }
+            </div>
+            
           </Card>
         </Col>
 
@@ -71,9 +109,9 @@ function Office() {
                     </a>
                   </li>
                   <div className="line">
-                    <a href="/logout" className="exit">
+                    <Link onClick={logoutHandler} to='/' className="exit">
                       Log out
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -95,7 +133,7 @@ function Office() {
               </div>
 
               <div>
-                <p>New Incoming: 4 items</p>
+                <p>Outgoing package : 0 items</p>
               </div>
               <div>
                 <p>In stock: 0 items</p>
