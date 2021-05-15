@@ -22,7 +22,11 @@ import {
 
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
-  USER_DELETE_FAIL
+  USER_DELETE_FAIL,
+
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL
 } from "../constants/userConstant";
 import API from "../apiUrl.json";
 
@@ -156,6 +160,7 @@ export const getUserDetails = (_id) => async (dispatch, getState) => {
 
 
 //for user update details actions
+
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -264,7 +269,7 @@ export const deleteUsers = (id) => async (dispatch, getState) => {
     };
     var url = API.baseUrl;
     const { data } = await axios.delete(
-      `${url}/users/delete/${id}`,
+      `${url}/users/delete/${id}/`,
       config
     );
 
@@ -276,6 +281,51 @@ export const deleteUsers = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+
+//for update user actions
+export const updateUser = (user) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token} `,
+      },
+    };
+    var url = API.baseUrl;
+    const { data } = await axios.put(
+      `${url}/users/update/${user.id}/`,
+      user,
+      config
+    );
+
+    dispatch({
+      type: USER_UPDATE_SUCCESS,
+      payload: data,
+    });
+    dispatch({
+      type: USER_DETAILS_SUCCESS,
+      payload: data,
+    });
+
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

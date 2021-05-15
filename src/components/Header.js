@@ -17,7 +17,6 @@ import logo from "../logo.svg";
 import { logout } from '../actions/userActions'
 function Header() {
 
-  
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 

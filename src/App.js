@@ -16,6 +16,8 @@ import UserProfile from './screens/UserProfile'
 import ProfileScreen from './screens/ProfileScreen'
 import UserListScreen  from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
+import PackageListScreen from "./screens/PackageListScreen";
+import Address from "./screens/Address";
 
 function App() {
 
@@ -50,6 +52,8 @@ function App() {
           <Route path='/outgoing' component={OutGoingPackage}  exact/>
           <Route path='/add-incoming' component={AddNewIncomingPck} exact />
           <Route path='/incoming/:_id' component={IncomingPackageDetails} exact/>
+          <Route path='/address' component={Address} exact />
+          <Route path='/admin/package' component={PackageListScreen} exact />
         </Container>
       </main>
       <Footer />

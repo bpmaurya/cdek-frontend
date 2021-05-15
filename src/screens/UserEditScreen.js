@@ -4,8 +4,9 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { login, register, getUserDetails } from "../actions/userActions";
+import { login, register, getUserDetails,updateUser } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
+import { USER_UPDATE_RESET } from '../constants/userConstant'
 
 function UserEditScreen({ match, history }) {
   const userId = match.params._id;
@@ -17,10 +18,21 @@ function UserEditScreen({ match, history }) {
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.userDetails);
-
   const { error, loading, user } = userDetails;
 
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const { error:errorUpdate, loading:loadingUpdate,success:successUpdate } = userUpdate;
+
   useEffect(() => {
+    if(successUpdate){
+      dispatch({type:USER_UPDATE_RESET})
+      history.push('/admin/userlist')
+    }
+    else{
+
+
+
+
       if(!user.name || user._id !== Number(userId)){
           dispatch(getUserDetails(userId))
       }else{
@@ -28,10 +40,12 @@ function UserEditScreen({ match, history }) {
           setEmail(user.email)
           setIsAdmin(user.isAdmin)
       }
-  }, [user,userId]);
+    }
+  }, [user,userId,successUpdate,history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(updateUser({id:user.id,name,email,isAdmin}))
 
     console.log("submit");
   };
@@ -69,7 +83,7 @@ function UserEditScreen({ match, history }) {
 
             <Form.Group controlId="isadmin">
               <Form.Check
-                required
+               
                 type="checkbox"
                 label="Is Admin"
                 checked={isAdmin}
