@@ -42,47 +42,14 @@ function Office({location,history}) {
       </Link> */}
 
       <Row>
-        <Col  className="col-md-6 col-sm-6 col-xs-12">
-          <Card>
-            <div className="m-5 text-center">
-              <div>
-                <p>New incoming packages and packages in stock</p>
-                <h2 style={{ color: "#1ab248" }}>
-                  <i className="fas fa-box-open"></i> Incoming Packages
-                </h2>
-              </div>
 
-              {loading ? <Loader/>
-             : error ? <Message variant='danger' >{error} </Message>
-             : <div>
-              <div>
-                <p>New Incoming: {incomingPackages.length} items</p>
-              </div>
-              <div>
-                <p>In stock: 0 items</p>
-              </div>
-              <div>
-                <Button
-                  href="/incoming"
-                  variant="outline-success btn-block"
-                  type="button">
-                  New Incoming Package
-                </Button>
-              </div>
-            </div>
-            }
-            </div>
-            
-          </Card>
-        </Col>
-
-        <Col  className="col-md-6 col-sm-6 col-xs-12">
+      <Col  className="col-md-6 col-sm-6 col-xs-12">
           <Card style={{ backgroundColor: "#f5f5f6" }}>
             <div className="m-5 text-center">
               <div className="profile">
                 <div className="info-client">
-                  <div className="num m-4">Customer number: #51463</div>
-                  <div className="fio">Nvidia Shield</div>
+                  <div className="num m-4">Customer number: #{userInfo.id} </div>
+                  <div className="fio">{userInfo.name} </div>
                   <li>
                     <a href="/office/profile" className="profile-link">
                       Profile
@@ -103,11 +70,11 @@ function Office({location,history}) {
                       Delivery addresses
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="/office/profile/password" className="change-password">
                       Change password
                     </a>
-                  </li>
+                  </li> */}
                   <div className="line">
                     <Link onClick={logoutHandler} to='/' className="exit">
                       Log out
@@ -118,37 +85,7 @@ function Office({location,history}) {
             </div>
           </Card>
         </Col>
-      </Row>
 
-      <Row className="my-5">
-        <Col className="col-md-6 col-sm-6 col-xs-12">
-          <Card>
-            <div className="m-5 text-center">
-              <div>
-                <p>New incoming packages and packages in stock</p>
-                <h2 style={{ color: "#1ab248" }}>
-                  {" "}
-                  <i className="fas fa-box-open"></i> OutGoing Packages
-                </h2>
-              </div>
-
-              <div>
-                <p>Outgoing package : 0 items</p>
-              </div>
-              <div>
-                <p>In stock: 0 items</p>
-              </div>
-              <div>
-                <Button
-                  href="/outgoing"
-                  variant="outline-success btn-block"
-                  type="button">
-                  New OutGoing Package
-                </Button>
-              </div>
-            </div>
-          </Card>
-        </Col>
 
         <Col md={6}>
           <Row>
@@ -194,6 +131,83 @@ function Office({location,history}) {
             </Col>
           </Row>
         </Col>
+
+
+
+
+       
+
+       
+      </Row>
+
+      <Row className="my-5">
+         
+      <Col  className="col-md-6 col-sm-6 col-xs-12">
+          <Card>
+            <div className="m-5 text-center">
+              <div>
+                <p>New incoming packages and packages in stock</p>
+                <Link to='/incoming' style={{textDecoration:"none"}}>
+                <h2 style={{ color: "#1ab248" }}>
+                  <i className="fas fa-box-open"></i> Incoming Packages
+                </h2>
+                </Link>
+              </div>
+
+              {loading ? <Loader/>
+             : error ? <Message variant='danger' >{error} </Message>
+             : <div>
+              <div>
+                <p>New Incoming: {incomingPackages.length} items</p>
+              </div>
+              <div>
+                <p>In stock: 0 items</p>
+              </div>
+              <div>
+                <Button
+                  href="/add-incoming"
+                  variant="outline-success btn-block"
+                  type="button">
+                  New Incoming Package
+                </Button>
+              </div>
+            </div>
+            }
+            </div>
+            
+          </Card>
+        </Col>
+
+        <Col className="col-md-6 col-sm-6 col-xs-12">
+          <Card>
+            <div className="m-5 text-center">
+              <div>
+                <p>New incoming packages and packages in stock</p>
+                <h2 style={{ color: "#1ab248" }}>
+                  {" "}
+                  <i className="fas fa-box-open"></i> OutGoing Packages
+                </h2>
+              </div>
+
+              <div>
+                <p>Outgoing package : 0 items</p>
+              </div>
+              <div>
+                <p>In stock: 0 items</p>
+              </div>
+              <div>
+                <Button
+                  href="/outgoing"
+                  variant="outline-success btn-block"
+                  type="button">
+                  New OutGoing Package
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </Col>
+
+       
       </Row>
 
       <Row>

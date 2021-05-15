@@ -29,7 +29,7 @@ function IncomingPackage({}) {
       <Row>
         <Col md={8}>
           <Form>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+            <FormControl type="text" placeholder="Search Package By Name" className="mr-sm-2" />
           </Form>
         </Col>
 
@@ -44,13 +44,13 @@ function IncomingPackage({}) {
       </Row>
       <Row className="my-3">
         <Col md={6}>
-          <h2>incomingPackg </h2>
+          <h2>Incoming Packages </h2>
         </Col>
-        <Col md={3}>
+        {/* <Col md={3}>
           <Form>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           </Form>
-        </Col>
+        </Col> */}
         <Col md={3} className="text-center align-items-center">
           {/* <p> arriving {incomingPackages.length} items </p> */}
         </Col>
@@ -60,7 +60,7 @@ function IncomingPackage({}) {
 
       {loading ? <Loader/>
         : error ? <Message variant='danger' >{error} </Message>
-        :  <Row>
+        : <Row>
         {incomingPackages.map((product) => (
           <Card className="container p-md-3 m-3">
               <Link to={`/incoming/${product._id}`} >
@@ -78,15 +78,17 @@ function IncomingPackage({}) {
               <Col md={4}>
                 <h4>Package_id </h4>
                 <p> {product._id} </p>
+                {/* <h4>Products- 2 </h4> */}
               </Col>
               <Col md={4}>
-                <h4>Product </h4>
-                <p>25</p>
+                <h4>Created at </h4>
+                <p>{product.created_at} </p>
                 {/* <p> {product.user.profile.id} </p> */}
               </Col>
             </Row>
             </Link> 
-            <Row>
+            
+            {/* <Row>
               <Col md={12}>
                 <Collapse in={open}>
                   <div id="example-collapse-text">
@@ -97,14 +99,15 @@ function IncomingPackage({}) {
                   </div>
                 </Collapse>
               </Col>
-            </Row>
+            </Row> */}
+
           </Card>
         ))}
       </Row>
        }
      
 
-      <Row>
+      {/* <Row>
         <Card className="container p-md-3 m-3">
           <Row>
             <Col md={4}>
@@ -120,7 +123,7 @@ function IncomingPackage({}) {
             </Col>
           </Row>
         </Card>
-      </Row>
+      </Row> */}
 
       {/* <Row className="text-center">
         {incomingPackages.map((product) => (

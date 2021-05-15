@@ -37,7 +37,7 @@ function Login({location,history}) {
     return (
         <FormContainer>
             <h1>Sign In</h1>
-            {error && <Message variant='danger' > {error} </Message>}
+            {error && <Message variant='danger' > Incorrect Email or Password. Please try again </Message>}
             {loading && <Loader/>}
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email'>

@@ -43,8 +43,8 @@ function Header() {
             <Nav className="mr-auto">
               <Nav.Link to="/News">News</Nav.Link>
               <Nav.Link to="/fee">Service fee</Nav.Link>
-              <Nav.Link>
-                <Link to="/contact">Contact</Link>
+              <Nav.Link  >
+                <Link style={{textDecoration:"none"}} to="/contact">Contact</Link>
               </Nav.Link>
             </Nav>
             {/* <Form inline>
@@ -80,9 +80,9 @@ function Header() {
                 <NavDropdown.Item href="/address">
                 <i className="fas fa-address-book m-2"></i>Delivery Address
                 </NavDropdown.Item>
-                <NavDropdown.Item href="/setting">
+                {/* <NavDropdown.Item href="/setting">
                 <i className="fas fa-unlock m-2"></i> Change Password
-                </NavDropdown.Item>
+                </NavDropdown.Item> */}
                 <NavDropdown.Item >
                   <Link onClick={logoutHandler} to='/'>
                 <i className="fas fa-unlock m-2"></i>  Log out
