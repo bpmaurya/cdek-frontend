@@ -6,7 +6,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { getUserAddress } from "../actions/addressAction";
 
-function Address({history}) {
+function Address({}) {
   const dispatch = useDispatch();
 
   const getAddress = useSelector((state) => state.getAddress);
@@ -17,7 +17,7 @@ function Address({history}) {
 
   useEffect(() => {
     dispatch(getUserAddress());
-  }, [dispatch,history]);
+  }, [dispatch]);
 
   const deleteHandler =()=>{
       
