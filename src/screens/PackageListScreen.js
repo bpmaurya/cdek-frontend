@@ -51,7 +51,7 @@ function PackageListScreen({ history,match }) {
                 
                 </Col>
                 <Col className="text-right">
-                    <Button className="my-3" onClick={createPackageHandler} >
+                    <Button className="my-3" variant="outline-success" onClick={createPackageHandler} >
                         <i className="fas fa-plus" > CREATE OUTGOING PACKAGE </i>
                     </Button>
                 

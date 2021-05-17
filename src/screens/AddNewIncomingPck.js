@@ -101,7 +101,7 @@ function AddNewIncomingPck({ location, history }) {
   } else {
     return (
       <div>
-        <h1>Add your new Incoming Package here</h1>
+        <h1>Add Your New Incoming Package here</h1>
         <Row className="my-4">
           <Col md={12}>
             <h3> 1. Order Information</h3>

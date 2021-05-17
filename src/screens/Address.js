@@ -30,11 +30,11 @@ function Address({}) {
     <div>
       <Row className="align-items-center">
         <Col>
-          <h2>Addresses </h2>
+          <h2>Address </h2>
         </Col>
         <Col className="text-right">
-          <Button className="my-3" onClick={createAddressHandler}>
-            <i className="fas fa-plus"> CREATE NEW ADDRESS </i>
+          <Button className="my-3  " variant="outline-success btn-block" onClick={createAddressHandler}  >
+            <i className="fas fa-plus"></i> CREATE NEW ADDRESS
           </Button>
         </Col>
       </Row>
