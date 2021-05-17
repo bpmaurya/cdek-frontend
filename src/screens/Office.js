@@ -40,9 +40,9 @@ function Office({location,history}) {
       {/* <Link to="/" className="btn btn-light my-3">
         MY Page
       </Link> */}
-
+      <h2>MY PAGE</h2>
       <Row>
-
+      
       <Col  className="col-md-6 col-sm-6 col-xs-12">
           <Card style={{ backgroundColor: "#f5f5f6" }}>
             <div className="m-5 text-center">
@@ -97,14 +97,14 @@ function Office({location,history}) {
                   <i className="fas fa-hand-paper fa-9x"></i>
                 </div>
                 <div className="m-3">
-                  <p>Prohibited Shipping Items</p>
+                  <p>Incoming Package Items</p>
                 </div>
                 <div className="m-3">
                   <Button
-                    href="/view"
+                    href="/add-incoming"
                     variant="outline-success btn-block"
                     type="button">
-                    View a list
+                    add incoming package
                   </Button>
                 </div>
               </Card>
@@ -117,14 +117,14 @@ function Office({location,history}) {
                   <i className="fas fa-hand-paper fa-9x "></i>
                 </div>
                 <div className="m-3">
-                  <p>customer Limit In Russia</p>
+                  <p>outgoing package items</p>
                 </div>
                 <div className="m-3">
                   <Button
                     href="/view"
                     variant="outline-success btn-block"
                     type="button">
-                    View a list
+                    create outgoing package
                   </Button>
                 </div>
               </Card>
@@ -141,7 +141,6 @@ function Office({location,history}) {
       </Row>
 
       <Row className="my-5">
-         
       <Col  className="col-md-6 col-sm-6 col-xs-12">
           <Card>
             <div className="m-5 text-center">
@@ -149,7 +148,7 @@ function Office({location,history}) {
                 <p>New incoming packages and packages in stock</p>
                 <Link to='/incoming' style={{textDecoration:"none"}}>
                 <h2 style={{ color: "#1ab248" }}>
-                  <i className="fas fa-box-open"></i> Incoming Packages
+                  <i className="fas fa-box-open"></i> Incoming Packages Details
                 </h2>
                 </Link>
               </div>
@@ -210,28 +209,7 @@ function Office({location,history}) {
        
       </Row>
 
-      <Row>
-        <Col className="col-md-6 col-sm-6 col-xs-12">
-          <h2>News Feed</h2>
-          <p>No News Feed Till now</p>
-        </Col>
-        <Col>
-          <Col className="col-md-12 col-sm-6 col-xs-12" style={{ height: "40vh" }}>
-            <h2>
-              <i className="fas fa-location"></i>Your warehouse location:
-            </h2>
-            <p>No News Feed Till now</p>
-          </Col>
-          <Col className="col-md-12 col-sm-6 col-xs-12" style={{ height: "40vh" }}>
-          <Button variant="success">New Castle</Button>{' '}
-          <Button variant="outline-success">Boca Raton</Button>{' '}
-            <p>
-              101 Lukens drive suite H , New Castle, Delaware (DE) 19720
-              +1-929-999-57-97
-            </p>
-          </Col>
-        </Col>
-      </Row>
+     
     </div>
   );
 }

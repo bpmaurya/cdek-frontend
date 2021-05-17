@@ -71,6 +71,7 @@ function PackageListScreen({ history,match }) {
                        <th>TRACKING NUMBER</th>
                        <th>COUNT IN STOCK</th>
                        <th>CREATED AT</th>
+                       <th>EDIT/DELETE</th>
                        </tr>
                    </thead>
                    <tbody>

@@ -2,7 +2,8 @@ import { useDispatch,useSelector } from 'react-redux'
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import {Link} from 'react-router-dom'
-import { Row, Col, Form, FormControl, Button, Card,Collapse,Image} from "react-bootstrap";
+import { LinkContainer } from 'react-router-bootstrap'
+import { Row, Col,Table, Form, FormControl, Button, Card,Collapse,Image} from "react-bootstrap";
 import { listIncomingPackage } from "../actions/incomimgPackageActions"
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -21,6 +22,19 @@ function IncomingPackage({}) {
   }, [dispatch]);
 
   console.log(incomingPackages);
+
+  const deleteHandler = (id)=>{
+    if(window.confirm('Are you sure you want to delete this user?')){
+        // dispatch(deleteUsers(id))
+        
+    }
+    // console.log("delete:",id);
+    
+}
+const createPackageHandler = (  )=>{
+    //create incoming package
+
+}
   
 
   return (
@@ -58,86 +72,53 @@ function IncomingPackage({}) {
 
 
 
-      {loading ? <Loader/>
-        : error ? <Message variant='danger' >{error} </Message>
-        : <Row>
-        {incomingPackages.map((product) => (
-          <Card className="container p-md-3 m-3">
-              <Link to={`/incoming/${product._id}`} >
-            <Row>
-              <Col
-                md={4}
-                // onClick={() => setOpen(!open)}
-                aria-controls="example-collapse-text"
-                aria-expanded={open}>
-                <a  style={{ color: "#4bbf73", fontWeight: "bold" }}>
-                  {" "}
-                  {product.name}
-                </a>
-              </Col>
-              <Col md={4}>
-                <h4>Package_id </h4>
-                <p> {product._id} </p>
-                {/* <h4>Products- 2 </h4> */}
-              </Col>
-              <Col md={4}>
-                <h4>Created at </h4>
-                <p>{product.created_at} </p>
-                {/* <p> {product.user.profile.id} </p> */}
-              </Col>
-            </Row>
-            </Link> 
-            
-            {/* <Row>
-              <Col md={12}>
-                <Collapse in={open}>
-                  <div id="example-collapse-text">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life
-                    accusamus terry richardson ad squid. Nihil anim keffiyeh
-                    helvetica, craft beer labore wes anderson cred nesciunt
-                    sapiente ea proident.
-                  </div>
-                </Collapse>
-              </Col>
-            </Row> */}
+      {loading
+            ? (<Loader/>)
+            : error 
+            ? (<Message variant='danger' > {error} </Message>)
+            :(
+               <Table striped border hover responsive className='table-sm'>
+                   <thead>
+                       <tr>
+                       <th>ID</th>
+                       <th>NAME</th>
+                       <th>TRACKING NUMBER</th>
+                       <th>COUNT IN STOCK</th>
+                       <th>CREATED AT</th>
+                       <th>EDIT/DELETE</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       {incomingPackages.map(user=>(
+                           <tr key={user._id} >
+                               <td>{user._id}</td>
+                               <td>{user.name}</td>
+                               <td>{user.trackingNumber}</td>
+                               <td>{user.countInStock}</td>
+                               <td>{user.created_at}</td>
+                              
+                               <td>
+                                   <LinkContainer to={`/admin/package/${user._id}/edit`} >
+                                       <Button variant='light' className='btn-sm' >
+                                           <i className='fas fa-edit' ></i>
 
-          </Card>
-        ))}
-      </Row>
-       }
-     
+                                       </Button>
+                                   
+                                   </LinkContainer>
 
-      {/* <Row>
-        <Card className="container p-md-3 m-3">
-          <Row>
-            <Col md={4}>
-              <p>Select all Packagee</p>
-            </Col>
-            <Col md={4}>
-              <h4>Package_id </h4>
-              <p> product._id </p>
-            </Col>
-            <Col md={4}>
-              <h4>Product </h4>
-              <p> 20 </p>
-            </Col>
-          </Row>
-        </Card>
-      </Row> */}
+                                   <Button variant='danger' className='btn-sm'  onClick={()=> deleteHandler(user._id) } >
 
-      {/* <Row className="text-center">
-        {incomingPackages.map((product) => (
-          <Col sm={12} md={6} lg={4} xl={3}>
-            <h3> {product.name} </h3>
-            <br />
-            <p> {product._id} </p>
-            <br />
-            <h3>{product.user} </h3>
-            <br />
-            <p>{product.product} </p>
-          </Col>
-        ))}
-      </Row> */}
+                                       <i className='fas fa-trash' > </i>
+
+                                   </Button>
+                               </td>
+                                </tr>
+                       ))}
+                   </tbody>
+
+
+               </Table>
+            ) }
     </div>
   );
 }
