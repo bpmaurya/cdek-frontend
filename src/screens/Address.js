@@ -53,6 +53,7 @@ function Address({}) {
               <th>CITY</th>
               <th>COUNTRY</th>
               <th>RECIPIENT</th>
+              <th>EDIT/DELETE</th>
             </tr>
           </thead>
           <tbody>
