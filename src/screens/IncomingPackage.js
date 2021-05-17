@@ -24,7 +24,7 @@ function IncomingPackage({}) {
   console.log(incomingPackages);
 
   const deleteHandler = (id)=>{
-    if(window.confirm('Are you sure you want to delete this user?')){
+    if(window.confirm('Are you sure you want to delete this package?')){
         // dispatch(deleteUsers(id))
         
     }
@@ -98,7 +98,7 @@ const createPackageHandler = (  )=>{
                                <td>{user.created_at}</td>
                               
                                <td>
-                                   <LinkContainer to={`/admin/package/${user._id}/edit`} >
+                                   <LinkContainer to={`/users/package/${user._id}/edit`} >
                                        <Button variant='light' className='btn-sm' >
                                            <i className='fas fa-edit' ></i>
 

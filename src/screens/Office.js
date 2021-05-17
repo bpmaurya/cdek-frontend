@@ -55,11 +55,11 @@ function Office({location,history}) {
                       Profile
                     </a>
                   </li>
-                  <li>
+                  {/* <li>
                     <a href="/office/tariff" className="tariff">
                       Tariff: Standard
                     </a>
-                  </li>
+                  </li> */}
                   <li>
                     <a href="/office/recipient" className="recipients">
                       Recipients
@@ -89,12 +89,12 @@ function Office({location,history}) {
 
         <Col md={6}>
           <Row>
-            <Col className="col-md-6 col-sm-6 col-xs-12">
+            <Col className="col-md-6 col-sm-6 col-xs-10">
               <Card
                 style={{ background: "#e5fae8" }}
                 className="text-center text-align-center item-align-center">
                 <div className="m-3" style={{color:"red"}}>
-                  <i className="fas fa-hand-paper fa-9x"></i>
+                  <i className="fas fa-hand-paper fa-7x"></i>
                 </div>
                 <div className="m-3">
                   <p>Incoming Package Items</p>
@@ -104,27 +104,27 @@ function Office({location,history}) {
                     href="/add-incoming"
                     variant="outline-success btn-block"
                     type="button">
-                    add incoming package
+                    Create Incoming Package
                   </Button>
                 </div>
               </Card>
             </Col>
-            <Col className="col-md-6 col-sm-6 col-xs-12">
+            <Col className="col-md-6 col-sm-6 col-xs-10">
               <Card
                 className="text-center"
                 style={{ background: "#dff5ff" }}>
                 <div className="m-3" style={{color:"red"}}>
-                  <i className="fas fa-hand-paper fa-9x "></i>
+                  <i className="fas fa-hand-paper fa-7x "></i>
                 </div>
                 <div className="m-3">
-                  <p>outgoing package items</p>
+                  <p>Outgoing Package Items</p>
                 </div>
                 <div className="m-3">
                   <Button
                     href="/view"
                     variant="outline-success btn-block"
                     type="button">
-                    create outgoing package
+                    Create Outgoing Package
                   </Button>
                 </div>
               </Card>
@@ -164,10 +164,10 @@ function Office({location,history}) {
               </div>
               <div>
                 <Button
-                  href="/add-incoming"
+                  href="/incoming"
                   variant="outline-success btn-block"
                   type="button">
-                  New Incoming Package
+                  View Incoming Package
                 </Button>
               </div>
             </div>
@@ -181,7 +181,7 @@ function Office({location,history}) {
           <Card>
             <div className="m-5 text-center">
               <div>
-                <p>New incoming packages and packages in stock</p>
+                <p>New Outgoing packages and packages in stock</p>
                 <h2 style={{ color: "#1ab248" }}>
                   {" "}
                   <i className="fas fa-box-open"></i> OutGoing Packages
@@ -199,7 +199,7 @@ function Office({location,history}) {
                   href="/outgoing"
                   variant="outline-success btn-block"
                   type="button">
-                  New OutGoing Package
+                  View OutGoing Package
                 </Button>
               </div>
             </div>
