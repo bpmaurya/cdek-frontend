@@ -44,7 +44,7 @@ function Login({location,history}) {
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
                     type='email'
-                    placeholder='enter you email'
+                    placeholder='Enter your email'
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
                     >
@@ -57,7 +57,7 @@ function Login({location,history}) {
                     <Form.Label>Your Password</Form.Label>
                     <Form.Control
                     type='password'
-                    placeholder='enter your password'
+                    placeholder='Enter your password'
                     value={password}
                     onChange={(e)=>setPassword(e.target.value)}
                     >
