@@ -1,6 +1,8 @@
-import React from "react";
-import { Card, Button, Row, Col } from "react-bootstrap";
-import { useSelector,useDispatch } from 'react-redux'
+import React, { useState, useEffect } from "react";
+import { Card, Button, Form, Row, Col } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 import { Link } from "react-router-dom";
 import logo from "../img/girl.png";
 import good from "../img/goods.png";
@@ -9,10 +11,30 @@ import how1 from "../img/how-1.svg";
 import how2 from "../img/how-2.svg";
 import how3 from "../img/how-3.svg";
 import how4 from "../img/how-4.svg";
+import { getCalculator } from "../actions/calculatorAction";
 
-function HomeScreen() {
-  const userLogin = useSelector(state => state.userLogin)
-  const { userInfo } = userLogin
+function HomeScreen({}) {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const dispatch = useDispatch();
+
+  const getCalculators = useSelector((state) => state.getCalculators);
+  const { loading, error, calculator } = getCalculators;
+
+  useEffect(() => {
+    dispatch(getCalculator());
+  }, [dispatch]);
+  
+  const [region, setRegion] = useState('')
+  const [weight, setWeight] = useState('')
+
+  function handleChangeRegion(e){
+      setRegion(e.target.value)
+  }
+ 
+
+  const rate = parseInt(weight)*parseInt(weight)
 
   return (
     <div>
@@ -29,16 +51,96 @@ function HomeScreen() {
               customers directly.
             </p>
           </div>
-          { !userInfo && 
-          <div className="my-5">
-            <Link to='/register'  className=" btn btn-success btn-lg p-3">Sign Up</Link>
-          </div>
-          }
+          {!userInfo && (
+            <div className="my-5">
+              <Link to="/register" className=" btn btn-success btn-lg p-3">
+                Sign Up
+              </Link>
+            </div>
+          )}
         </Col>
         <Col md={6}>
           <div>
             <img src={logo} className="img-fluid" />
           </div>
+        </Col>
+      </Row>
+
+      <Row className="text-center">
+        <Col md={12}>
+          <h1>Delivery cost from the USA</h1>
+          <p>CDEK company delivers at two tariffs. More</p>
+
+          <div className="m-5">
+            <Link
+              to="/register"
+              className=" btn btn-outline-success  btn-lg p-3">
+              Tariff «Standard»
+            </Link>
+          </div>
+          <Card className="half-width">
+          {loading ? (
+                      <Loader />
+                    ) : error ? (
+                      <Message variant="danger"> {error} </Message>
+                    ) : (
+
+            <Form className="m-3">
+              <Row className="item-align-content-center">
+                <Col md={4}>
+                  <Form.Group controlId="exampleForm.ControlInput1">
+                  <Form.Label>Region </Form.Label>
+                    {/* <Form.Control
+                      required
+                      name="productType"
+                      type="name"
+                      placeholder="enter your city"
+                      // value={productType}
+                      // onChange={(e) => setProductType(e.target.value)}
+                    /> */}
+                    
+                      <Form.Control as="select">
+                      <option value="" disabled selected hidden>Select Region...</option>
+                        {calculator.map((item) => (
+                          <option onChange={handleChangeRegion}>
+                            {item.zone} {item.region} {item.zone_city} {" "}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    
+                  </Form.Group>
+                </Col>
+                <Col md={4}>
+                  <Form.Group controlId="exampleForm.ControlInput1">
+                    <Form.Label>Product Weight </Form.Label>
+                    <Form.Control
+                      required
+                      name="productWeight"
+                      type="number"
+                      placeholder="enter package weight"
+                      // value={productBrand}
+                      onChange={(e) => setWeight(e.target.value)}
+                    />
+                    {/* <Form.Control as="select"  >
+                    <option value="" disabled selected hidden>Select Weight...</option>
+                        {calculator.map((item) => (
+                          <option onChange={handleChangeWeight} >
+                            {item.weight}{" "}
+                          </option>
+                        ))}
+                      </Form.Control> */}
+                    
+                  </Form.Group>
+                </Col>
+                { rate>=1 &&
+                <Col md={4}>
+                     <h5 style={{color:"green"}}>Delivery price:${rate} </h5>
+                </Col>
+}
+              </Row>
+            </Form>
+          )}
+          </Card>
         </Col>
       </Row>
 
@@ -61,11 +163,13 @@ function HomeScreen() {
               customers. At lower prices: from $9.
             </p>
           </div>
-          { !userInfo && 
-          <div className="my-5">
-          <Link to='/register'  className=" btn btn-success btn-lg p-3">Sign Up</Link>
-          </div>
-         }
+          {!userInfo && (
+            <div className="my-5">
+              <Link to="/register" className=" btn btn-success btn-lg p-3">
+                Sign Up
+              </Link>
+            </div>
+          )}
         </Col>
       </Row>
 
@@ -99,11 +203,15 @@ function HomeScreen() {
                     </div>
                   </Col>
                 </Row>
-                { !userInfo && 
-                <div className="m-5">
-                <Link to='/register'  className=" btn btn-success btn-lg p-3">Sign Up</Link>
-                </div>
-               }
+                {!userInfo && (
+                  <div className="m-5">
+                    <Link
+                      to="/register"
+                      className=" btn btn-success btn-lg p-3">
+                      Sign Up
+                    </Link>
+                  </div>
+                )}
               </Col>
               <Col md={6}>
                 <div>
