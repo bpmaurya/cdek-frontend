@@ -73,7 +73,7 @@ function HomeScreen({}) {
 
           <div className="m-5">
             <Link
-              to="/register"
+              to=""
               className=" btn btn-outline-success  btn-lg p-3">
               Tariff «Standard»
             </Link>
