@@ -112,12 +112,12 @@ function HomeScreen({}) {
                 </Col>
                 <Col md={4}>
                   <Form.Group controlId="exampleForm.ControlInput1">
-                    <Form.Label>Product Weight </Form.Label>
+                    <Form.Label>Product Weight in KG </Form.Label>
                     <Form.Control
                       required
                       name="productWeight"
                       type="number"
-                      placeholder="enter package weight"
+                      placeholder="Enter package weight in KG"
                       // value={productBrand}
                       onChange={(e) => setWeight(e.target.value)}
                     />
