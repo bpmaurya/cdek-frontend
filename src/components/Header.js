@@ -109,6 +109,10 @@ function Header() {
                     <NavDropdown.Item>OutGoing package </NavDropdown.Item>
                   </LinkContainer>
 
+                  <LinkContainer to='/admin/shippingRate' >
+                    <NavDropdown.Item>Shipping Rates</NavDropdown.Item>
+                  </LinkContainer>
+
                 </NavDropdown>
               ) }
 

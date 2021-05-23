@@ -18,6 +18,8 @@ import UserListScreen  from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
 import PackageListScreen from "./screens/PackageListScreen";
 import Address from "./screens/Address";
+import ShippingRateScreen from "./screens/ShippingRateScreen";
+import AddShippingRate from "./screens/AddShippingRate";
 
 function App() {
 
@@ -54,6 +56,8 @@ function App() {
           <Route path='/incoming/:_id' component={IncomingPackageDetails} exact/>
           <Route path='/address' component={Address} exact />
           <Route path='/admin/package' component={PackageListScreen} exact />
+          <Route path='/admin/shippingRate' component={ShippingRateScreen} exact />
+          <Route path='/admin/add-shippingRate' component={AddShippingRate} exact />
         </Container>
       </main>
       <Footer />
