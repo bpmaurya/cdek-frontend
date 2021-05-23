@@ -55,6 +55,7 @@ function ShippingRateScreen({}) {
                   <th>ZONE_CITY</th>
                   <th>RATE_TYPE</th>
                   <th>WEIGHT_TYPE</th>
+                  <th>WEIGHT</th>
                   <th>RATE</th>
                   <th>EDIT/DELETE</th>
                 </tr>
@@ -67,6 +68,7 @@ function ShippingRateScreen({}) {
                     <td>{item.zone_city}</td>
                     <td>{item.rate_type}</td>
                     <td>{item.weight_type}</td>
+                    <td>{item.weight}</td>
                     <td>{item.rate}</td>
                     <td>
                       <LinkContainer
