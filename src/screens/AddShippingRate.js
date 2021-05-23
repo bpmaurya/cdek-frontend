@@ -112,7 +112,7 @@ function AddShippingRate() {
         </Col>
 
         <Col md={9}>
-          <h2> AVAILABLE RATES</h2>
+          <h2>PARCEL RATES</h2>
           {/* <Row className="align-items-center">
        
         <Col className="text-right">
@@ -146,8 +146,13 @@ function AddShippingRate() {
                 </tr>
               </thead>
               <tbody>
-                {calculator.map((item) => (
+                
+                {calculator
+                .filter(item => item.rate_type ==="PARCEL")
+                .map(item => (
+
                   <tr key={item._id}>
+                    
                     <td>{item.zone}</td>
                     <td>{item.region}</td>
                     <td>{item.zone_city}</td>
@@ -170,7 +175,72 @@ function AddShippingRate() {
                         <i className="fas fa-trash"> </i>
                       </Button>
                     </td>
-                  </tr>
+                
+                  </tr> 
+                
+                ))}
+              </tbody>
+            </Table>
+          )}
+        </Col>
+      </Row>
+
+
+      <Row>
+      
+        <Col md={12}>
+        <h2>COURIER RATES</h2>
+          {loading ? (
+            <Loader />
+          ) : error ? (
+            <Message variant="danger"> {error} </Message>
+          ) : (
+            <Table striped border hover responsive className="table-sm">
+              <thead>
+                <tr>
+                  <th>ZONE</th>
+                  <th>REGION</th>
+                  <th>ZONE_CITY</th>
+                  <th>RATE_TYPE</th>
+                  <th>WEIGHT_TYPE</th>
+                  <th>WEIGHT</th>
+                  <th>RATE</th>
+                  <th>EDIT/DELETE</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                {calculator
+                .filter(item => item.rate_type ==="COURIER")
+                .map(item => (
+
+                  <tr key={item._id}>
+                    
+                    <td>{item.zone}</td>
+                    <td>{item.region}</td>
+                    <td>{item.zone_city}</td>
+                    <td>{item.rate_type}</td>
+                    <td>{item.weight_type}</td>
+                    <td>{item.weight}</td>
+                    <td>{item.rate}</td>
+                    <td>
+                      <LinkContainer
+                        to={`/admin/shippingRate/${item._id}/edit`}>
+                        <Button variant="light" className="btn-sm">
+                          <i className="fas fa-edit"></i>
+                        </Button>
+                      </LinkContainer>
+
+                      <Button
+                        variant="danger"
+                        className="btn-sm"
+                        onClick={() => deleteHandler(item._id)}>
+                        <i className="fas fa-trash"> </i>
+                      </Button>
+                    </td>
+                
+                  </tr> 
+                
                 ))}
               </tbody>
             </Table>
