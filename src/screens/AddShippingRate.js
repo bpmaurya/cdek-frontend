@@ -141,13 +141,13 @@ function AddShippingRate({}) {
               <Row className="my-4">
                 <Col md={12}>
                   <Row>
-                    <Col md={4}></Col>
                     <Col md={4}>
                       <h6> weight</h6>
                     </Col>
                     <Col md={4}>
                       <h6> rate</h6>
                     </Col>
+                    <Col md={4}></Col>
                   </Row>
                 </Col>
               </Row>
@@ -159,37 +159,12 @@ function AddShippingRate({}) {
                       <Form>
                         <Row>
                           <Col md={4}>
-                            {/* <Button href="" variant="outline-success btn-block" type="button">
-                +Add New Product
-              </Button> */}
-                            {inputList.length !== 1 && (
-                              <Button
-                                className="mr10"
-                                onClick={() => handleRemoveClick(i)}
-                                variant="outline-danger btn-sm"
-                                type="button">
-                                <i class="fas fa-minus"></i>
-                              </Button>
-                            )}
-                            {inputList.length - 1 === i && (
-                              <Button
-                                onClick={handleAddClick}
-                                variant="outline-success btn-sm"
-                                type="button">
-                                {" "}
-                                <i class="fas fa-plus"></i>
-                              </Button>
-                            )}
-                          </Col>
-
-                          <Col md={4}>
                             <Form.Group controlId="zoneCity">
-                              {/* <Form.Label>Weight </Form.Label> */}
                               <Form.Control
                                 type="number"
                                 name="weight"
                                 placeholder="Enter Weight"
-                                // value={password}
+
                                 value={x.weight}
                                 onChange={(e) =>
                                   handleInputChange(e, i)
@@ -198,8 +173,7 @@ function AddShippingRate({}) {
                           </Col>
 
                           <Col md={4}>
-                            <Form.Group controlId="zoneCity1">
-                              {/* <Form.Label>Rate </Form.Label> */}
+                            <Form.Group controlId="rate">
                               <Form.Control
                                 type="number"
                                 name="rate"
@@ -210,6 +184,27 @@ function AddShippingRate({}) {
                                 }></Form.Control>
                             </Form.Group>
                           </Col>
+                          <Col md={4}>
+                           
+                           {inputList.length !== 1 && (
+                             <Button
+                               className="mr10"
+                               onClick={() => handleRemoveClick(i)}
+                               variant="outline-danger btn-sm"
+                               type="button">
+                               <i class="fas fa-minus"></i>
+                             </Button>
+                           )}
+                           {inputList.length - 1 === i && (
+                             <Button
+                               onClick={handleAddClick}
+                               variant="outline-success btn-sm"
+                               type="button">
+                               {" "}
+                               <i class="fas fa-plus"></i>
+                             </Button>
+                           )}
+                         </Col>
                         </Row>
                       </Form>
                     </Col>
@@ -219,7 +214,7 @@ function AddShippingRate({}) {
 
               <Row>
                 <Col md={12}>
-                  <Button variant="success btn-block" onClick={submitHandler}>
+                  <Button variant="success btn-block" type="submit" onClick={submitHandler}>
                     Add Shipping Rate
                   </Button>
                 </Col>
