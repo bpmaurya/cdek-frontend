@@ -64,16 +64,7 @@ function AddNewIncomingPck({ location, history }) {
     trackingNumber: trackingNumber,
     countInStock: "12",
     comment: comment,
-    product: [
-      {
-        // name: productType,
-        // type: productType,
-        // brand: productBrand,
-        // size: "122",
-        // price: productPrice,
-        // quantity: productQuantity,
-      }
-    ],
+   
     user: {
       username: "admin1@gmail.com",
       email: "admin1@gmail.com",
@@ -92,6 +83,7 @@ function AddNewIncomingPck({ location, history }) {
     dispatch(createPackage(savePackage));
     console.log("submit");
   };
+
   if (success) {
     return (
       <div>

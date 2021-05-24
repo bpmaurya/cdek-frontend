@@ -30,13 +30,13 @@ export const getCalculatorReducers =  ( state = { calculator:[] },action)=>{
 
 }
 
-export const createShippingRateReducers = ( state = { }, action)=>{
+export const createShippingRateReducers = ( state = [ ], action)=>{
     switch(action.type){
         case CREATE_SHIPPING_RATE_REQUEST:
             return{ loading1:true }
 
         case CREATE_SHIPPING_RATE_SUCCESS:
-            return{ loading1:false, success1:true, createRate: action.payload }
+            return{ loading1:false, success1:true, createShippingRate: action.payload }
 
 
         case CREATE_SHIPPING_RATE_FAIL:

@@ -134,7 +134,7 @@ export const userUpdateProfileReducers =  ( state = {  },action)=>{
 
 
 //FOR GET ALL  USER LIST DETAILS REDUCER
-export const userListReducers =  ( state = { users:[] },action)=>{
+export const userListReducers =  ( state = { users:[ ] },action)=>{
     switch(action.type){
         case USER_LIST_REQUEST:
             return{ loading:true }

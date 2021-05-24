@@ -39,7 +39,7 @@ import {
 
 
 //for shippingRate action
-export const createShippingRate = ( shipping_rate = { } ) => async(dispatch,getState)=>{
+export const createShippingRate = ( shipping_rate=[] ) => async(dispatch,getState)=>{
   try{
       dispatch({
           type:CREATE_SHIPPING_RATE_REQUEST,
@@ -47,7 +47,6 @@ export const createShippingRate = ( shipping_rate = { } ) => async(dispatch,getS
       })
       const {
           userLogin:{userInfo},
-
       } = getState()
 
       const config={
@@ -57,7 +56,7 @@ export const createShippingRate = ( shipping_rate = { } ) => async(dispatch,getS
           }
       }
       var url = API.baseUrl
-      const {data} = await axios.post(`${url}/calc/`, shipping_rate ,config)
+      const {data} = await axios.post(`${url}/calc/create/`, shipping_rate ,config)
 
       dispatch({
           type:CREATE_SHIPPING_RATE_SUCCESS,

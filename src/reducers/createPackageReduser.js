@@ -7,7 +7,7 @@ import {
 
 
 
-export const createPackageReducers = ( state = { },action)=>{
+export const createPackageReducers = ( state = { }, action)=>{
     switch(action.type){
         case CREATE_PACKAGE_REQUEST:
             return{ loading:true }

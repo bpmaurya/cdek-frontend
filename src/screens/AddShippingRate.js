@@ -7,7 +7,8 @@ import Message from "../components/Message";
 import { getCalculator, createShippingRate } from "../actions/calculatorAction";
 import { LinkContainer } from "react-router-bootstrap";
 
-function AddShippingRate({}) {
+function AddShippingRate({location,history}) {
+  const redirect = location.search ? location.search.split('=')[1]:'/admin/add-shippingRate'
   const [zone, setZone] = useState("");
   const [region, setRegion] = useState("");
   const [rateType, setRateType] = useState("");
@@ -49,15 +50,21 @@ function AddShippingRate({}) {
 
   const shippingRate = useSelector((state) => state.shippingRate);
   const { error1, loading1, success1 } = shippingRate;
+  
+  var rate = []
 
-  const rate = {
-    zone: zone,
-    region: region,
-    rate_type: rateType,
-    weight_type: weightType,
-    weight: "122",
-    rate: "12",
-  };
+  inputList.map(item => {
+  const dicts =
+      {
+        zone: zone,
+        region: region,
+        rate_type: rateType,
+        weight_type: weightType,
+        weight: item.weight,
+        rate: item.rate
+      }
+      rate.push(dicts)
+  })
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -65,12 +72,15 @@ function AddShippingRate({}) {
     console.log(region);
     console.log(rateType);
     console.log(weightType);
+    console.log(rate);
     dispatch(createShippingRate(rate));
+    window.location.reload(true)
   };
+  
 
   useEffect(() => {
     dispatch(getCalculator());
-  }, [dispatch]);
+  }, [dispatch,history]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this rate?")) {
@@ -132,8 +142,8 @@ function AddShippingRate({}) {
                       Select Type...
                     </option>
 
-                    <option value="KILOGRAM"> KILOGRAM </option>
-                    <option value="PASCAl">LBS</option>
+                    <option value="KG"> KILOGRAM </option>
+                    <option value="LBS">LBS</option>
                   </Form.Control>
                 </Form.Group>
               </Form>
@@ -164,7 +174,6 @@ function AddShippingRate({}) {
                                 type="number"
                                 name="weight"
                                 placeholder="Enter Weight"
-
                                 value={x.weight}
                                 onChange={(e) =>
                                   handleInputChange(e, i)
@@ -185,26 +194,25 @@ function AddShippingRate({}) {
                             </Form.Group>
                           </Col>
                           <Col md={4}>
-                           
-                           {inputList.length !== 1 && (
-                             <Button
-                               className="mr10"
-                               onClick={() => handleRemoveClick(i)}
-                               variant="outline-danger btn-sm"
-                               type="button">
-                               <i class="fas fa-minus"></i>
-                             </Button>
-                           )}
-                           {inputList.length - 1 === i && (
-                             <Button
-                               onClick={handleAddClick}
-                               variant="outline-success btn-sm"
-                               type="button">
-                               {" "}
-                               <i class="fas fa-plus"></i>
-                             </Button>
-                           )}
-                         </Col>
+                            {inputList.length !== 1 && (
+                              <Button
+                                className="mr10"
+                                onClick={() => handleRemoveClick(i)}
+                                variant="outline-danger btn-sm"
+                                type="button">
+                                <i class="fas fa-minus"></i>
+                              </Button>
+                            )}
+                            {inputList.length - 1 === i && (
+                              <Button
+                                onClick={handleAddClick}
+                                variant="outline-success btn-sm"
+                                type="button">
+                                {" "}
+                                <i class="fas fa-plus"></i>
+                              </Button>
+                            )}
+                          </Col>
                         </Row>
                       </Form>
                     </Col>
@@ -214,7 +222,10 @@ function AddShippingRate({}) {
 
               <Row>
                 <Col md={12}>
-                  <Button variant="success btn-block" type="submit" onClick={submitHandler}>
+                  <Button
+                    variant="success btn-block"
+                    type="submit"
+                    onClick={submitHandler}>
                     Add Shipping Rate
                   </Button>
                 </Col>
