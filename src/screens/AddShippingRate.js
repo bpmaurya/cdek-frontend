@@ -175,9 +175,8 @@ function AddShippingRate() {
                         <i className="fas fa-trash"> </i>
                       </Button>
                     </td>
-                
-                  </tr> 
-                
+                  </tr>
+
                 ))}
               </tbody>
             </Table>
