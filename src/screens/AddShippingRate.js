@@ -74,9 +74,7 @@ function AddShippingRate({location,history}) {
     console.log(weightType);
     console.log(rate);
     dispatch(createShippingRate(rate));
-    
   };
-  
 
   useEffect(() => {
     dispatch(getCalculator());
@@ -97,6 +95,7 @@ function AddShippingRate({location,history}) {
               <h2>Add Rates</h2>
               {error1 && <Message variant="danger"> {error1} </Message>}
               {loading1 && <Loader />}
+              {success1 && <h1 style={{color:"green"}}>Data Submitted</h1> }
               <Form>
                 <Form.Group>
                   <Form.Label>ZONE</Form.Label>
