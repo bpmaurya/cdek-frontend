@@ -74,7 +74,7 @@ function AddShippingRate({location,history}) {
     console.log(weightType);
     console.log(rate);
     dispatch(createShippingRate(rate));
-    window.location.reload(true)
+    
   };
   
 
