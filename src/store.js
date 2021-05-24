@@ -7,7 +7,7 @@ import { incomingPackageReducers,incomingPackageDetailsReducers } from './reduce
 import { userLoginReducers,userRegistrationReducers, userDetailsReducers,userUpdateProfileReducers,userListReducers,userDeleteReducers,userUpdateReducers } from './reducers/userReducer'
 import { createPackageReducers } from './reducers/createPackageReduser'
 import { getAddressReducers } from './reducers/deliveryAddressReduser'
-import { getCalculatorReducers } from './reducers/calculatorReduser'
+import { getCalculatorReducers,createShippingRateReducers } from './reducers/calculatorReduser'
 
 
 const reducer = combineReducers({
@@ -24,7 +24,8 @@ const reducer = combineReducers({
 
       createIncomingPackage:createPackageReducers,
       getAddress:getAddressReducers,
-      getCalculators:getCalculatorReducers
+      getCalculators:getCalculatorReducers,
+      shippingRate:createShippingRateReducers
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ?

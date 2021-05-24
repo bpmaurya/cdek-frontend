@@ -27,6 +27,7 @@ export const createPackage = ( package1={} ) => async(dispatch,getState)=>{
                 Authorization: `Bearer ${userInfo.token} `
             }
         }
+        
         var url = API.baseUrl
         const {data} = await axios.post(`${url}/add/create/`,package1, config)
 

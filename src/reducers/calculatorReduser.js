@@ -1,7 +1,11 @@
 import {
     CREATE_CALCULATOR_REQUEST,
     CREATE_CALCULATOR_SUCCESS,
-    CREATE_CALCULATOR_FAIL
+    CREATE_CALCULATOR_FAIL,
+
+    CREATE_SHIPPING_RATE_REQUEST,
+    CREATE_SHIPPING_RATE_SUCCESS,
+    CREATE_SHIPPING_RATE_FAIL,
   
 
 } from '../constants/calculatorConstant'
@@ -18,6 +22,25 @@ export const getCalculatorReducers =  ( state = { calculator:[] },action)=>{
 
         case CREATE_CALCULATOR_FAIL:
             return{ loading:false, error:action.payload}
+
+        default:
+            return state
+
+    }
+
+}
+
+export const createShippingRateReducers = ( state = { }, action)=>{
+    switch(action.type){
+        case CREATE_SHIPPING_RATE_REQUEST:
+            return{ loading1:true }
+
+        case CREATE_SHIPPING_RATE_SUCCESS:
+            return{ loading1:false, success1:true, createRate: action.payload }
+
+
+        case CREATE_SHIPPING_RATE_FAIL:
+            return{ loading1:false, error1:action.payload}
 
         default:
             return state

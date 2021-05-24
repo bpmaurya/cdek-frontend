@@ -4,13 +4,14 @@ import { Form, Button, Row, Col, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { getCalculator } from "../actions/calculatorAction";
+import { getCalculator, createShippingRate } from "../actions/calculatorAction";
 import { LinkContainer } from "react-router-bootstrap";
 
-function AddShippingRate() {
+function AddShippingRate({}) {
   const [zone, setZone] = useState("");
   const [region, setRegion] = useState("");
-  const [zoneCity, setZoneCity] = useState("");
+  const [rateType, setRateType] = useState("");
+  const [weightType, setWeightType] = useState("");
 
   const [inputList, setInputList] = useState([
     {
@@ -46,6 +47,27 @@ function AddShippingRate() {
   const getCalculators = useSelector((state) => state.getCalculators);
   const { loading, error, calculator } = getCalculators;
 
+  const shippingRate = useSelector((state) => state.shippingRate);
+  const { error1, loading1, success1 } = shippingRate;
+
+  const rate = {
+    zone: zone,
+    region: region,
+    rate_type: rateType,
+    weight_type: weightType,
+    weight: "122",
+    rate: "12",
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log(zone);
+    console.log(region);
+    console.log(rateType);
+    console.log(weightType);
+    dispatch(createShippingRate(rate));
+  };
+
   useEffect(() => {
     dispatch(getCalculator());
   }, [dispatch]);
@@ -56,8 +78,6 @@ function AddShippingRate() {
     // console.log("delete:",id);
   };
 
-  const submitHandler = () => {};
-
   return (
     <div>
       <Row className="my-4">
@@ -65,28 +85,35 @@ function AddShippingRate() {
           <Row>
             <Col md={4}>
               <h2>Add Rates</h2>
-              <Form onSubmit={submitHandler}>
-                <Form.Group controlId="email">
+              {error1 && <Message variant="danger"> {error1} </Message>}
+              {loading1 && <Loader />}
+              <Form>
+                <Form.Group>
                   <Form.Label>ZONE</Form.Label>
                   <Form.Control
+                    required
                     type="text"
                     placeholder="Enter Zone"
-                    // value={name}
+                    value={zone}
                     onChange={(e) => setZone(e.target.value)}></Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId="email">
+                <Form.Group>
                   <Form.Label>Region</Form.Label>
                   <Form.Control
+                    required
                     type="text"
                     placeholder="Enter region"
-                    // value={email}
+                    value={region}
                     onChange={(e) => setRegion(e.target.value)}></Form.Control>
                 </Form.Group>
 
-                <Form.Group controlId="confirmPassword">
+                <Form.Group>
                   <Form.Label>Rate Type</Form.Label>
-                  <Form.Control as="select">
+                  <Form.Control
+                    as="select"
+                    required
+                    onChange={(e) => setRateType(e.target.value)}>
                     <option value="" disabled selected hidden>
                       Select Type...
                     </option>
@@ -95,9 +122,12 @@ function AddShippingRate() {
                     <option value="COURIER">COURIER</option>
                   </Form.Control>
                 </Form.Group>
-                <Form.Group controlId="confirmPassword1">
+                <Form.Group>
                   <Form.Label>Weight Type</Form.Label>
-                  <Form.Control as="select">
+                  <Form.Control
+                    as="select"
+                    required
+                    onChange={(e) => setWeightType(e.target.value)}>
                     <option value="" disabled selected hidden>
                       Select Type...
                     </option>
@@ -107,6 +137,93 @@ function AddShippingRate() {
                   </Form.Control>
                 </Form.Group>
               </Form>
+
+              <Row className="my-4">
+                <Col md={12}>
+                  <Row>
+                    <Col md={4}></Col>
+                    <Col md={4}>
+                      <h6> weight</h6>
+                    </Col>
+                    <Col md={4}>
+                      <h6> rate</h6>
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+
+              {inputList.map((x, i) => {
+                return (
+                  <Row className="my-4">
+                    <Col md={12}>
+                      <Form>
+                        <Row>
+                          <Col md={4}>
+                            {/* <Button href="" variant="outline-success btn-block" type="button">
+                +Add New Product
+              </Button> */}
+                            {inputList.length !== 1 && (
+                              <Button
+                                className="mr10"
+                                onClick={() => handleRemoveClick(i)}
+                                variant="outline-danger btn-sm"
+                                type="button">
+                                <i class="fas fa-minus"></i>
+                              </Button>
+                            )}
+                            {inputList.length - 1 === i && (
+                              <Button
+                                onClick={handleAddClick}
+                                variant="outline-success btn-sm"
+                                type="button">
+                                {" "}
+                                <i class="fas fa-plus"></i>
+                              </Button>
+                            )}
+                          </Col>
+
+                          <Col md={4}>
+                            <Form.Group controlId="zoneCity">
+                              {/* <Form.Label>Weight </Form.Label> */}
+                              <Form.Control
+                                type="number"
+                                name="weight"
+                                placeholder="Enter Weight"
+                                // value={password}
+                                value={x.weight}
+                                onChange={(e) =>
+                                  handleInputChange(e, i)
+                                }></Form.Control>
+                            </Form.Group>
+                          </Col>
+
+                          <Col md={4}>
+                            <Form.Group controlId="zoneCity1">
+                              {/* <Form.Label>Rate </Form.Label> */}
+                              <Form.Control
+                                type="number"
+                                name="rate"
+                                placeholder="Enter Rate"
+                                value={x.rate}
+                                onChange={(e) =>
+                                  handleInputChange(e, i)
+                                }></Form.Control>
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                      </Form>
+                    </Col>
+                  </Row>
+                );
+              })}
+
+              <Row>
+                <Col md={12}>
+                  <Button variant="success btn-block" onClick={submitHandler}>
+                    Add Shipping Rate
+                  </Button>
+                </Col>
+              </Row>
             </Col>
 
             <Col md={8}>
@@ -230,95 +347,6 @@ function AddShippingRate() {
               </Row>
             </Col>
           </Row>
-
-          <Row className="my-4">
-            <Col md={4}>
-              <Row>
-                <Col md={4}></Col>
-                <Col md={4}>
-                  <h6> weight</h6>
-                </Col>
-                <Col md={4}>
-                  <h6> rate</h6>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-
-          {inputList.map((x, i) => {
-            return (
-              <Row className="my-4">
-                <Col md={4}>
-                  <Form>
-                    <Row>
-                      <Col md={4}>
-                        {/* <Button href="" variant="outline-success btn-block" type="button">
-                +Add New Product
-              </Button> */}
-                        {inputList.length !== 1 && (
-                          <Button
-                            className="mr10"
-                            onClick={() => handleRemoveClick(i)}
-                            variant="outline-danger btn-sm"
-                            type="button">
-                            <i class="fas fa-minus"></i>
-                          </Button>
-                        )}
-                        {inputList.length - 1 === i && (
-                          <Button
-                            onClick={handleAddClick}
-                            variant="outline-success btn-sm"
-                            type="button">
-                            {" "}
-                            <i class="fas fa-plus"></i>
-                          </Button>
-                        )}
-                      </Col>
-
-                      <Col md={4}>
-                        <Form.Group controlId="zoneCity">
-                          {/* <Form.Label>Weight </Form.Label> */}
-                          <Form.Control
-                            type="number"
-                            name="weight"
-                            placeholder="Enter Weight"
-                            // value={password}
-                            value={x.weight}
-                            onChange={(e) =>
-                              handleInputChange(e, i)
-                            }></Form.Control>
-                        </Form.Group>
-                      </Col>
-
-                      <Col md={4}>
-                        <Form.Group controlId="zoneCity1">
-                          {/* <Form.Label>Rate </Form.Label> */}
-                          <Form.Control
-                            type="number"
-                            name="rate"
-                            placeholder="Enter Rate"
-                            value={x.rate}
-                            onChange={(e) =>
-                              handleInputChange(e, i)
-                            }></Form.Control>
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                  </Form>
-                </Col>
-              </Row>
-            );
-          })}
-          
-
-          <Row>
-            <Col md={4}>
-            <Button variant="success btn-block">
-                         Add Shipping Rate
-                  </Button>
-            </Col>
-          </Row>
-
         </Col>
       </Row>
     </div>

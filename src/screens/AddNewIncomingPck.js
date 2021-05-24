@@ -168,8 +168,6 @@ function AddNewIncomingPck({ location, history }) {
                             name="productType"
                             type="name"
                             placeholder="enter your product type"
-                            // value={productType}
-                            // onChange={(e) => setProductType(e.target.value)}
                             value={x.productType}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -183,8 +181,7 @@ function AddNewIncomingPck({ location, history }) {
                             name="productBrand"
                             type="name"
                             placeholder="enter you product brand"
-                            // value={productBrand}
-                            // onChange={(e) => setProductBrand(e.target.value)}
+                            
                             value={x.productBrand}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -198,8 +195,7 @@ function AddNewIncomingPck({ location, history }) {
                             name="productColor"
                             type="name"
                             placeholder="product color"
-                            // value={productColor}
-                            // onChange={(e) => setProductColor(e.target.value)}
+                            
                             value={x.productColor}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -213,8 +209,7 @@ function AddNewIncomingPck({ location, history }) {
                             name="productPrice"
                             type="price"
                             placeholder="price"
-                            // value={productPrice}
-                            // onChange={(e) => setProductPrice(e.target.value)}
+                            
                             value={x.productPrice}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -236,8 +231,7 @@ function AddNewIncomingPck({ location, history }) {
                             name="productQuantity"
                             type="quantity"
                             placeholder="product quantity"
-                            // value={productQuantity}
-                            // onChange={(e) => setProductQuantity(e.target.value)}
+                        
                             value={x.productQuantity}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -285,5 +279,5 @@ function AddNewIncomingPck({ location, history }) {
     );
   }
 }
-  
+
 export default AddNewIncomingPck;
