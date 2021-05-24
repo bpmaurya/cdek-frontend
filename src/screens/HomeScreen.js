@@ -103,7 +103,7 @@ function HomeScreen({}) {
                       <option value="" disabled selected hidden>Select Region...</option>
                         {calculator.map((item) => (
                           <option onChange={handleChangeRegion}>
-                            {item.zone} {item.region} {item.zone_city} {" "}
+                            {item.zone} {item.region} {" "}
                           </option>
                         ))}
                       </Form.Control>

@@ -146,6 +146,7 @@ function AddNewIncomingPck({ location, history }) {
             </Card>
           </Col>
         </Row>
+        
         {inputList.map((x, i) => {
           return (
             <Row className="my-4">

@@ -52,7 +52,6 @@ function ShippingRateScreen({}) {
                 <tr>
                   <th>ZONE</th>
                   <th>REGION</th>
-                  <th>ZONE_CITY</th>
                   <th>RATE_TYPE</th>
                   <th>WEIGHT_TYPE</th>
                   <th>WEIGHT</th>
@@ -65,7 +64,6 @@ function ShippingRateScreen({}) {
                   <tr key={item._id}>
                     <td>{item.zone}</td>
                     <td>{item.region}</td>
-                    <td>{item.zone_city}</td>
                     <td>{item.rate_type}</td>
                     <td>{item.weight_type}</td>
                     <td>{item.weight}</td>
