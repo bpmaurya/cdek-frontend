@@ -63,7 +63,7 @@ function AddShippingRate() {
       <Row className="my-4">
         <Col md={12}>
           <Row>
-            <Col md={3}>
+            <Col md={4}>
               <h2>Add Rates</h2>
               <Form onSubmit={submitHandler}>
                 <Form.Group controlId="email">
@@ -109,7 +109,7 @@ function AddShippingRate() {
               </Form>
             </Col>
 
-            <Col md={9}>
+            <Col md={8}>
               <h2>COURIER RATES</h2>
               {loading ? (
                 <Loader />
@@ -232,7 +232,7 @@ function AddShippingRate() {
           </Row>
 
           <Row className="my-4">
-            <Col md={3}>
+            <Col md={4}>
               <Row>
                 <Col md={4}></Col>
                 <Col md={4}>
@@ -248,7 +248,7 @@ function AddShippingRate() {
           {inputList.map((x, i) => {
             return (
               <Row className="my-4">
-                <Col md={3}>
+                <Col md={4}>
                   <Form>
                     <Row>
                       <Col md={4}>
@@ -312,7 +312,7 @@ function AddShippingRate() {
           
 
           <Row>
-            <Col md={3}>
+            <Col md={4}>
             <Button variant="success btn-block">
                          Add Shipping Rate
                   </Button>
