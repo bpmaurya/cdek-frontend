@@ -74,6 +74,7 @@ function AddShippingRate({location,history}) {
     console.log(weightType);
     console.log(rate);
     dispatch(createShippingRate(rate));
+    
   };
 
   useEffect(() => {
