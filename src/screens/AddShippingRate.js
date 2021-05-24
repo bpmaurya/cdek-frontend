@@ -309,8 +309,16 @@ function AddShippingRate() {
               </Row>
             );
           })}
+          
 
-         
+          <Row>
+            <Col md={3}>
+            <Button variant="success btn-block">
+                         Add Shipping Rate
+                  </Button>
+            </Col>
+          </Row>
+
         </Col>
       </Row>
     </div>
