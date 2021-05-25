@@ -282,10 +282,10 @@ function EditPackageAdmin({ match, history }) {
                 </Card.Subtitle>
                 <Card.Text>
                   <p> type ={item.type} </p>
-                  <p> type ={item.brand} </p>
-                  <p> type ={item.size} </p>
-                  <p> type ={item.price} </p>
-                  <p> type ={item.quantity} </p>
+                  <p> brand ={item.brand} </p>
+                  <p> size ={item.size} </p>
+                  <p> price ={item.price} </p>
+                  <p> quantity ={item.quantity} </p>
                 </Card.Text>
               </Card.Body>
             </Card>
