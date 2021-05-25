@@ -214,10 +214,10 @@ function EditPackageAdmin({ match, history }) {
      </Col>
      <Col md={3}>
        <h2>Total products {product.length} </h2>
-       {product.map(item=>(
+       {/* {product.map(item=>(
              <Card style={{ width: '15rem',height:"14rem" }}>
              <Card.Body>
-               {/* <Card.Title>Product </Card.Title> */}
+             
                <Card.Subtitle className="mb-2 text-muted">name={item.name} </Card.Subtitle>
                <Card.Text>
                 <p> type ={item.type} </p>
@@ -226,11 +226,10 @@ function EditPackageAdmin({ match, history }) {
                 <p> type ={item.price} </p>
                 <p> type ={item.quantity} </p>
                </Card.Text>
-               {/* <Card.Link href="#">Card Link</Card.Link>
-               <Card.Link href="#">Another Link</Card.Link> */}
+              
              </Card.Body>
            </Card>
-       ))}
+       ))} */}
      </Col>
      <Col md={3}>
        <h2>User</h2>
