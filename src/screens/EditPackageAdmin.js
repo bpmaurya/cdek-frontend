@@ -213,7 +213,7 @@ function EditPackageAdmin({ match, history }) {
       )}
      </Col>
      <Col md={3}>
-       <h2>Total products {product.length} </h2>
+       <h2>Total products  </h2>
        {/* {product.map(item=>(
              <Card style={{ width: '15rem',height:"14rem" }}>
              <Card.Body>
