@@ -29,7 +29,6 @@ function UserEditScreen({ match, history }) {
       history.push('/admin/userlist')
     }
     else{
-
       if(!user.name || user._id !== Number(userId)){
           dispatch(getUserDetails(userId))
       }else{

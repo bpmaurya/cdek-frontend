@@ -11,7 +11,6 @@ import {
     PACKAGE_UPDATE_REQUEST,
     PACKAGE_UPDATE_SUCCESS,
     PACKAGE_UPDATE_FAIL,
-    PACKAGE_UPDATE_RESET,
 
 } from '../constants/incomingPackageConstant'
 import API from '../apiUrl.json'

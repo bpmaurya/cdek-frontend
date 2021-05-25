@@ -41,32 +41,35 @@ function EditPackageAdmin({ match, history }) {
   useEffect(() => {
     if(successUpdate){
       dispatch({type:PACKAGE_UPDATE_RESET})
-      history.push('/admin/userlist')
+      history.push('/admin/package')
     }
     else{
+      if ( incomingPackage._id!== packageId){
     
-            dispatch(listIncomingPackageDetails(packageId));
-            setName(incomingPackage.name)
-            setTrackingNumber(incomingPackage.trackingNumber)
-            setCountInStock(incomingPackage.countInStock)
-            setComment(incomingPackage.comment)
-            setStatus(incomingPackage.state)
-            setFull_received(incomingPackage.full_received)
-            setPartial_received(incomingPackage.partial_received)
-            setRemarks(incomingPackage.remarks)
-            setProduct(incomingPackage.product)
-            setUser(incomingPackage.user)
+      dispatch(listIncomingPackageDetails(packageId));
+      }else{
+      setName(incomingPackage.name)
+      setTrackingNumber(incomingPackage.trackingNumber)
+      setCountInStock(incomingPackage.countInStock)
+      setComment(incomingPackage.comment)
+      setStatus(incomingPackage.state)
+      setFull_received(incomingPackage.full_received)
+      setPartial_received(incomingPackage.partial_received)
+      setRemarks(incomingPackage.remarks)
+      setProduct(incomingPackage.product)
+      setUser(incomingPackage.user)
+      }
 
     }
 
-  }, [history,successUpdate]);
+  }, [ history,successUpdate,incomingPackage]);
 
   console.log(incomingPackage.product);
 
   
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(updateUser({id:user.id,name,email,isAdmin}))
+    // dispatch(updatePackage(item))
 
     console.log("submit");
   };
@@ -231,7 +234,7 @@ function EditPackageAdmin({ match, history }) {
      </Col>
      <Col md={3}>
        <h2>Total products  </h2>
-       {/* {product.map(item=>(
+       {product.map(item=>(
              <Card style={{ width: '15rem',height:"14rem" }}>
              <Card.Body>
              
@@ -246,12 +249,12 @@ function EditPackageAdmin({ match, history }) {
               
              </Card.Body>
            </Card>
-       ))} */}
+       ))}
      </Col>
      <Col md={3}>
        <h2>User</h2>
         
-            {/* <Card style={{ width: '18rem'}} >
+            <Card style={{ width: '18rem'}} >
             
             <ListGroup variant="flush">
               <ListGroup.Item>username= {user.username} </ListGroup.Item>
@@ -259,7 +262,7 @@ function EditPackageAdmin({ match, history }) {
              
               
             </ListGroup>
-          </Card> */}
+          </Card>
       
      </Col>
     </Row>

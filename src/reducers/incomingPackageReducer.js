@@ -68,7 +68,7 @@ export const packageUpdateReducers =  ( state = { item:{} },action)=>{
             return{ loading:true }
 
         case PACKAGE_UPDATE_SUCCESS:
-            return{ loading:false, success:true, item: action.payload } 
+            return{ loading:false, success:true , item: action.payload } 
 
 
         case PACKAGE_UPDATE_FAIL:
