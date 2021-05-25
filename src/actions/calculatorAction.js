@@ -7,6 +7,10 @@ import {
     CREATE_SHIPPING_RATE_REQUEST,
     CREATE_SHIPPING_RATE_SUCCESS,
     CREATE_SHIPPING_RATE_FAIL,
+
+    DELETE_SHIPPING_RATE_REQUEST,
+    DELETE_SHIPPING_RATE_SUCCESS,
+    DELETE_SHIPPING_RATE_FAIL
   } from "../constants/calculatorConstant";
 
   import API from "../apiUrl.json";
@@ -73,3 +77,42 @@ export const createShippingRate = ( shipping_rate=[] ) => async(dispatch,getStat
       })
   }
 }
+
+//for delete shipping rate actions
+export const deleteRates = (_id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: DELETE_SHIPPING_RATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token} `,
+      },
+    };
+    var url = API.baseUrl;
+    const { data } = await axios.delete(
+      `${url}/calc/delete/${_id}/`,
+      config
+    );
+
+    dispatch({
+      type: DELETE_SHIPPING_RATE_SUCCESS,
+      payload: data,
+    });
+
+  } catch (error) {
+    dispatch({
+      type: DELETE_SHIPPING_RATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

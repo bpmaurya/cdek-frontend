@@ -6,6 +6,10 @@ import {
     CREATE_SHIPPING_RATE_REQUEST,
     CREATE_SHIPPING_RATE_SUCCESS,
     CREATE_SHIPPING_RATE_FAIL,
+
+    DELETE_SHIPPING_RATE_REQUEST,
+    DELETE_SHIPPING_RATE_SUCCESS,
+    DELETE_SHIPPING_RATE_FAIL,
   
 
 } from '../constants/calculatorConstant'
@@ -47,4 +51,23 @@ export const createShippingRateReducers = ( state = [ ], action)=>{
 
     }
 
+}
+
+//FOR Delete selected Shipping rate 
+export const rateDeleteReducers =  ( state = { },action)=>{
+    switch(action.type){
+        case DELETE_SHIPPING_RATE_REQUEST:
+            return{ loading:true }
+
+        case DELETE_SHIPPING_RATE_SUCCESS:
+            return{ loading:false, success:true } 
+
+
+        case DELETE_SHIPPING_RATE_FAIL:
+            return{ loading:false, success:true }
+
+        default:
+            return state
+
+    }
 }

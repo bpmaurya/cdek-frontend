@@ -4,7 +4,7 @@ import { Table, Button} from 'react-bootstrap'
 import { useDispatch,useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-import { listUsers,deleteUsers } from '../actions/userActions'
+import { listUsers, deleteUsers } from '../actions/userActions'
 
 
 
@@ -33,7 +33,6 @@ function UserListScreen({ history}) {
     const deleteHandler = (id)=>{
         if(window.confirm('Are you sure you want to delete this package?')){
             dispatch(deleteUsers(id))
-            
         }
         // console.log("delete:",id);
         
@@ -42,10 +41,6 @@ function UserListScreen({ history}) {
 
     return (
         <div>
-
-
-
-
             <h1> Users </h1>
             {loading
             ? (<Loader/>)

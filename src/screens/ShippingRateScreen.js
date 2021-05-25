@@ -1,24 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { Card, Button, Form, Row, Col, Table } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { getCalculator } from "../actions/calculatorAction";
+import { getCalculator, deleteRates } from "../actions/calculatorAction";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 
-function ShippingRateScreen({}) {
+
+function ShippingRateScreen({history}) {
   const dispatch = useDispatch();
 
   const getCalculators = useSelector((state) => state.getCalculators);
   const { loading, error, calculator } = getCalculators;
 
-  useEffect(() => {
-    dispatch(getCalculator());
-  }, [dispatch]);
+  const userLogin  = useSelector(state => state.userLogin)
+  const { userInfo  } = userLogin 
 
-  const deleteHandler = (id) => {
+  const rateDelete  = useSelector(state => state.rateDelete)
+  const { success:successDelete  } = rateDelete
+
+  useEffect(() => {
+    if(userInfo && userInfo.isAdmin ){
+      dispatch(getCalculator());
+   }else{
+       history.push('/login')
+   }
+  //  history.push('/admin/shippingRate')
+  }, [dispatch,history,successDelete, userInfo]);
+
+  const deleteHandler = (_id) => {
     if (window.confirm("Are you sure you want to delete this rate?")) {
+      dispatch(deleteRates(_id))
     }
     // console.log("delete:",id);
   };

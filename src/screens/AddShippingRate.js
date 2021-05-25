@@ -4,7 +4,7 @@ import { Form, Button, Row, Col, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { getCalculator, createShippingRate } from "../actions/calculatorAction";
+import { getCalculator, createShippingRate, deleteRates} from "../actions/calculatorAction";
 import { LinkContainer } from "react-router-bootstrap";
 
 function AddShippingRate({location,history}) {
@@ -13,7 +13,6 @@ function AddShippingRate({location,history}) {
   const [region, setRegion] = useState("");
   const [rateType, setRateType] = useState("");
   const [weightType, setWeightType] = useState("");
-
   const [inputList, setInputList] = useState([
     {
       weight: "",
@@ -50,6 +49,13 @@ function AddShippingRate({location,history}) {
 
   const shippingRate = useSelector((state) => state.shippingRate);
   const { error1, loading1, success1 } = shippingRate;
+
+  const userLogin  = useSelector(state => state.userLogin)
+  const { userInfo  } = userLogin
+
+
+  const rateDelete  = useSelector(state => state.rateDelete)
+  const { success:successDelete  } = rateDelete
   
   var rate = []
 
@@ -78,11 +84,19 @@ function AddShippingRate({location,history}) {
   };
 
   useEffect(() => {
-    dispatch(getCalculator());
-  }, [dispatch,history]);
+    if(userInfo && userInfo.isAdmin ){
+      dispatch(getCalculator());
+   }else {
+       history.push('/login')
+   }
+   
+  //  history.push('/admin/add-shippingRate')
+   
+  },[dispatch,history,successDelete, userInfo]);
 
-  const deleteHandler = (id) => {
+  const deleteHandler = (_id) => {
     if (window.confirm("Are you sure you want to delete this rate?")) {
+      dispatch(deleteRates(_id))
     }
     // console.log("delete:",id);
   };
