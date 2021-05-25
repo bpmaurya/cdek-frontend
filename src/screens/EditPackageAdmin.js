@@ -234,15 +234,15 @@ function EditPackageAdmin({ match, history }) {
      <Col md={3}>
        <h2>User</h2>
         
-            <Card style={{ width: '18rem'}} >
-            {/* <Card.Header>User </Card.Header> */}
+            {/* <Card style={{ width: '18rem'}} >
+            
             <ListGroup variant="flush">
               <ListGroup.Item>username= {user.username} </ListGroup.Item>
               <ListGroup.Item>email= {user.email}</ListGroup.Item>
-              {/* <ListGroup.Item>isAdmin= {user.isAdmin} </ListGroup.Item> */}
+             
               
             </ListGroup>
-          </Card>
+          </Card> */}
       
      </Col>
     </Row>
