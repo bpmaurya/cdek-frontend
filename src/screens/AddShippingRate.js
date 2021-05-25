@@ -58,7 +58,6 @@ function AddShippingRate({location,history}) {
   const { success:successDelete  } = rateDelete
   
   var rate = []
-
   inputList.map(item => {
   const dicts =
       {
