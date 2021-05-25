@@ -124,7 +124,7 @@ export const userUpdateProfileReducers =  ( state = {  },action)=>{
         case USER_PROFILE_RESET:
             return { }
 
-        default: 
+        default:
             return state
 
     }

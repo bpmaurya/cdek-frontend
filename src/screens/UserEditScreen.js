@@ -30,9 +30,6 @@ function UserEditScreen({ match, history }) {
     }
     else{
 
-
-
-
       if(!user.name || user._id !== Number(userId)){
           dispatch(getUserDetails(userId))
       }else{

@@ -158,10 +158,8 @@ export const getUserDetails = (_id) => async (dispatch, getState) => {
   }
 };
 
-
 //for user update details actions
-
-export const updateUserProfile = (user) => async (dispatch, getState) => {
+export const updateUserProfile = (user) => async(dispatch, getState) => {
   try {
     dispatch({
       type: USER_PROFILE_UPDATE_REQUEST,
@@ -174,7 +172,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     const config = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userInfo.token} `,
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
     var url = API.baseUrl;
@@ -288,6 +286,7 @@ export const deleteUsers = (id) => async (dispatch, getState) => {
     });
   }
 };
+
 
 
 //for update user actions

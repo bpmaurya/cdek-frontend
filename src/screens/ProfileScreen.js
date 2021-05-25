@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { login, register, getUserDetails,updateUserProfile } from "../actions/userActions";
+import { login, register, getUserDetails, updateUserProfile } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
 import { USER_PROFILE_RESET } from '../constants/userConstant'
 
@@ -27,6 +27,7 @@ function ProfileScreen({ location, history }) {
 
   useEffect(() => {
     if (!userInfo) {
+      
       history.push("/login");
     } else {
       if (!user || !user.name || success || userInfo._id !== user._id ) {

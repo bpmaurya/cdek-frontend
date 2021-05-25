@@ -2,47 +2,64 @@ import React, { useEffect, useState } from "react";
 import { Form, Button, Row, Col,Card,ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { listIncomingPackageDetails } from "../actions/incomimgPackageActions";
+import { listIncomingPackageDetails, updatePackage } from "../actions/incomimgPackageActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
+import { PACKAGE_UPDATE_RESET } from "../constants/incomingPackageConstant"
 
 function EditPackageAdmin({ match, history }) {
-  const dispatch = useDispatch();
+    const packageId = match.params._id
 
-  const incomingPackageDetails = useSelector(
-    (state) => state.incomingPackageDetails
-  );
-  const { loading, error, incomingPackage } = incomingPackageDetails;
+    const [name, setName] = useState("");
+    const [trackingNumber, setTrackingNumber] = useState("");
+    const [countInStock, setCountInStock] = useState("");
+    const [comment, setComment] = useState("");
+    const [status, setStatus] = useState("");
+    const [full_received, setFull_received] = useState("");
+    const [partial_received, setPartial_received] = useState("");
+    const [remarks, setRemarks] = useState("");
+    const [created_at, setCreated_at] = useState("");
+    const [product, setProduct] = useState([])
+    const [user, setUser] = useState({})
 
-  const [name, setName] = useState("");
-  const [trackingNumber, setTrackingNumber] = useState("");
-  const [countInStock, setCountInStock] = useState("");
-  const [comment, setComment] = useState("");
-  const [status, setStatus] = useState("");
-  const [full_received, setFull_received] = useState("");
-  const [partial_received, setPartial_received] = useState("");
-  const [remarks, setRemarks] = useState("");
-  const [created_at, setCreated_at] = useState("");
-  const [product, setProduct] = useState([])
-  const [user, setUser] = useState({})
+    const dispatch = useDispatch();
+
+    const userLogin = useSelector((state) => state.userLogin);
+    const { userInfo } = userLogin;
+
+    const incomingPackageDetails = useSelector(
+        (state) => state.incomingPackageDetails
+    );
+    const { loading, error, incomingPackage } = incomingPackageDetails;
+
+    const packageUpdate = useSelector((state) => state.packageUpdate);
+    const { error:errorUpdate, loading:loadingUpdate,success:successUpdate } = packageUpdate;
+
+
 
   useEffect(() => {
-    dispatch(listIncomingPackageDetails(match.params._id));
-    // console.log(incomingPackage);
+    if(successUpdate){
+      dispatch({type:PACKAGE_UPDATE_RESET})
+      history.push('/admin/userlist')
+    }
+    else{
     
-    setName(incomingPackage.name)
-    setTrackingNumber(incomingPackage.trackingNumber)
-    setCountInStock(incomingPackage.countInStock)
-    setComment(incomingPackage.comment)
-    setStatus(incomingPackage.state)
-    setFull_received(incomingPackage.full_received)
-    setPartial_received(incomingPackage.partial_received)
-    setRemarks(incomingPackage.remarks)
-    setProduct(incomingPackage.product)
-    setUser(incomingPackage.user)
+            dispatch(listIncomingPackageDetails(packageId));
+            setName(incomingPackage.name)
+            setTrackingNumber(incomingPackage.trackingNumber)
+            setCountInStock(incomingPackage.countInStock)
+            setComment(incomingPackage.comment)
+            setStatus(incomingPackage.state)
+            setFull_received(incomingPackage.full_received)
+            setPartial_received(incomingPackage.partial_received)
+            setRemarks(incomingPackage.remarks)
+            setProduct(incomingPackage.product)
+            setUser(incomingPackage.user)
 
-  }, []);
+    }
+
+  }, [history,successUpdate]);
 
   console.log(incomingPackage.product);
 

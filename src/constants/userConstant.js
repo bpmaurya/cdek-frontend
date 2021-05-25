@@ -39,7 +39,7 @@ export const USER_DELETE_REQUEST = 'USER_DELETE_REQUEST'
 export const USER_DELETE_SUCCESS =  'USER_DELETE_SUCCESS' 
 export const USER_DELETE_FAIL = 'USER_DELETE_FAIL'
 
-//for all  user details for admin
+//for all  user update for admin
 export const USER_UPDATE_REQUEST = 'USER_UPDATE_REQUEST'
 export const USER_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS'
 export const USER_UPDATE_FAIL = 'USER_UPDATE_FAIL'

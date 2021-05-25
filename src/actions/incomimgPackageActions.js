@@ -6,7 +6,12 @@ import {
 
     INCOMING_PACKAGE_DETAIL_REQUEST,
     INCOMING_PACKAGE_DETAIL_SUCCESS,
-    INCOMING_PACKAGE_DETAIL_FAIL
+    INCOMING_PACKAGE_DETAIL_FAIL,
+
+    PACKAGE_UPDATE_REQUEST,
+    PACKAGE_UPDATE_SUCCESS,
+    PACKAGE_UPDATE_FAIL,
+    PACKAGE_UPDATE_RESET,
 
 } from '../constants/incomingPackageConstant'
 import API from '../apiUrl.json'
@@ -76,3 +81,47 @@ export const listIncomingPackageDetails = (_id) => async(dispatch) => {
     }
 
 }
+
+//for update package actions for admin
+export const updatePackage = (item={}) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: PACKAGE_UPDATE_REQUEST,
+      });
+  
+      const {
+        userLogin: { userInfo },
+      } = getState();
+  
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${userInfo.token} `,
+        },
+      };
+      var url = API.baseUrl;
+      const { data } = await axios.put(
+        `${url}/incoming/edit/${item._id}/`,
+        item,
+        config
+      );
+  
+      dispatch({
+        type: PACKAGE_UPDATE_SUCCESS,
+        payload: data,
+      });
+      dispatch({
+        type: INCOMING_PACKAGE_DETAIL_SUCCESS,
+        payload: data,
+      });
+  
+    } catch (error) {
+      dispatch({
+        type: PACKAGE_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
