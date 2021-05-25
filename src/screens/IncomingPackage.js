@@ -14,6 +14,9 @@ function IncomingPackage({}) {
   const incomingPackageList = useSelector(state=> state.incomingPackageList)
   const {error,loading, incomingPackages} = incomingPackageList
 
+  const userLogin  = useSelector(state => state.userLogin)
+  const { userInfo  } = userLogin
+
   useEffect(() => {
 
     dispatch(listIncomingPackage())
@@ -89,7 +92,9 @@ const createPackageHandler = (  )=>{
                        </tr>
                    </thead>
                    <tbody>
-                       {incomingPackages.map(user=>(
+                       {incomingPackages
+                       .filter((item) => item.user.email === userInfo.email)
+                       .map(user=>(
                            <tr key={user._id} >
                                <td>{user._id}</td>
                                <td>{user.name}</td>

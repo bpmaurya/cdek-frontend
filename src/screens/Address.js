@@ -6,18 +6,23 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { getUserAddress } from "../actions/addressAction";
 
-function Address({}) {
+function Address({history}) {
   const dispatch = useDispatch();
 
   const getAddress = useSelector((state) => state.getAddress);
   const { loading, error, address } = getAddress;
 
-  // const userLogin  = useSelector(state => state.userLogin)
-  // const { userInfo  } = userLogin
+  const userLogin  = useSelector(state => state.userLogin)
+  const { userInfo  } = userLogin
 
   useEffect(() => {
-    dispatch(getUserAddress());
-  }, [dispatch]);
+
+    if(userInfo){
+      dispatch(getUserAddress());
+  }else{
+      history.push('/login')
+  }
+  }, [dispatch,history]);
 
   const deleteHandler =()=>{
       
@@ -39,6 +44,8 @@ function Address({}) {
         </Col>
       </Row>
 
+      
+
       {loading ? (
         <Loader />
       ) : error ? (
@@ -57,7 +64,9 @@ function Address({}) {
             </tr>
           </thead>
           <tbody>
-            {address.map((item) => (
+            {address
+            .filter((item) => item.user.email === userInfo.email)
+            .map((item) => (
               <tr key={item._id}>
                 <td>{item._id}</td>
                 <td>{item.address}</td>

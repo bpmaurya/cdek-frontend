@@ -80,6 +80,16 @@ function AddShippingRate({location,history}) {
     console.log(weightType);
     console.log(rate);
     dispatch(createShippingRate(rate));
+    setInputList([
+      {
+        weight: "",
+        rate: "",
+      },
+    ])
+    setRateType('')
+    setRegion('')
+    setWeightType('')
+    setZone('')
     
   };
 
@@ -238,7 +248,7 @@ function AddShippingRate({location,history}) {
                 <Col md={12}>
                   <Button
                     variant="success btn-block"
-                    type="submit"
+                    className="btn"
                     onClick={submitHandler}>
                     Add Shipping Rate
                   </Button>
