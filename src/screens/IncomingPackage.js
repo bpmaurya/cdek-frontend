@@ -8,7 +8,7 @@ import { listIncomingPackage } from "../actions/incomimgPackageActions"
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
-function IncomingPackage({}) {
+function IncomingPackage({history}) {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch()
   const incomingPackageList = useSelector(state=> state.incomingPackageList)
@@ -18,11 +18,15 @@ function IncomingPackage({}) {
   const { userInfo  } = userLogin
 
   useEffect(() => {
-
-    dispatch(listIncomingPackage())
+    if(userInfo){
+      dispatch(listIncomingPackage())
+  }else{
+      history.push('/login')
+  }
+    
     // fetchProduct()
 
-  }, [dispatch]);
+  }, [dispatch,history]);
 
   console.log(incomingPackages);
 

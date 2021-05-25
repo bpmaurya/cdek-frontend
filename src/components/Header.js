@@ -15,7 +15,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from "react-router-dom";
 import logo from "../logo.svg";
 import { logout } from '../actions/userActions'
-function Header() {
+function Header({history}) {
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
@@ -27,6 +27,10 @@ function Header() {
     dispatch(logout())
 
   }
+
+  useEffect(() => {
+
+  }, []);
 
 
   return (
@@ -72,6 +76,13 @@ function Header() {
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/profile">
                 <i className="fas fa-id-badge m-2"></i> Profile
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/incoming">
+                
+                <i className="fas fa-box-open m-1"></i> Incoming Package
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/outgoing">
+                <i className="fas fa-box-open m-1"></i> Outgoing Package
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/recipients">
                 <i className="fas fa-receipt m-2"></i>Recipients
