@@ -56,31 +56,28 @@ function EditPackageUser({ match, location, history }) {
   const rate = [];
   inputList.map((item) => {
     const dict1 = {
-      name: item.productName,
-      type: item.productType,
-      brand: item.productBrand,
-      size: item.productColor,
-      price: item.productPrice,
-      quantity: item.productQuantity,
-    };
+      name: item.name,
+      type: item.type,
+      brand: item.brand,
+      size: item.size,
+      price: item.price,
+      quantity: item.quantity,
+    }
     rate.push(dict1);
   });
 
-  const savePackage = {
+  if(userInfo){
+  var savePackage = {
+    _id:packageId,
     name: packageName,
     trackingNumber: trackingNumber,
-    countInStock: 0,
     comment: comment,
     created_by: userInfo.id,
     product_package: rate,
-  };
+  }
+}
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      if (successUpdate) {
-        dispatch({ type: PACKAGE_UPDATE_RESET });
-        history.push("/incoming");
-      } else {
         if (incomingPackage._id !== packageId) {
           dispatch(listIncomingPackageDetails(packageId));
         } else {
@@ -89,17 +86,14 @@ function EditPackageUser({ match, location, history }) {
           setTrackingNumber(incomingPackage.countInStock);
           setComment(incomingPackage.comment);
           setProduct(incomingPackage.product_package);
-        //   setInputList(incomingPackage.product_package);
+          setInputList(incomingPackage.product_package);
 
-          product.map((x)=>{
-              setInputList({...inputList,[x.name]:x.name,[x.price]:x.price, [x.brand]:x.brand})
-          })
+          // product.map((x)=>{
+          //     setInputList({name:x.name,brand:x.brand })
+          // })
         }
-      }
-    } else {
-      history.push("/login");
-    }
-  }, [history, successUpdate, incomingPackage]);
+
+  }, [history, successUpdate,incomingPackage]);
 
   console.log(inputList);
 
@@ -107,11 +101,15 @@ function EditPackageUser({ match, location, history }) {
     e.preventDefault();
     console.log(packageName);
     console.log(inputList);
-    console.log(inputList.productBrand);
     console.log(savePackage);
-    dispatch(createPackage(savePackage));
+    dispatch(updatePackage(savePackage));
     console.log("submit");
   };
+
+  if(successUpdate){
+    history.push('/incoming')
+    dispatch({type:PACKAGE_UPDATE_RESET})
+  }
 
   return (
     <div>
@@ -121,8 +119,8 @@ function EditPackageUser({ match, location, history }) {
         <Col md={12}>
           <h3> 1. Order Information</h3>
 
-          {error && <Message variant="danger"> {error} </Message>}
-          {loading && <Loader />}
+          {errorUpdate && <Message variant="danger"> {error} </Message>}
+          {errorUpdate && <Loader />}
           <Card className="m-3">
             <Form className="m-3">
               <Form.Group controlId="exampleForm.ControlInput1">
@@ -180,10 +178,10 @@ function EditPackageUser({ match, location, history }) {
                         <Form.Label>Product Type</Form.Label>
                         <Form.Control
                           required
-                          name="productType"
-                          type="name"
+                          name="type"
+                          type="text"
                           placeholder="enter your product type"
-                          value={x.productType}
+                          value={x.type}
                           onChange={(e) => handleInputChange(e, i)}
                         />
                       </Form.Group>
@@ -193,10 +191,10 @@ function EditPackageUser({ match, location, history }) {
                         <Form.Label>Product Brand</Form.Label>
                         <Form.Control
                           required
-                          name="productBrand"
-                          type="name"
+                          name="brand"
+                          type="text"
                           placeholder="enter you product brand"
-                          value={x.productBrand}
+                          value={x.brand}
                           onChange={(e) => handleInputChange(e, i)}
                         />
                       </Form.Group>
@@ -206,10 +204,10 @@ function EditPackageUser({ match, location, history }) {
                         <Form.Label>Color/Size</Form.Label>
                         <Form.Control
                           required
-                          name="productColor"
+                          name="size"
                           type="text"
                           placeholder="product color"
-                          value={x.productColor}
+                          value={x.size}
                           onChange={(e) => handleInputChange(e, i)}
                         />
                       </Form.Group>
@@ -219,10 +217,10 @@ function EditPackageUser({ match, location, history }) {
                         <Form.Label>Product Price</Form.Label>
                         <Form.Control
                           required
-                          name="productPrice"
+                          name="price"
                           type="number"
                           placeholder="price"
-                          value={x.productPrice}
+                          value={x.price}
                           onChange={(e) => handleInputChange(e, i)}
                         />
                       </Form.Group>
@@ -234,10 +232,10 @@ function EditPackageUser({ match, location, history }) {
                         <Form.Label>Product Name</Form.Label>
                         <Form.Control
                           required
-                          name="productName"
+                          name="name"
                           type="text"
                           placeholder="Enter Product Name"
-                          value={x.productName}
+                          value={x.name}
                           onChange={(e) => handleInputChange(e, i)}
                         />
                       </Form.Group>
@@ -247,10 +245,10 @@ function EditPackageUser({ match, location, history }) {
                         <Form.Label>Product Quantity</Form.Label>
                         <Form.Control
                           required
-                          name="productQuantity"
+                          name="quantity"
                           type="number"
                           placeholder="product quantity"
-                          value={x.productQuantity}
+                          value={x.quantity}
                           onChange={(e) => handleInputChange(e, i)}
                         />
                       </Form.Group>
