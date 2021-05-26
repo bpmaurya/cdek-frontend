@@ -83,7 +83,6 @@ function EditPackageUser({ match, location, history }) {
         } else {
           setPackageName(incomingPackage.name);
           setTrackingNumber(incomingPackage.trackingNumber);
-          setTrackingNumber(incomingPackage.countInStock);
           setComment(incomingPackage.comment);
           setProduct(incomingPackage.product_package);
           setInputList(incomingPackage.product_package);
@@ -93,7 +92,7 @@ function EditPackageUser({ match, location, history }) {
           // })
         }
 
-  }, [history, successUpdate,incomingPackage]);
+  }, [history,successUpdate,incomingPackage]);
 
   console.log(inputList);
 
@@ -127,7 +126,7 @@ function EditPackageUser({ match, location, history }) {
                 <Form.Label>Package Name</Form.Label>
                 <Form.Control
                   required
-                  type="name"
+                  type="text"
                   placeholder="enter you package name"
                   value={packageName}
                   onChange={(e) => setPackageName(e.target.value)}
@@ -137,7 +136,7 @@ function EditPackageUser({ match, location, history }) {
                 <Form.Label>Tracking Number</Form.Label>
                 <Form.Control
                   required
-                  type="name"
+                  type="text"
                   placeholder="tracking number"
                   value={trackingNumber}
                   onChange={(e) => setTrackingNumber(e.target.value)}
@@ -148,7 +147,7 @@ function EditPackageUser({ match, location, history }) {
                 <Form.Label>Your Comment</Form.Label>
                 <Form.Control
                   required
-                  type="name"
+                  type="text"
                   placeholder="enter you package name"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
