@@ -120,7 +120,7 @@ function EditPackageUser({ match, location, history }) {
           <h3> 1. Order Information</h3>
 
           {errorUpdate && <Message variant="danger"> {error} </Message>}
-          {errorUpdate && <Loader />}
+          {loading && <Loader />}
           <Card className="m-3">
             <Form className="m-3">
               <Form.Group controlId="exampleForm.ControlInput1">
