@@ -111,7 +111,7 @@ function AddNewIncomingPck({ location, history }) {
           <Col md={12}>
             <h3> 1. Order Information</h3>
 
-            {error && <Message variant="danger"> {error} </Message>}
+            {error && <Message variant="danger"> Please Enter All field Carefully </Message>}
             {loading && <Loader />}
             <Card className="m-3">
               <Form className="m-3">
@@ -283,7 +283,7 @@ function AddNewIncomingPck({ location, history }) {
               className="btn btn-primary btn-lg">
               Save
             </Button>{" "}
-            <Button className="btn btn-danger btn-lg">Cancel</Button>{" "}
+            <Button className="btn btn-danger btn-lg" href="/incoming">Cancel</Button>{" "}
           </Col>
         </Row>
       </div>
