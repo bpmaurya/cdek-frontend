@@ -6,6 +6,11 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 function AddNewIncomingPck({ location, history }) {
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   const [packageName, setPackageName] = useState("");
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comment, setComment] = useState("");
@@ -16,6 +21,7 @@ function AddNewIncomingPck({ location, history }) {
   // const [productQuantity, setProductQuantity] = useState("");
   const [inputList, setInputList] = useState([
     {
+      productName:"",
       productType: "",
       productBrand: "",
       productColor: "",
@@ -41,6 +47,7 @@ function AddNewIncomingPck({ location, history }) {
     setInputList([
       ...inputList,
       {
+        productName:"",
         productType: "",
         productBrand: "",
         productColor: "",
@@ -51,26 +58,32 @@ function AddNewIncomingPck({ location, history }) {
   };
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
-  const dispatch = useDispatch();
+ 
   const createIncomingPackage = useSelector(
     (state) => state.createIncomingPackage
   );
   const { error, loading, success } = createIncomingPackage;
 
-  
+  const rate = [];
+  inputList.map((item) => {
+    const dict1 = {
+      name: item.productName,
+      type: item.productType,
+      brand: item.productBrand,
+      size: item.productColor,
+      price: item.productPrice,
+      quantity: item.productQuantity,
+    };
+    rate.push(dict1);
+  });
 
   const savePackage = {
     name: packageName,
     trackingNumber: trackingNumber,
-    countInStock: "12",
+    countInStock: 0,
     comment: comment,
-   
-    user: {
-      username: "admin1@gmail.com",
-      email: "admin1@gmail.com",
-      name: "admin1@gmail.com",
-      isAdmin: true,
-    },
+    created_by: userInfo.id,
+    product_package: rate,
   };
 
   useEffect(() => {}, []);
@@ -80,6 +93,8 @@ function AddNewIncomingPck({ location, history }) {
     console.log(packageName);
     console.log(inputList);
     console.log(inputList.productBrand);
+    console.log(savePackage);
+    
     dispatch(createPackage(savePackage));
     console.log("submit");
   };
@@ -101,7 +116,7 @@ function AddNewIncomingPck({ location, history }) {
             {error && <Message variant="danger"> {error} </Message>}
             {loading && <Loader />}
             <Card className="m-3">
-              <Form className="m-3" >
+              <Form className="m-3">
                 <Form.Group controlId="exampleForm.ControlInput1">
                   <Form.Label>Package Name</Form.Label>
                   <Form.Control
@@ -138,7 +153,7 @@ function AddNewIncomingPck({ location, history }) {
             </Card>
           </Col>
         </Row>
-        
+
         {inputList.map((x, i) => {
           return (
             <Row className="my-4">
@@ -173,7 +188,6 @@ function AddNewIncomingPck({ location, history }) {
                             name="productBrand"
                             type="name"
                             placeholder="enter you product brand"
-                            
                             value={x.productBrand}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -185,9 +199,8 @@ function AddNewIncomingPck({ location, history }) {
                           <Form.Control
                             required
                             name="productColor"
-                            type="name"
+                            type="text"
                             placeholder="product color"
-                            
                             value={x.productColor}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -199,9 +212,8 @@ function AddNewIncomingPck({ location, history }) {
                           <Form.Control
                             required
                             name="productPrice"
-                            type="price"
+                            type="number"
                             placeholder="price"
-                            
                             value={x.productPrice}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -209,10 +221,17 @@ function AddNewIncomingPck({ location, history }) {
                       </Col>
                     </Row>
                     <Row>
-                      <Col md={8}>
-                        <Form.Group controlId="exampleForm.ControlInput1">
-                          <Form.Label>Link To the Product</Form.Label>
-                          <Form.Control type="text" placeholder="" />
+                    <Col md={8}>
+                        <Form.Group controlId="exampleForm.ControlInput2">
+                          <Form.Label>Product Name</Form.Label>
+                          <Form.Control
+                            required
+                            name="productName"
+                            type="text"
+                            placeholder="Enter Product Name"
+                            value={x.productName}
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
                         </Form.Group>
                       </Col>
                       <Col>
@@ -221,9 +240,8 @@ function AddNewIncomingPck({ location, history }) {
                           <Form.Control
                             required
                             name="productQuantity"
-                            type="quantity"
+                            type="number"
                             placeholder="product quantity"
-                        
                             value={x.productQuantity}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -261,7 +279,10 @@ function AddNewIncomingPck({ location, history }) {
         })}
         <Row>
           <Col className="m-3">
-            <Button onClick={submitHandler} type="submit" className="btn btn-primary btn-lg">
+            <Button
+              onClick={submitHandler}
+              type="submit"
+              className="btn btn-primary btn-lg">
               Save
             </Button>{" "}
             <Button className="btn btn-danger btn-lg">Cancel</Button>{" "}

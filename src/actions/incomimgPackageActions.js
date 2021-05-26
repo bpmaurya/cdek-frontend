@@ -82,7 +82,7 @@ export const listIncomingPackageDetails = (_id) => async(dispatch) => {
 }
 
 //for update package actions for admin
-export const updatePackage = (item={}) => async (dispatch, getState) => {
+export const updatePackage = (item) => async (dispatch, getState) => {
     try {
       dispatch({
         type: PACKAGE_UPDATE_REQUEST,

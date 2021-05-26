@@ -44,30 +44,34 @@ function EditPackageAdmin({ match, history }) {
   } = packageUpdate;
 
   useEffect(() => {
-    if (successUpdate) {
-      dispatch({ type: PACKAGE_UPDATE_RESET });
-      history.push("/admin/package");
-    } else {
-      if (incomingPackage._id !== packageId) {
-        dispatch(listIncomingPackageDetails(packageId));
+    if (userInfo && userInfo.isAdmin) {
+      if (successUpdate) {
+        dispatch({ type: PACKAGE_UPDATE_RESET });
+        history.push("/admin/package");
       } else {
-        setName(incomingPackage.name);
-        setTrackingNumber(incomingPackage.trackingNumber);
-        setCountInStock(incomingPackage.countInStock);
-        setComment(incomingPackage.comment);
-        setStatus(incomingPackage.state);
-        setFull_received(incomingPackage.full_received);
-        setPartial_received(incomingPackage.partial_received);
-        setRemarks(incomingPackage.remarks);
-        setProduct(incomingPackage.product);
-        setUser(incomingPackage.user);
+        if (incomingPackage._id !== packageId) {
+          dispatch(listIncomingPackageDetails(packageId));
+        } else {
+          setName(incomingPackage.name);
+          setTrackingNumber(incomingPackage.trackingNumber);
+          setCountInStock(incomingPackage.countInStock);
+          setComment(incomingPackage.comment);
+          setStatus(incomingPackage.state);
+          setFull_received(incomingPackage.full_received);
+          setPartial_received(incomingPackage.partial_received);
+          setRemarks(incomingPackage.remarks);
+          setProduct(incomingPackage.product_package);
+          setUser(incomingPackage.user);
+        }
       }
+    } else {
+      history.push("/login");
     }
   }, [history, successUpdate, incomingPackage]);
 
   console.log(incomingPackage.product);
 
-  var rate = [];
+  const rate = [];
   product.map((item) => {
     const dict1 = {
       name: item.name,
@@ -80,37 +84,26 @@ function EditPackageAdmin({ match, history }) {
     rate.push(dict1);
   });
 
-  const dict = {
-    _id: packageId,
-    name: name,
-    trackingNumber: trackingNumber,
-    countInStock: countInStock,
-    comment: comment,
-    status: status,
-    full_received: full_received,
-    partial_received: partial_received,
-    remarks: remarks,
-    product: [
-      {
-        name: "Package_2",
-        type: "software",
-        brand: "mi",
-        size: "122",
-        price: 12000,
-        quantity: 12,
-      },
-    ],
-    user: {
-      username: userInfo.username,
-      email: userInfo.email,
-      name: userInfo.name,
-      isAdmin: userInfo.isAdmin,
-    },
-  };
+  if (userInfo) {
+    var dict = {
+      _id: packageId,
+      name: name,
+      trackingNumber: trackingNumber,
+      countInStock: countInStock,
+      comment: comment,
+      status: status,
+      full_received: full_received,
+      partial_received: partial_received,
+      remarks: remarks,
+      product_package: rate,
+      created_by: userInfo.id
+    };
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(dict);
+    console.log(incomingPackage);
 
     dispatch(updatePackage(dict));
 
@@ -150,7 +143,7 @@ function EditPackageAdmin({ match, history }) {
                 </Form.Label>
                 <Col sm="8">
                   <Form.Control
-                  disabled
+                    disabled
                     type="text"
                     value={trackingNumber}
                     onChange={(e) =>
@@ -179,7 +172,7 @@ function EditPackageAdmin({ match, history }) {
                 </Form.Label>
                 <Col sm="8">
                   <Form.Control
-                  disabled
+                    disabled
                     as="textarea"
                     type="textarea"
                     value={comment}
@@ -224,7 +217,7 @@ function EditPackageAdmin({ match, history }) {
                     required
                     value={status}
                     onChange={(e) => setStatus(e.target.value)}>
-                    <option value="" disabled selected hidden>
+                    <option value=" " disabled selected hidden>
                       Select Type...
                     </option>
 
@@ -247,7 +240,7 @@ function EditPackageAdmin({ match, history }) {
                     required
                     value={full_received}
                     onChange={(e) => setFull_received(e.target.value)}>
-                    <option value="" disabled selected hidden>
+                    <option value=" " disabled selected hidden>
                       Select Type...
                     </option>
 
@@ -272,34 +265,47 @@ function EditPackageAdmin({ match, history }) {
             </Form>
           )}
         </Col>
-        <Col md={3}>
-          <h2>Total products </h2>
-          {product.map((item) => (
-            <Card style={{ width: "15rem", height: "14rem" }}>
-              <Card.Body>
-                <Card.Subtitle className="mb-2 text-muted">
-                  name={item.name}{" "}
-                </Card.Subtitle>
-                <Card.Text>
-                  <p> Type ={item.type} </p>
-                  <p> Brand ={item.brand} </p>
-                  <p> Size ={item.size} </p>
-                  <p> Price ={item.price} </p>
-                  <p> Quantity ={item.quantity} </p>
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          ))}
-        </Col>
-        <Col md={3}>
-          <h2>User</h2>
-          <Card style={{ width: "18rem" }}>
-            <ListGroup variant="flush">
-              <ListGroup.Item>Username= {user.username} </ListGroup.Item>
-              <ListGroup.Item>Email= {user.email}</ListGroup.Item>
-            </ListGroup>
-          </Card>
-        </Col>
+        {product !== null ? (
+          <Col md={3}>
+            <h2>Total products </h2>
+            {product.map((item) => (
+              <Card style={{ width: "15rem", height: "14rem" }}>
+                <Card.Body>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    name={item.name}{" "}
+                  </Card.Subtitle>
+                  <Card.Text>
+                    <p> Type ={item.type} </p>
+                    <p> Brand ={item.brand} </p>
+                    <p> Size ={item.size} </p>
+                    <p> Price ={item.price} </p>
+                    <p> Quantity ={item.quantity} </p>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            ))}
+          </Col>
+        ) : (
+          <Col md={3}>
+            <h2>product not available</h2>
+          </Col>
+        )}
+
+        {user !== null ? (
+          <Col md={3}>
+            <h2>User</h2>
+            {/* <Card style={{ width: "18rem" }}>
+              <ListGroup variant="flush">
+                <ListGroup.Item>Username= {user.username} </ListGroup.Item>
+                <ListGroup.Item>Email= {user.email}</ListGroup.Item>
+              </ListGroup>
+            </Card> */}
+          </Col>
+        ) : (
+          <Col md={3}>
+            <h2>user not provided</h2>
+          </Col>
+        )}
       </Row>
     </div>
   );

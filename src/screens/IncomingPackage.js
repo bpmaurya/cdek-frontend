@@ -97,7 +97,7 @@ const createPackageHandler = (  )=>{
                    </thead>
                    <tbody>
                        {incomingPackages
-                       .filter((item) => item.user.email === userInfo.email)
+                       .filter((item) => item.created_by === userInfo.id)
                        .map(user=>(
                            <tr key={user._id} >
                                <td>{user._id}</td>
