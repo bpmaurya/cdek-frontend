@@ -21,6 +21,7 @@ import Address from "./screens/Address";
 import ShippingRateScreen from "./screens/ShippingRateScreen";
 import AddShippingRate from "./screens/AddShippingRate";
 import EditPackageAdmin from "./screens/EditPackageAdmin";
+import EditPackageUser from "./screens/EditPackageUser";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
 
           <Route path='/admin/userlist' component={UserListScreen} exact />
           <Route path='/admin/user/:_id/edit' component={UserEditScreen} exact />
+          <Route path='/users/package/:_id/edit' component={EditPackageUser} exact />
           <Route path='/mypage' component={Office} exact />
           <Route path='/profile' component={ProfileScreen} exact />
           <Route path='/incoming' component={IncomingPackage}  exact/>

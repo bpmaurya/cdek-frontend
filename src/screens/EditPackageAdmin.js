@@ -8,7 +8,6 @@ import {
 } from "../actions/incomimgPackageActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import FormContainer from "../components/FormContainer";
 import { PACKAGE_UPDATE_RESET } from "../constants/incomingPackageConstant";
 
 function EditPackageAdmin({ match, history }) {
@@ -104,7 +103,6 @@ function EditPackageAdmin({ match, history }) {
     e.preventDefault();
     console.log(dict);
     console.log(incomingPackage);
-
     dispatch(updatePackage(dict));
 
     console.log("submit");

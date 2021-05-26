@@ -2,23 +2,24 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createPackage } from "../actions/createPackageAction";
+import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import EditPackageAdmin from "./EditPackageAdmin";
+import { PACKAGE_UPDATE_RESET } from "../constants/incomingPackageConstant";
+import {
+    listIncomingPackageDetails,
+    updatePackage,
+  } from "../actions/incomimgPackageActions";
 
-function AddNewIncomingPck({ location, history }) {
+function EditPackageUser({ match,location, history }) {
+    const packageId = match.params._id;
   const dispatch = useDispatch();
-
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
 
   const [packageName, setPackageName] = useState("");
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comment, setComment] = useState("");
-  // const [productType, setProductType] = useState("");
-  // const [productBrand, setProductBrand] = useState("");
-  // const [productColor, setProductColor] = useState("");
-  // const [productPrice, setProductPrice] = useState("");
-  // const [productQuantity, setProductQuantity] = useState("");
+  const [product, setProduct] = useState([])
   const [inputList, setInputList] = useState([
     {
       productName:"",
@@ -37,32 +38,24 @@ function AddNewIncomingPck({ location, history }) {
     setInputList(list);
   };
 
-  const handleRemoveClick = (index) => {
-    const list = [...inputList];
-    list.splice(index, 1);
-    setInputList(list);
-  };
 
-  const handleAddClick = () => {
-    setInputList([
-      ...inputList,
-      {
-        productName:"",
-        productType: "",
-        productBrand: "",
-        productColor: "",
-        productPrice: "",
-        productQuantity: "",
-      },
-    ]);
-  };
 
-  const redirect = location.search ? location.search.split("=")[1] : "/";
- 
-  const createIncomingPackage = useSelector(
-    (state) => state.createIncomingPackage
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const incomingPackageDetails = useSelector(
+    (state) => state.incomingPackageDetails
   );
-  const { error, loading, success } = createIncomingPackage;
+  const { loading, error, incomingPackage } = incomingPackageDetails;
+
+  const packageUpdate = useSelector((state) => state.packageUpdate);
+  const {
+    error: errorUpdate,
+    loading: loadingUpdate,
+    success: successUpdate,
+  } = packageUpdate;
+
+
 
   const rate = [];
   inputList.map((item) => {
@@ -86,7 +79,32 @@ function AddNewIncomingPck({ location, history }) {
     product_package: rate,
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+        if (successUpdate) {
+          dispatch({ type: PACKAGE_UPDATE_RESET });
+          history.push("/incoming");
+        } else {
+          if (incomingPackage._id !== packageId) {
+            dispatch(listIncomingPackageDetails(packageId));
+          } else {
+            setPackageName(incomingPackage.name);
+            setTrackingNumber(incomingPackage.trackingNumber);
+            setTrackingNumber(incomingPackage.countInStock);
+            setComment(incomingPackage.comment);
+            setProduct(incomingPackage.product_package);
+            setInputList(incomingPackage.product_package)
+
+          }
+        }
+      } else {
+        history.push("/login");
+      }
+    }, [history, successUpdate, incomingPackage]);
+
+
+   console.log(inputList);
+   
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -95,18 +113,15 @@ function AddNewIncomingPck({ location, history }) {
     console.log(inputList.productBrand);
     console.log(savePackage);
     dispatch(createPackage(savePackage));
-    
     console.log("submit");
   };
 
-  if (success) {
-    history.push("/incoming");
-    
-  } 
+ 
 
     return (
       <div>
-        <h2>Add Your New Incoming Package here</h2>
+        <h2>Edit Your Package here</h2>
+        <Link to="/incoming">Go Back</Link>
         <Row className="my-4">
           <Col md={12}>
             <h3> 1. Order Information</h3>
@@ -152,7 +167,7 @@ function AddNewIncomingPck({ location, history }) {
           </Col>
         </Row>
 
-        {inputList.map((x, i) => {
+        {product.map((x,i) => {
           return (
             <Row className="my-4">
               <Col md={12}>
@@ -247,29 +262,7 @@ function AddNewIncomingPck({ location, history }) {
                       </Col>
                     </Row>
                   </Form>
-                  <Col md={4}>
-                    {/* <Button href="" variant="outline-success btn-block" type="button">
-                +Add New Product
-              </Button> */}
-                    {inputList.length !== 1 && (
-                      <Button
-                        className="mr10"
-                        onClick={() => handleRemoveClick(i)}
-                        variant="outline-danger btn-block"
-                        type="button">
-                        Remove
-                      </Button>
-                    )}
-                    {inputList.length - 1 === i && (
-                      <Button
-                        onClick={handleAddClick}
-                        variant="outline-success btn-block"
-                        type="button">
-                        {" "}
-                        +Add New Product{" "}
-                      </Button>
-                    )}
-                  </Col>
+                 
                 </Card>
               </Col>
             </Row>
@@ -281,9 +274,9 @@ function AddNewIncomingPck({ location, history }) {
               onClick={submitHandler}
               type="submit"
               className="btn btn-primary btn-lg">
-              Save
+              Update
             </Button>{" "}
-            <Button className="btn btn-danger btn-lg">Cancel</Button>{" "}
+            <Button className="btn btn-danger btn-lg" href="/incoming">Cancel</Button>{" "}
           </Col>
         </Row>
       </div>
@@ -291,4 +284,4 @@ function AddNewIncomingPck({ location, history }) {
   }
 
 
-export default AddNewIncomingPck;
+export default EditPackageUser;
