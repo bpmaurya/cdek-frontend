@@ -21,7 +21,6 @@ function EditPackageAdmin({ match, history }) {
   const [full_received, setFull_received] = useState("");
   const [partial_received, setPartial_received] = useState("");
   const [remarks, setRemarks] = useState("");
-  const [created_at, setCreated_at] = useState("");
   const [product, setProduct] = useState([]);
   const [user, setUser] = useState({});
 
@@ -60,7 +59,7 @@ function EditPackageAdmin({ match, history }) {
           setPartial_received(incomingPackage.partial_received);
           setRemarks(incomingPackage.remarks);
           setProduct(incomingPackage.product_package);
-          setUser(incomingPackage.user);
+          setUser(incomingPackage.created_by);
         }
       }
     } else {
