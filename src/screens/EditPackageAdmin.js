@@ -189,7 +189,7 @@ function EditPackageAdmin({ match, history }) {
 
               <Form.Group as={Row} controlId="partial_received">
                 <Form.Label column sm="3">
-                  Is Partial Received
+                  If Partial Received
                 </Form.Label>
                 <Col sm="8">
                   <Form.Control
@@ -281,11 +281,11 @@ function EditPackageAdmin({ match, history }) {
                   name={item.name}{" "}
                 </Card.Subtitle>
                 <Card.Text>
-                  <p> type ={item.type} </p>
-                  <p> brand ={item.brand} </p>
-                  <p> size ={item.size} </p>
-                  <p> price ={item.price} </p>
-                  <p> quantity ={item.quantity} </p>
+                  <p> Type ={item.type} </p>
+                  <p> Brand ={item.brand} </p>
+                  <p> Size ={item.size} </p>
+                  <p> Price ={item.price} </p>
+                  <p> Quantity ={item.quantity} </p>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -295,8 +295,8 @@ function EditPackageAdmin({ match, history }) {
           <h2>User</h2>
           <Card style={{ width: "18rem" }}>
             <ListGroup variant="flush">
-              <ListGroup.Item>username= {user.username} </ListGroup.Item>
-              <ListGroup.Item>email= {user.email}</ListGroup.Item>
+              <ListGroup.Item>Username= {user.username} </ListGroup.Item>
+              <ListGroup.Item>Email= {user.email}</ListGroup.Item>
             </ListGroup>
           </Card>
         </Col>
