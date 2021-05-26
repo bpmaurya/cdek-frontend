@@ -269,7 +269,7 @@ function EditPackageAdmin({ match, history }) {
           <Col md={3}>
             <h2>Total products </h2>
             {product.map((item) => (
-              <Card style={{ width: "15rem", height: "14rem" }}>
+              <Card style={{ width: "18rem" }}>
                 <Card.Body>
                   <Card.Subtitle className="mb-2 text-muted">
                     name={item.name}{" "}
