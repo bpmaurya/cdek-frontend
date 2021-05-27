@@ -260,17 +260,27 @@ function EditPackageUser({ match, location, history }) {
         );
       })}
       <Row>
-        <Col className="m-3">
+      <Col className="m-3">
+          {loadingUpdate ? ( 
+             <Button
+             className="btn btn-primary btn-lg" type="submit">
+             Updating..........
+           </Button>
+
+          ):(
           <Button
             onClick={submitHandler}
             type="submit"
             className="btn btn-primary btn-lg">
             Update
-          </Button>{" "}
+          </Button>
+          ) }
           
-          <Button className="btn btn-danger btn-lg" href="/incoming">
+          { !loadingUpdate &&
+          <Button className="btn btn-danger btn-lg m-3" href="/incoming">
             Cancel
-          </Button>{" "}
+          </Button>
+         }
          
         </Col>
       </Row>
