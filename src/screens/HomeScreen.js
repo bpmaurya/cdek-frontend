@@ -37,7 +37,7 @@ function HomeScreen({}) {
   const rate = parseInt(weight)*parseInt(weight)
 
   return (
-    <div>
+    <>
       <Row className="align-items-center">
         <Col md={6} style={{ width: "100", height: "100" }}>
           <div className="my-4">
@@ -282,7 +282,7 @@ function HomeScreen({}) {
           </div>
         </Col>
       </Row>
-    </div>
+    </>
   );
 }
 

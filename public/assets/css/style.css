@@ -53,6 +53,8 @@ body {
   font-family: "Nunito", sans-serif;
   color: #354558;
   font-size: 14px;
+  /* margin: 0px;
+  padding: 0px; */
 }
 
 @media (max-width: 991px) {
@@ -1214,9 +1216,7 @@ dt {
 /* ==============
 Menu
 ===================*/
-body {
-  padding-bottom: 65px;
-}
+
 
 .container-fluid {
   max-width: 1500px;
@@ -1281,24 +1281,8 @@ body {
 }
 
 /******* Footer *******/
-.footer {
-  bottom: 0;
-  /* text-align: center !important; */
-  /* padding: 19px 30px 20px; */
-  /* position: absolute; */
-  background-color: #131111;
-  right: 0;
-  left: 0px;
-  font-family: "Roboto", sans-serif;
-}
 
-.wrapper {
-  padding-top: 3px;
-}
 
-.page-title-box {
-  padding: 24px 0px;
-}
 
 /*
 Responsive Menu

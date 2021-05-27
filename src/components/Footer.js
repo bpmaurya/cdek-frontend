@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 function Footer() {
   return (
+    <>
   
       <div className="row" >
         <div className="col-md-12">
@@ -70,11 +71,12 @@ function Footer() {
               </div>
             </div>
           </footer>
-          <div className="footer-bottom bottom-0">
+          <div className="footer-bottom">
             Copyright © 2020, All Rights Reserved
           </div>
         </div>
       </div>
+      </>
    
   );
 }

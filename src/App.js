@@ -38,9 +38,10 @@ function App() {
   });
 
   return (
+    <>
     <Router>
       <Header />
-      <main className="py-3" >
+      <main >
         <Container>
           <Route path='/' component={HomeScreen} exact />
           <Route path ='/login' component={Login} exact />
@@ -68,7 +69,7 @@ function App() {
       </main>
       <Footer/>
     </Router>
-     
+     </>
   );
 }
 
