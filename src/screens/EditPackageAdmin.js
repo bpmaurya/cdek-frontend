@@ -24,6 +24,17 @@ function EditPackageAdmin({ match, history }) {
   const [product, setProduct] = useState([]);
   const [user, setUser] = useState({});
 
+  const [inputList, setInputList] = useState([
+    {
+      name: "",
+      type: "",
+      brand: "",
+      size: "",
+      price: "",
+      quantity: "",
+    },
+  ]);
+
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -40,6 +51,13 @@ function EditPackageAdmin({ match, history }) {
     loading: loadingUpdate,
     success: successUpdate,
   } = packageUpdate;
+
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -60,6 +78,8 @@ function EditPackageAdmin({ match, history }) {
           setRemarks(incomingPackage.remarks);
           setProduct(incomingPackage.product_package);
           setUser(incomingPackage.created_by);
+          setProduct(incomingPackage.product_package);
+          setInputList(incomingPackage.product_package);
         }
       }
     } else {
@@ -94,7 +114,7 @@ function EditPackageAdmin({ match, history }) {
       partial_received: partial_received,
       remarks: remarks,
       product_package: rate,
-      created_by: userInfo.id
+      created_by: userInfo.id,
     };
   }
 
@@ -108,11 +128,11 @@ function EditPackageAdmin({ match, history }) {
   };
 
   return (
-    <div>
+    <>
       <Link to="/admin/package">Go Back</Link>
 
       <Row>
-        <Col md={6}>
+        <Col md={8}>
           <h2>Edit Package </h2>
 
           {loading ? (
@@ -120,191 +140,257 @@ function EditPackageAdmin({ match, history }) {
           ) : errorUpdate ? (
             <Message variant="danger"> {errorUpdate} </Message>
           ) : (
-            <Form onSubmit={submitHandler}>
-              <Form.Group as={Row} controlId="email">
-                <Form.Label column sm="3">
-                  Package Name
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    disabled
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}></Form.Control>
-                </Col>
-              </Form.Group>
+            <Card className="m-3">
+              <Form className="m-3" >
+                <Row>
+                  <Col md={3}>
+                    <Form.Group controlId="exampleForm.ControlInput1">
+                      <Form.Label>Package Name</Form.Label>
+                      <Form.Control
+                        required
+                        type="text"
+                        placeholder="enter you package name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={3}>
+                    <Form.Group controlId="exampleForm.ControlInput1">
+                      <Form.Label>Tracking Number</Form.Label>
+                      <Form.Control
+                        required
+                        type="text"
+                        placeholder="tracking number"
+                        value={trackingNumber}
+                        onChange={(e) => setTrackingNumber(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={3}>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                      <Form.Label>User Comment</Form.Label>
+                      <Form.Control
+                        required
+                        type="text"
+                        placeholder="enter you package name"
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        rows={3}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={3}>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                      <Form.Label>Count In Stock</Form.Label>
+                      <Form.Control
+                        required
+                        type="number"
+                        placeholder="enter  package name"
+                        value={countInStock}
+                        onChange={(e) => setCountInStock(e.target.value)}
+                        rows={3}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={3}>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                      <Form.Label> If Partial Received</Form.Label>
+                      <Form.Control
+                        required
+                        type="text"
+                        as="textarea"
+                        placeholder="enter  package name"
+                        value={partial_received}
+                        onChange={(e) => setPartial_received(e.target.value)}
+                        rows={3}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={9}>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                      <Form.Label> Add Remarks</Form.Label>
+                      <Form.Control
+                        required
+                        type="text"
+                        as="textarea"
+                        placeholder="enter  package name"
+                        value={remarks}
+                        onChange={(e) => setRemarks(e.target.value)}
+                        rows={3}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Form.Group as={Row} controlId="status">
+                  <Form.Label column sm="3">
+                    Package Status
+                  </Form.Label>
+                  <Col sm="9">
+                    <Form.Control
+                      as="select"
+                      required
+                      value={status}
+                      onChange={(e) => setStatus(e.target.value)}>
+                      <option value=" " disabled selected hidden>
+                        Select Type...
+                      </option>
 
-              <Form.Group as={Row} controlId="email">
-                <Form.Label column sm="3">
-                  TrackingNumber
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    disabled
-                    type="text"
-                    value={trackingNumber}
-                    onChange={(e) =>
-                      setTrackingNumber(e.target.value)
-                    }></Form.Control>
-                </Col>
-              </Form.Group>
+                      <option value="INCOMING">INCOMING</option>
+                      <option value="PENDING">PENDING</option>
+                      <option value="RECEIVED">RECEIVED</option>
+                      <option value="OUTGOING">OUTGOING</option>
+                      <option value="DELIVERED">DELIVERED</option>
+                    </Form.Control>
+                  </Col>
+                </Form.Group>
 
-              <Form.Group as={Row} controlId="email">
-                <Form.Label column sm="3">
-                  Count In Stock
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    type="text"
-                    value={countInStock}
-                    onChange={(e) =>
-                      setCountInStock(e.target.value)
-                    }></Form.Control>
-                </Col>
-              </Form.Group>
+                <Form.Group as={Row} controlId="full_received">
+                  <Form.Label column sm="3">
+                    Is full Received
+                  </Form.Label>
+                  <Col sm="9">
+                    <Form.Control
+                      as="select"
+                      required
+                      value={full_received}
+                      onChange={(e) => setFull_received(e.target.value)}>
+                      <option value=" " disabled selected hidden>
+                        Select Type...
+                      </option>
 
-              <Form.Group as={Row} controlId="comment">
-                <Form.Label column sm="3">
-                  Comment by user
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    disabled
-                    as="textarea"
-                    type="textarea"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}></Form.Control>
-                </Col>
-              </Form.Group>
+                      <option value="YES">YES</option>
 
-              <Form.Group as={Row} controlId="partial_received">
-                <Form.Label column sm="3">
-                  If Partial Received
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    type="text"
-                    value={partial_received}
-                    onChange={(e) =>
-                      setPartial_received(e.target.value)
-                    }></Form.Control>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} controlId="remarks">
-                <Form.Label column sm="3">
-                  Add Remarks{" "}
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    as="textarea"
-                    type="textField"
-                    value={remarks}
-                    onChange={(e) => setRemarks(e.target.value)}></Form.Control>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} controlId="status">
-                <Form.Label column sm="3">
-                  Package Status
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    as="select"
-                    required
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}>
-                    <option value=" " disabled selected hidden>
-                      Select Type...
-                    </option>
-
-                    <option value="INCOMING">INCOMING</option>
-                    <option value="PENDING">PENDING</option>
-                    <option value="RECEIVED">RECEIVED</option>
-                    <option value="OUTGOING">OUTGOING</option>
-                    <option value="DELIVERED">DELIVERED</option>
-                  </Form.Control>
-                </Col>
-              </Form.Group>
-
-              <Form.Group as={Row} controlId="full_received">
-                <Form.Label column sm="3">
-                  Is full Received
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    as="select"
-                    required
-                    value={full_received}
-                    onChange={(e) => setFull_received(e.target.value)}>
-                    <option value=" " disabled selected hidden>
-                      Select Type...
-                    </option>
-
-                    <option value="YES">YES</option>
-
-                    <option value="NO">NO</option>
-                  </Form.Control>
-                </Col>
-              </Form.Group>
-
-              {/* <Form.Group controlId="isadmin">
-            <Form.Check
-              type="checkbox"
-              label="Is Admin"
-              checked={isAdmin}
-              onChange={(e) => setIsAdmin(e.target.checked)}></Form.Check>
-          </Form.Group> */}
-
-              <Button type="submit" variant="primary">
-                Update
-              </Button>
-            </Form>
+                      <option value="NO">NO</option>
+                    </Form.Control>
+                  </Col>
+                </Form.Group>
+              </Form>
+            </Card>
           )}
         </Col>
-        {product !== null ? (
-          <Col md={3}>
-            <h2>Total products </h2>
-            {product.map((item) => (
-              <Card style={{ width: "18rem" }}>
-                <Card.Body>
-                  <Card.Subtitle className="mb-2 text-muted">
-                    name={item.name}{" "}
-                  </Card.Subtitle>
-                  <Card.Text>
-                    <p> Type ={item.type} </p>
-                    <p> Brand ={item.brand} </p>
-                    <p> Size ={item.size} </p>
-                    <p> Price ={item.price} </p>
-                    <p> Quantity ={item.quantity} </p>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            ))}
-          </Col>
-        ) : (
-          <Col md={3}>
-            <h2>product not available</h2>
-          </Col>
-        )}
-
-        {user !== null ? (
-          <Col md={3}>
-            <h2>User</h2>
-            {/* <Card style={{ width: "18rem" }}>
-              <ListGroup variant="flush">
-                <ListGroup.Item>Username= {user.username} </ListGroup.Item>
-                <ListGroup.Item>Email= {user.email}</ListGroup.Item>
-              </ListGroup>
-            </Card> */}
-          </Col>
-        ) : (
-          <Col md={3}>
-            <h2>user not provided</h2>
-          </Col>
-        )}
+       
       </Row>
-    </div>
+
+      <Row>
+        {product.map((x, i) => {
+          return (
+            // <Row className="my-4">
+            <Col md={8}>
+              <h3> {i + 1}. Product Information</h3>
+              <Card>
+                <p className="m-3">
+                  Please, give a detailed description of each item in your
+                  order. This data will be used for the customs declaration.
+                </p>
+                <h4 className="mx-3">Product{i + 1} </h4>
+                <Form className="m-3" >
+                  <Row>
+                    <Col md={3}>
+                      <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Label>Product Type</Form.Label>
+                        <Form.Control
+                          required
+                          name="type"
+                          type="text"
+                          placeholder="enter your product type"
+                          value={x.type}
+                          onChange={(e) => handleInputChange(e, i)}
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={3}>
+                      <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Label>Product Brand</Form.Label>
+                        <Form.Control
+                          required
+                          name="brand"
+                          type="text"
+                          placeholder="enter you product brand"
+                          value={x.brand}
+                          onChange={(e) => handleInputChange(e, i)}
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={3}>
+                      <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Label>Color/Size</Form.Label>
+                        <Form.Control
+                          required
+                          name="size"
+                          type="text"
+                          placeholder="product color"
+                          value={x.size}
+                          onChange={(e) => handleInputChange(e, i)}
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={3}>
+                      <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Label>Product Price</Form.Label>
+                        <Form.Control
+                          required
+                          name="price"
+                          type="number"
+                          placeholder="price"
+                          value={x.price}
+                          onChange={(e) => handleInputChange(e, i)}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md={8}>
+                      <Form.Group controlId="exampleForm.ControlInput2">
+                        <Form.Label>Product Name</Form.Label>
+                        <Form.Control
+                          required
+                          name="name"
+                          type="text"
+                          placeholder="Enter Product Name"
+                          value={x.name}
+                          onChange={(e) => handleInputChange(e, i)}
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col>
+                      <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Label>Product Quantity</Form.Label>
+                        <Form.Control
+                          required
+                          name="quantity"
+                          type="number"
+                          placeholder="product quantity"
+                          value={x.quantity}
+                          onChange={(e) => handleInputChange(e, i)}
+                        />
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                </Form>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
+      <Row>
+        <Col className="m-3">
+          <Button
+            onClick={submitHandler}
+            type="submit"
+            className="btn btn-primary btn-lg">
+            Update
+          </Button>{" "}
+          
+          <Button className="btn btn-danger btn-lg" href="">
+            Cancel
+          </Button>{" "}
+         
+        </Col>
+      </Row>
+    </>
   );
 }
 
