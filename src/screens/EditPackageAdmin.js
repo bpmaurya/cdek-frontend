@@ -130,9 +130,9 @@ function EditPackageAdmin({ match, history }) {
   return (
     <>
       <Link to="/admin/package">Go Back</Link>
-
+     <Row> <Col md={8}>
       <Row>
-        <Col md={8}>
+        <Col md={12}>
           <h2>Edit Package </h2>
 
           {loading ? (
@@ -278,7 +278,7 @@ function EditPackageAdmin({ match, history }) {
         {product.map((x, i) => {
           return (
             // <Row className="my-4">
-            <Col md={8}>
+            <Col md={12}>
               <h3> {i + 1}. Product Information</h3>
               <Card>
                 <p className="m-3">
@@ -389,6 +389,11 @@ function EditPackageAdmin({ match, history }) {
           </Button>{" "}
          
         </Col>
+      </Row>
+      </Col>  
+      <Col md={4}>
+        <h2>User Details</h2>
+      </Col>
       </Row>
     </>
   );
