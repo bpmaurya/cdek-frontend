@@ -123,10 +123,12 @@ function EditPackageAdmin({ match, history }) {
     console.log(dict);
     console.log(incomingPackage);
     dispatch(updatePackage(dict));
-
     console.log("submit");
   };
-
+   
+  const cancelHandler=(e)=>{
+    history.push("/admin/package");
+  }
   return (
     <>
       <Link to="/admin/package">Go Back</Link>
@@ -377,20 +379,30 @@ function EditPackageAdmin({ match, history }) {
       </Row>
       <Row>
         <Col className="m-3">
+          {loadingUpdate ? ( 
+             <Button
+             className="btn btn-primary btn-lg" type="submit">
+             Updating..........
+           </Button>
+
+          ):(
           <Button
             onClick={submitHandler}
             type="submit"
             className="btn btn-primary btn-lg">
             Update
-          </Button>{" "}
+          </Button>
+          ) }
           
-          <Button className="btn btn-danger btn-lg" href="">
+          { !loadingUpdate &&
+          <Button className="btn btn-danger btn-lg m-3" href="" onClick={cancelHandler}>
             Cancel
-          </Button>{" "}
+          </Button>
+         }
          
         </Col>
       </Row>
-      </Col>  
+      </Col>
       <Col md={4}>
         <h2>User Details</h2>
       </Col>
