@@ -124,6 +124,7 @@ function Header({history}) {
                     <NavDropdown.Item>Shipping Rates</NavDropdown.Item>
                   </LinkContainer>
 
+
                 </NavDropdown>
               ) }
 

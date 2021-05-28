@@ -14,11 +14,6 @@ function AddNewIncomingPck({ location, history }) {
   const [packageName, setPackageName] = useState("");
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comment, setComment] = useState("");
-  // const [productType, setProductType] = useState("");
-  // const [productBrand, setProductBrand] = useState("");
-  // const [productColor, setProductColor] = useState("");
-  // const [productPrice, setProductPrice] = useState("");
-  // const [productQuantity, setProductQuantity] = useState("");
   const [inputList, setInputList] = useState([
     {
       productName:"",

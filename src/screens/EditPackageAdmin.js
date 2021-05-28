@@ -405,6 +405,7 @@ function EditPackageAdmin({ match, history }) {
       </Col>
       <Col md={4}>
         <h2>User Details</h2>
+         
       </Col>
       </Row>
     </>

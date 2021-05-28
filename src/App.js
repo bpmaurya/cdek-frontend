@@ -22,6 +22,7 @@ import ShippingRateScreen from "./screens/ShippingRateScreen";
 import AddShippingRate from "./screens/AddShippingRate";
 import EditPackageAdmin from "./screens/EditPackageAdmin";
 import EditPackageUser from "./screens/EditPackageUser";
+import CreateOutgoingPackage from "./screens/CreateOutgoingPackage";
 
 function App() {
 
@@ -63,7 +64,9 @@ function App() {
           <Route path='/admin/shippingRate' component={ShippingRateScreen} exact />
           <Route path='/admin/add-shippingRate' component={AddShippingRate} exact />
           <Route path='/admin/package/:_id/edit' component={EditPackageAdmin} exact />
-          
+          <Route path='/create_outgoing' component={CreateOutgoingPackage} exact />
+         
+
         </Container>
        
       </main>

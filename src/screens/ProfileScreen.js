@@ -64,7 +64,7 @@ function ProfileScreen({ location, history }) {
   return (
     <Row>
       <Col md={3}>
-        <h2>USER PROFILE</h2>
+        <h3>USER PROFILE</h3>
 
         {message && <Message variant="danger"> {message} </Message>}
         {error && <Message variant="danger"> {error} </Message>}
@@ -118,7 +118,7 @@ function ProfileScreen({ location, history }) {
         </Form>
       </Col>
       <Col md={9}>
-        <h2>INCOMING PACKAGE</h2>
+        <h3>INCOMING PACKAGE</h3>
       </Col>
     </Row>
   );

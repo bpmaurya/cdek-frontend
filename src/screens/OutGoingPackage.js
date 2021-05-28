@@ -4,7 +4,7 @@ import { Row, Col, Card, Button } from "react-bootstrap";
 function OutGoingPackage() {
   return (
     <div>
-      <h1>THis is OutGoing package Page</h1>
+      <h2>THis is OutGoing package Page</h2>
       <Row>
         <Col>
           <Card>

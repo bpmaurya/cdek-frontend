@@ -6,11 +6,19 @@ import App from './App';
 import { Provider } from 'react-redux'
 import store from './store'
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+
+
+import "assets/scss/paper-dashboard.scss?v=1.3.0";
+import "assets/demo/demo.css";
+import "perfect-scrollbar/css/perfect-scrollbar.css";
+
 
 ReactDOM.render(
-  
     <Provider store={store}>
-    <App />
+      <BrowserRouter>
+      <App />
+    </BrowserRouter>
     </Provider>,
   document.getElementById('root')
 );
