@@ -47,7 +47,7 @@ function Office({ location, history }) {
       </Link> */}
       <h2>MY PAGE</h2>
       <Row>
-        <Col className="col-md-6 col-sm-6 col-xs-12">
+        <Col className="col-md-6 col-sm-6 col-xs-10 ">
           <Card style={{ backgroundColor: "#f5f5f6" }}>
             <div className="m-5 text-center">
               <div className="profile">

@@ -218,7 +218,7 @@ function EditPackageAdmin({ match, history }) {
                         required
                         type="text"
                         as="textarea"
-                        placeholder=""
+                        placeholder="enter  package name"
                         value={remarks}
                         onChange={(e) => setRemarks(e.target.value)}
                         rows={3}

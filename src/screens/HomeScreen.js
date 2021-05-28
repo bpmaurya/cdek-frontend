@@ -61,7 +61,7 @@ function HomeScreen({}) {
         </Col>
         <Col md={6}>
           <div>
-            <img src={logo} className="img-fluid" />
+            <img src={logo} alt="home screen logo" className="img-fluid" />
           </div>
         </Col>
       </Row>

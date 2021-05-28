@@ -82,7 +82,7 @@ JSON.dateParser = function (key, value) {
         </Col>
       </Row>
       <Row className="my-3">
-        <Col md={6}>
+        <Col md={8}>
           <h2>Incoming Packages </h2>
         </Col>
         {/* <Col md={3}>
@@ -90,8 +90,13 @@ JSON.dateParser = function (key, value) {
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
           </Form>
         </Col> */}
-        <Col md={3} className="text-center align-items-center">
-          {/* <p> arriving {incomingPackages.length} items </p> */}
+        <Col md={4} className="text-center align-items-center">
+        <Button
+            href="/create_outgoing"
+            variant="outline-success btn-block"
+            type="button">
+            +Create New Outgoing package
+          </Button>
         </Col>
       </Row>
 
