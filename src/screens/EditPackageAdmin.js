@@ -175,7 +175,7 @@ function EditPackageAdmin({ match, history }) {
                       <Form.Control
                         required
                         type="text"
-                        placeholder="enter you package name"
+                        placeholder=""
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         rows={3}
@@ -204,7 +204,7 @@ function EditPackageAdmin({ match, history }) {
                         required
                         type="text"
                         as="textarea"
-                        placeholder="enter  package name"
+                        placeholder=""
                         value={partial_received}
                         onChange={(e) => setPartial_received(e.target.value)}
                         rows={3}
@@ -218,7 +218,7 @@ function EditPackageAdmin({ match, history }) {
                         required
                         type="text"
                         as="textarea"
-                        placeholder="enter  package name"
+                        placeholder=""
                         value={remarks}
                         onChange={(e) => setRemarks(e.target.value)}
                         rows={3}

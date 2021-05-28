@@ -148,7 +148,7 @@ function EditPackageUser({ match, location, history }) {
                 <Form.Control
                   required
                   type="text"
-                  placeholder="enter you package name"
+                  placeholder="enter  comment"
                   value={comment}
                   onChange={(e) => setComment(e.target.value)}
                   rows={3}

@@ -44,12 +44,30 @@ const createPackageHandler = (  )=>{
 }
   
 
+var reISO = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
+
+JSON.dateParser = function (key, value) {
+    if (typeof value === 'string') {
+        var a = reISO.exec(value);
+        if (a)
+            return new Date(value);
+        a = reMsAjax.exec(value);
+        if (a) {
+            var b = a[1].split(/[-+,.]/);
+            return new Date(b[0] ? +b[0] : 0 - +b[1]);
+        }
+    }
+    return value;
+};
+    
+
   return (
     <div>
       {/* <h1>This is Incoming package Page</h1> */}
       <Row>
         <Col md={8}>
-          <Form>
+          <Form className="mt-2">
             <FormControl type="text" placeholder="Search Package By Name" className="mr-sm-2" />
           </Form>
         </Col>
@@ -104,7 +122,7 @@ const createPackageHandler = (  )=>{
                                <td>{user.name}</td>
                                <td>{user.trackingNumber}</td>
                                <td>{user.countInStock}</td>
-                               <td>{user.created_at}</td>
+                               <td>{ user.created_at} </td>
                               
                                <td>
                                    <LinkContainer to={`/users/package/${user._id}/edit`} >
