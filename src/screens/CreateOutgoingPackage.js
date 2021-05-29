@@ -49,6 +49,7 @@ function CreateOutgoingPackage({ match, location, history }) {
     outgoing_package_name: outgoingPackageName,
     product_name: productName,
     product_quantity: productQuantity,
+    created_by: userInfo.id
 
   };
   useEffect(() => {
