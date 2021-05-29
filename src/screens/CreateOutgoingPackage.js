@@ -5,43 +5,31 @@ import { createPackage } from "../actions/createPackageAction";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import EditPackageAdmin from "./EditPackageAdmin";
 import { PACKAGE_UPDATE_RESET } from "../constants/incomingPackageConstant";
 import {
   listIncomingPackageDetails,
   listIncomingPackage,
   updatePackage,
 } from "../actions/incomimgPackageActions";
-import IncomingPackageDetails from "./IncomingPackageDetails";
+import { createOutgoing } from "../actions/outgoingPackageAction";
 
 function CreateOutgoingPackage({ match, location, history }) {
   const [packageName, setPackageName] = useState("");
-  const [setPackageId, setSetPackageId] = useState("");
+  const [outgoingPackageName, setOutgoingPackageName] = useState("");
+  const [productName, setProductName] = useState("");
+  const [productQuantity, setProductQuantity] = useState("");
+
   const [product, setProduct] = useState([]);
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comment, setComment] = useState("");
   const [ready, setReady] = useState("");
   const [selectProduct, setSelectProduct] = useState();
-  const [productQuantity, setProductQuantity] = useState('')
-  const [inputList, setInputList] = useState([
-    {
-      name: "",
-      type: "",
-      brand: "",
-      size: "",
-      price: "",
-      quantity: "",
-    },
-  ]);
-
-  const handleInputChange = (e, index) => {
-    const { name, value } = e.target;
-    const list = [...inputList];
-    list[index][name] = value;
-    setInputList(list);
-  };
 
   const dispatch = useDispatch();
+  const outgoingCreate = useSelector((state) => state.outgoingCreate);
+  const { error:errorCreate, loading:loadingCreate, success } = outgoingCreate;
+
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const incomingPackageList = useSelector((state) => state.incomingPackageList);
@@ -56,6 +44,13 @@ function CreateOutgoingPackage({ match, location, history }) {
     incomingPackage: incomingDetails,
   } = incomingPackageDetails;
 
+  const outgoingData = {
+    incoming_package_name: packageName,
+    outgoing_package_name: outgoingPackageName,
+    product_name: productName,
+    product_quantity: productQuantity,
+
+  };
   useEffect(() => {
     if (userInfo) {
       dispatch(listIncomingPackage());
@@ -69,15 +64,25 @@ function CreateOutgoingPackage({ match, location, history }) {
   const selectPackageHandler = (e) => {
     dispatch(listIncomingPackageDetails(e.target.value));
     setReady(true);
+    setPackageName(e.target.value);
+    setOutgoingPackageName(e.target.value);
   };
 
   const selectDivideProduct = (e) => {
     setSelectProduct(e.target.value === null ? false : true);
     console.log(e.target.value);
   };
-  const submitHandler = () => {
-    history.push('/outgoing')
+  const submitHandler = (e) => {
+    e.preventDefault()
+    console.log(outgoingData);
+    dispatch(createOutgoing(outgoingData))
+
   };
+
+  if(success){
+    history.push('/outgoing')
+  }
+
 
   return (
     <>
@@ -188,7 +193,10 @@ function CreateOutgoingPackage({ match, location, history }) {
                   Select The Product
                 </Form.Label>
                 <Col sm="8">
-                  <Form.Control as="select" defaultValue="Choose...">
+                  <Form.Control
+                    as="select"
+                    defaultValue="Choose..."
+                    onChange={(e) => setProductName(e.target.value)}>
                     <option>Choose...</option>
                     {incomingDetails.product_package.map((item) => (
                       <option value={item._id}> {item.name} </option>
@@ -211,14 +219,28 @@ function CreateOutgoingPackage({ match, location, history }) {
                   />
                 </Col>
               </Form.Group>
-              <Button
+              
+              {/* <Button
                 onClick={submitHandler}
                 type="submit"
                 className="btn btn-primary btn-lg">
-                Create Outgoing 
-              </Button>
+                Create Outgoing
+              </Button> */}
             </Form>
           )}
+        </Col>
+      </Row>
+      <Row>
+        <Col className="m-3">
+          {ready && selectProduct === true &&
+            
+          <Button
+            onClick={submitHandler}
+            type="submit"
+            className="btn btn-primary btn-lg">
+            Create OutGoing Package
+          </Button>}
+         
         </Col>
       </Row>
     </>

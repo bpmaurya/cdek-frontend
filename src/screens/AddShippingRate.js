@@ -92,6 +92,8 @@ function AddShippingRate({location,history}) {
     
   };
 
+  
+
   useEffect(() => {
     if(userInfo && userInfo.isAdmin ){
       dispatch(getCalculator());
