@@ -79,6 +79,7 @@ function AddShippingRate({location,history}) {
     console.log(weightType);
     console.log(rate);
     dispatch(createShippingRate(rate));
+    window.location.reload(false);
     setInputList([
       {
         weight: "",
@@ -112,6 +113,7 @@ function AddShippingRate({location,history}) {
     // console.log("delete:",id);
   };
 
+  
   return (
     <div>
       <Row className="my-4">
@@ -121,7 +123,7 @@ function AddShippingRate({location,history}) {
               <h2>Add Rates</h2>
               {error1 && <Message variant="danger"> {error1} </Message>}
               {loading1 && <Loader />}
-              {success1 && <h1 style={{color:"green"}}>Data Submitted</h1> }
+              {success1 && <h2 style={{color:"green"}}>Data Submitted</h2> }
               <Form>
                 <Form.Group>
                   <Form.Label>ZONE</Form.Label>
