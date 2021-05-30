@@ -121,16 +121,16 @@ JSON.dateParser = function (key, value) {
                    <tbody>
                        {incomingPackages
                        .filter((item) => item.created_by === userInfo.id)
-                       .map(user=>(
-                           <tr key={user._id} >
-                               <td>{user._id}</td>
-                               <td>{user.name}</td>
-                               <td>{user.trackingNumber}</td>
-                               <td>{user.countInStock}</td>
-                               <td>{ user.created_at} </td>
+                       .map(item=>(
+                           <tr key={item._id} >
+                               <td>{item._id}</td>
+                               <td>{item.name}</td>
+                               <td>{item.trackingNumber}</td>
+                               <td>{item.countInStock}</td>
+                               <td>{item.created_at} </td>
                               
                                <td>
-                                   <LinkContainer to={`/users/package/${user._id}/edit`} >
+                                   <LinkContainer to={`/users/package/${item._id}/edit`} >
                                        <Button variant='light' className='btn-sm' >
                                            <i className='fas fa-edit' ></i>
 
@@ -138,7 +138,7 @@ JSON.dateParser = function (key, value) {
                                    
                                    </LinkContainer>
 
-                                   <Button variant='danger' className='btn-sm'  onClick={()=> deleteHandler(user._id) } >
+                                   <Button variant='danger' className='btn-sm'  onClick={()=> deleteHandler(item._id) } >
 
                                        <i className='fas fa-trash' > </i>
 

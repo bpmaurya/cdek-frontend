@@ -79,7 +79,6 @@ function AddShippingRate({location,history}) {
     console.log(weightType);
     console.log(rate);
     dispatch(createShippingRate(rate));
-    window.location.reload(false);
     setInputList([
       {
         weight: "",
@@ -112,6 +111,10 @@ function AddShippingRate({location,history}) {
     }
     // console.log("delete:",id);
   };
+
+  if(success1){
+    window.location.reload(false)
+  }
 
   
   return (
