@@ -124,6 +124,7 @@ function EditPackageAdmin({ match, history }) {
     console.log(incomingPackage);
     dispatch(updatePackage(dict));
     console.log("submit");
+    window.scrollTo(0, 0);
   };
    
   const cancelHandler=(e)=>{

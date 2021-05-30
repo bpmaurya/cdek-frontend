@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { createPackage } from "../actions/createPackageAction";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import EditPackageAdmin from "./EditPackageAdmin";
 import { PACKAGE_UPDATE_RESET } from "../constants/incomingPackageConstant";
 import {
   listIncomingPackageDetails,
@@ -108,6 +106,7 @@ function EditPackageUser({ match, location, history }) {
   if(successUpdate){
     history.push('/incoming')
     dispatch({type:PACKAGE_UPDATE_RESET})
+    window.scrollTo(0, 0);
   }
 
   return (

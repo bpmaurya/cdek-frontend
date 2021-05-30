@@ -90,7 +90,7 @@ function AddNewIncomingPck({ location, history }) {
     console.log(inputList.productBrand);
     console.log(savePackage);
     dispatch(createPackage(savePackage));
-    
+    window.scrollTo(0, 0);
     console.log("submit");
   };
 
