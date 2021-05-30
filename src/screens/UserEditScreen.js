@@ -60,7 +60,7 @@ function UserEditScreen({ match, history }) {
         ) : (
           <Form onSubmit={submitHandler}>
             <Form.Group controlId="email">
-              <Form.Label>Your Name</Form.Label>
+              <Form.Label>User Name</Form.Label>
               <Form.Control
                 type="name"
                 placeholder="enter you name"
@@ -69,7 +69,7 @@ function UserEditScreen({ match, history }) {
             </Form.Group>
 
             <Form.Group controlId="email">
-              <Form.Label>Email Address</Form.Label>
+              <Form.Label>User Email Address</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="enter you email"
