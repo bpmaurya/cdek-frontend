@@ -23,7 +23,7 @@ import AddShippingRate from "./screens/AddShippingRate";
 import EditPackageAdmin from "./screens/EditPackageAdmin";
 import EditPackageUser from "./screens/EditPackageUser";
 import CreateOutgoingPackage from "./screens/CreateOutgoingPackage";
-
+import AddAddresses from "screens/AddAddresses";
 
 function App() {
 
@@ -61,6 +61,7 @@ function App() {
           <Route path='/add-incoming' component={AddNewIncomingPck} exact />
           <Route path='/incoming/:_id' component={IncomingPackageDetails} exact/>
           <Route path='/address' component={Address} exact />
+          <Route path='/address/add' component={AddAddresses} exact />
           <Route path='/admin/package' component={PackageListScreen} exact />
           <Route path='/admin/shippingRate' component={ShippingRateScreen} exact />
           <Route path='/admin/add-shippingRate' component={AddShippingRate} exact />

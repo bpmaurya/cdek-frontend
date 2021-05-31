@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { incomingPackageReducers,incomingPackageDetailsReducers ,packageUpdateReducers} from './reducers/incomingPackageReducer'
 import { userLoginReducers,userRegistrationReducers, userDetailsReducers,userUpdateProfileReducers,userListReducers,userDeleteReducers,userUpdateReducers } from './reducers/userReducer'
 import { createPackageReducers } from './reducers/createPackageReduser'
-import { getAddressReducers } from './reducers/deliveryAddressReduser'
+import { getAddressReducers,createAddressReducers } from './reducers/deliveryAddressReduser'
 import { getCalculatorReducers,createShippingRateReducers,rateDeleteReducers } from './reducers/calculatorReduser'
 import { deleteRates } from './actions/calculatorAction'
 import {createOutgoingReducers ,outgoingPackageReducers,outgoingDeleteReducers } from './reducers/outgoingReducer'
@@ -27,6 +27,7 @@ const reducer = combineReducers({
 
       createIncomingPackage:createPackageReducers,
       getAddress:getAddressReducers,
+      createAddress:createAddressReducers,
       getCalculators:getCalculatorReducers,
       shippingRate:createShippingRateReducers,
       rateDelete:rateDeleteReducers,

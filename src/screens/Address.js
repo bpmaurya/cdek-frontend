@@ -28,6 +28,7 @@ function Address({history}) {
       
   }
   const createAddressHandler=()=>{
+    history.push('/address/add')
 
   }
 
@@ -38,7 +39,7 @@ function Address({history}) {
           <h2>Address </h2>
         </Col>
         <Col className="text-right">
-          <Button className="my-3  " variant="outline-success btn-block" onClick={createAddressHandler}  >
+          <Button className="my-3  " variant="outline-success btn-block" href='/address/add'  >
             <i className="fas fa-plus"></i> CREATE NEW ADDRESS
           </Button>
         </Col>
@@ -65,7 +66,7 @@ function Address({history}) {
           </thead>
           <tbody>
             {address
-            .filter((item) => item.user.email === userInfo.email)
+            .filter((item) => item.created_by === userInfo._id)
             .map((item) => (
               <tr key={item._id}>
                 <td>{item._id}</td>
