@@ -53,12 +53,13 @@ function AddAddresses({history}) {
         }
     }
 
-    
+
 
   return (
     <>
       <Row>
         <Col md={6}>
+            <h2>Add Address</h2>
           <Form>
             <Form.Group controlId="formGridAddress1">
               <Form.Label>Address1</Form.Label>
