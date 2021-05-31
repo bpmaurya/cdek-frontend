@@ -12,23 +12,34 @@ import {
   updatePackage,
 } from "../actions/incomimgPackageActions";
 import { createOutgoing } from "../actions/outgoingPackageAction";
+import { getUserAddress } from "../actions/addressAction";
 
 function CreateOutgoingPackage({ match, location, history }) {
   const [packageName, setPackageName] = useState("");
   const [outgoingPackageName, setOutgoingPackageName] = useState("");
   const [productName, setProductName] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
+  const [address, setAddress] = useState('')
 
   const [product, setProduct] = useState([]);
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comment, setComment] = useState("");
   const [ready, setReady] = useState("");
-  const [selectProduct, setSelectProduct] = useState();
+  const [selectProduct, setSelectProduct] = useState([]);
+  const [inputList, setInputList] = useState([
+    {
+      name: "",
+      quantity: "",
+    },
+  ]);
 
   const dispatch = useDispatch();
   const outgoingCreate = useSelector((state) => state.outgoingCreate);
-  const { error:errorCreate, loading:loadingCreate, success } = outgoingCreate;
-
+  const {
+    error: errorCreate,
+    loading: loadingCreate,
+    success,
+  } = outgoingCreate;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -44,17 +55,20 @@ function CreateOutgoingPackage({ match, location, history }) {
     incomingPackage: incomingDetails,
   } = incomingPackageDetails;
 
+  const getAddress = useSelector((state) => state.getAddress);
+  const { loading:loadingAdd, error:errorAdd, address:getAdd } = getAddress;
+
   const outgoingData = {
     incoming_package_name: packageName,
     outgoing_package_name: outgoingPackageName,
     product_name: productName,
     product_quantity: productQuantity,
-    created_by: userInfo.id
-
+    created_by: userInfo.id,
   };
   useEffect(() => {
     if (userInfo) {
       dispatch(listIncomingPackage());
+      dispatch(getUserAddress());
     } else {
       history.push("/login");
     }
@@ -63,27 +77,35 @@ function CreateOutgoingPackage({ match, location, history }) {
   }, [dispatch, history]);
 
   const selectPackageHandler = (e) => {
+    e.preventDefault();
     dispatch(listIncomingPackageDetails(e.target.value));
+    setInputList(incomingDetails.product_package);
+    setProduct(incomingDetails.product_package);
+
     setReady(true);
     setPackageName(e.target.value);
     setOutgoingPackageName(e.target.value);
   };
 
-  const selectDivideProduct = (e) => {
-    setSelectProduct(e.target.value === null ? false : true);
-    console.log(e.target.value);
-  };
   const submitHandler = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     console.log(outgoingData);
-    dispatch(createOutgoing(outgoingData))
-
+    dispatch(createOutgoing(outgoingData));
   };
 
-  if(success){
-    history.push('/outgoing')
+  if (success) {
+    history.push("/outgoing");
   }
 
+  const handleInputChange = (e, index) => {
+    const { name, quantity } = e.target;
+    const list = [...inputList];
+    list[index][name] = quantity;
+    setInputList(list);
+  };
+  const selectAddress =(e)=>{
+    setAddress(e.target.value)
+  }
 
   return (
     <>
@@ -166,82 +188,103 @@ function CreateOutgoingPackage({ match, location, history }) {
       </Row>
 
       <Row>
-        <Col md={6}>
-          {ready && (
-            <Form>
-              <Form.Group as={Row} controlId="formPlaintextPsassword">
-                <Form.Label column sm="4">
-                  Are you want divide Products
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    as="select"
-                    defaultValue="Choose..."
-                    onChange={selectDivideProduct}>
-                    <option>Choose...</option>
+        {loadingDetails ? (
+          <Loader />
+        ) : errorDetails ? (
+          <Message variant="danger"> {error} </Message>
+        ) : ready ? (
+          <Col md={6}>
+            {incomingDetails.product_package.map((x, i) => {
+              return (
+                <Row className="my-4">
+                  <Col md={12}>
+                    <Form>
+                      <Row>
+                        <Col md={4}></Col>
+                        <Col md={4}>
+                          <Form.Group controlId="zoneCity">
+                            <Form.Label column sm="4">
+                              product
+                            </Form.Label>
+                            <Form.Control
+                              type="text"
+                              name="name"
+                              placeholder="Product name"
+                              value={x.name}
+                              onChange={(e) =>
+                                handleInputChange(e, i)
+                              }></Form.Control>
+                          </Form.Group>
+                        </Col>
 
-                    <option value="true"> YES </option>
-                    <option value="false"> NO </option>
-                  </Form.Control>
-                </Col>
-              </Form.Group>
-            </Form>
-          )}
-          {ready && selectProduct === true && (
-            <Form>
-              <Form.Group as={Row} controlId="formPlainstextPassword">
+                        <Col md={4}>
+                          <Form.Group controlId="rate">
+                            <Form.Label column sm="4">
+                              quantity
+                            </Form.Label>
+                            <Form.Control
+                              type="number"
+                              name="quantity"
+                              placeholder="quantity"
+                              value={x.quantity}
+                              onChange={(e) =>
+                                handleInputChange(e, i)
+                              }></Form.Control>
+                          </Form.Group>
+                          
+                        </Col>
+                      </Row>
+                    </Form>
+                  </Col>
+                </Row>
+              );
+            })}
+            <Col md={12}>
+            <Form.Group as={Row} controlId="formPlaintextPassword">
                 <Form.Label column sm="4">
-                  Select The Product
+                  Select Delivery address
                 </Form.Label>
                 <Col sm="8">
                   <Form.Control
                     as="select"
                     defaultValue="Choose..."
-                    onChange={(e) => setProductName(e.target.value)}>
+                    onChange={selectAddress}>
                     <option>Choose...</option>
-                    {incomingDetails.product_package.map((item) => (
-                      <option value={item._id}> {item.name} </option>
-                    ))}
+                    {getAdd 
+                      .filter((item) => item.created_by === userInfo.id)
+                      .map((item) => (
+                        <option value={item._id}> {item.address} {item.zipcode} {item.city} </option>
+                      ))}
                   </Form.Control>
                 </Col>
               </Form.Group>
-              <Form.Group as={Row} controlId="formPlainsltextPassword">
-                <Form.Label column sm="4">
-                  Set The Quantity
-                </Form.Label>
-                <Col sm="8">
-                  <Form.Control
-                    required
-                    name="productQuantity"
-                    type="number"
-                    placeholder="product quantity"
-                    value={productQuantity}
-                    onChange={(e) => setProductQuantity(e.target.value)}
-                  />
-                </Col>
-              </Form.Group>
-              
-              {/* <Button
-                onClick={submitHandler}
-                type="submit"
-                className="btn btn-primary btn-lg">
-                Create Outgoing
-              </Button> */}
-            </Form>
-          )}
-        </Col>
+            </Col>
+          </Col>
+           
+            
+
+           
+
+        ) : (
+          <Col md={6}>
+            <h3>Select Package</h3>
+          </Col>
+        )}
       </Row>
       <Row>
-        <Col className="m-3">
-          {ready && selectProduct === true &&
+        <Col md={2}>
+        
+        </Col>
+        <Col className="">
+          {ready &&  (
             
-          <Button
-            onClick={submitHandler}
-            type="submit"
-            className="btn btn-primary btn-lg">
-            Create OutGoing Package
-          </Button>}
-         
+            <Button
+              onClick={submitHandler}
+              type="submit"
+              className="btn btn-primary btn-lg">
+              Create OutGoing Package
+            </Button>
+          )}
         </Col>
       </Row>
     </>

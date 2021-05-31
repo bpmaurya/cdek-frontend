@@ -51,7 +51,7 @@ export const incomingPackageDetailsReducers = ( state = { incomingPackage:[] },a
             return{ loading:false, error:action.payload}
 
         case INCOMING_PACKAGE_DETAIL_RESET:
-            return { incomingPackage : [] }    
+            return { incomingPackage : [] }
 
         default:
             return state

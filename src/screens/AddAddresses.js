@@ -103,7 +103,7 @@ function AddAddresses({history}) {
             </Form.Row>
 
             <Button variant="primary" type="submit">
-              Submit
+              Add Address
             </Button>
           </Form>
         </Col>
