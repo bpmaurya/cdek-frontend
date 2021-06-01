@@ -68,6 +68,7 @@ function AddNewIncomingPck({ location, history }) {
       size: item.productColor,
       price: item.productPrice,
       quantity: item.productQuantity,
+      remains_quantity:item.productQuantity
     };
     rate.push(dict1);
   });

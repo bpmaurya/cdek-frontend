@@ -60,16 +60,15 @@ function CreateOutgoingPackage({ match, location, history }) {
   const getAddress = useSelector((state) => state.getAddress);
   const { loading: loadingAdd, error: errorAdd, address: getAdd } = getAddress;
 
-  var rate = []
-  inputList.map(item => {
-  const dicts =
-      {
-        product_id: item.name,
-        product_name: item.name,
-        product_quantity:item.quantity
-      }
-      rate.push(dicts)
-  })
+  var rate = [];
+  inputList.map((item) => {
+    const dicts = {
+      product_id: item.name,
+      product_name: item.name,
+      product_quantity: item.quantity,
+    };
+    rate.push(dicts);
+  });
 
   const outgoingData = {
     incoming_package_name: packageName,
@@ -89,13 +88,13 @@ function CreateOutgoingPackage({ match, location, history }) {
       setComment(incomingDetails.comment);
       setProduct(incomingDetails.product_package);
       setInputList(incomingDetails.product_package);
-      dispatch(getUserAddress())
+      dispatch(getUserAddress());
 
       // product.map((x)=>{
       //     setInputList({name:x.name,brand:x.brand })
       // })
     }
-  }, [history, success,successDetails, incomingDetails]);
+  }, [history, success, successDetails, incomingDetails]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -113,149 +112,145 @@ function CreateOutgoingPackage({ match, location, history }) {
     setAddress(e.target.value);
   };
 
-  if(success){
-    history.push('/outgoing')
+  if (success) {
+    history.push("/outgoing");
   }
-
 
   return (
     <>
       <Row>
         {errorDetails && <Message variant="danger"> {error} </Message>}
         {loadingDetails && <Loader />}
-     
+
         <Col md={8}>
-        {product.map((x, i) => {
-        return (
-          <Row className="my-4">
-            <Col md={12}>
-              <h3> {i + 1}. Product Information</h3>
-              <Card>
-                <p className="m-3">
-                  Please, give a detailed description of each item in your
-                  order. This data will be used for the customs declaration.
-                </p>
-                <h4 className="mx-3">Product{i + 1} </h4>
-                <Form className="m-3">
-                  <Row>
-                    <Col md={3}>
-                      <Form.Group controlId="exampleForm.ControlInput1">
-                        <Form.Label>Product Type</Form.Label>
-                        <Form.Control
-                         disabled
-                          name="type"
-                          type="text"
-                          placeholder="enter your product type"
-                          value={x.type}
-                          onChange={(e) => handleInputChange(e, i)}
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col md={3}>
-                      <Form.Group controlId="exampleForm.ControlInput1">
-                        <Form.Label>Product Brand</Form.Label>
-                        <Form.Control
-                          disabled
-                          name="brand"
-                          type="text"
-                          placeholder="enter you product brand"
-                          value={x.brand}
-                          onChange={(e) => handleInputChange(e, i)}
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col md={3}>
-                      <Form.Group controlId="exampleForm.ControlInput1">
-                        <Form.Label>Color/Size</Form.Label>
-                        <Form.Control
-                         disabled
-                          name="size"
-                          type="text"
-                          placeholder="product color"
-                          value={x.size}
-                          onChange={(e) => handleInputChange(e, i)}
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col md={3}>
-                      <Form.Group controlId="exampleForm.ControlInput1">
-                        <Form.Label>Product Price</Form.Label>
-                        <Form.Control
-                          disabled
-                          name="price"
-                          type="number"
-                          placeholder="price"
-                          value={x.price}
-                          onChange={(e) => handleInputChange(e, i)}
-                        />
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={8}>
-                      <Form.Group controlId="exampleForm.ControlInput2">
-                        <Form.Label>Product Name</Form.Label>
-                        <Form.Control
-                         disabled
-                          name="name"
-                          type="text"
-                          placeholder="Enter Product Name"
-                          value={x.name}
-                          onChange={(e) => handleInputChange(e, i)}
-                        />
-                      </Form.Group>
-                    </Col>
-                    <Col>
-                      <Form.Group controlId="exampleForm.ControlInput1">
-                        <Form.Label>Product Quantity</Form.Label>
-                        <Form.Control
-                          required
-                          name="quantity"
-                          max = {x.quantity}
-                          
-                          type="number"
-                          placeholder="product quantity"
-                          value={x.quantity}
-                          onChange={(e) => handleInputChange(e, i)}
-                        />
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                </Form>
-              </Card>
+          <Form className="m-3" onSubmit={submitHandler}>
+            {product.map((x, i) => {
+              return (
+                <Row className="my-4">
+                  <Col md={12}>
+                    <h3> {i + 1}. Product Information</h3>
+                    <Card>
+                      <p className="m-3">
+                        Please, give a detailed description of each item in your
+                        order. This data will be used for the customs
+                        declaration.
+                      </p>
+                      <h4 className="mx-3">Product{i + 1} </h4>
+
+                      <Row>
+                        <Col md={3}>
+                          <Form.Group controlId="exampleForm.ControlInput1">
+                            <Form.Label>Product Type</Form.Label>
+                            <Form.Control
+                              disabled
+                              name="type"
+                              type="text"
+                              placeholder="enter your product type"
+                              value={x.type}
+                              onChange={(e) => handleInputChange(e, i)}
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col md={3}>
+                          <Form.Group controlId="exampleForm.ControlInput1">
+                            <Form.Label>Product Brand</Form.Label>
+                            <Form.Control
+                              disabled
+                              name="brand"
+                              type="text"
+                              placeholder="enter you product brand"
+                              value={x.brand}
+                              onChange={(e) => handleInputChange(e, i)}
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col md={3}>
+                          <Form.Group controlId="exampleForm.ControlInput1">
+                            <Form.Label>Color/Size</Form.Label>
+                            <Form.Control
+                              disabled
+                              name="size"
+                              type="text"
+                              placeholder="product color"
+                              value={x.size}
+                              onChange={(e) => handleInputChange(e, i)}
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col md={3}>
+                          <Form.Group controlId="exampleForm.ControlInput1">
+                            <Form.Label>Product Price</Form.Label>
+                            <Form.Control
+                              disabled
+                              name="price"
+                              type="number"
+                              placeholder="price"
+                              value={x.price}
+                              onChange={(e) => handleInputChange(e, i)}
+                            />
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col md={8}>
+                          <Form.Group controlId="exampleForm.ControlInput2">
+                            <Form.Label>Product Name</Form.Label>
+                            <Form.Control
+                              disabled
+                              name="name"
+                              type="text"
+                              placeholder="Enter Product Name"
+                              value={x.name}
+                              onChange={(e) => handleInputChange(e, i)}
+                            />
+                          </Form.Group>
+                        </Col>
+                        <Col>
+                          <Form.Group controlId="exampleForm.ControlInput1">
+                            <Form.Label>Product Quantity</Form.Label>
+                            <Form.Control
+                              required
+                              name="quantity"
+                              max={x.remains_quantity}
+                              maxLength="2"
+                              min="0"
+                              type="number"
+                              placeholder="product quantity"
+                              value={x.quantity}
+                              onChange={(e) => handleInputChange(e, i)}
+                            />
+                          </Form.Group>
+                        </Col>
+                      </Row>
+                    </Card>
+                  </Col>
+                </Row>
+              );
+            })}
+            <Col className="submit">
+              <Button type="submit" className="btn btn-primary btn-lg">
+                Create OutGoing Package
+              </Button>
             </Col>
-          </Row>
-        );
-      })}
-      </Col>
-      <Col md={4}>
-        <Form>
-        <Form.Group controlId="exampleForm.ControlSelect1">
-        <Form.Label>Select Address</Form.Label>
-        <Form.Control as="select">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </Form.Control>
-        </Form.Group>
-        </Form>
-
-        Or add New address
-      </Col>
-
-      </Row>
-      <Row>
-        <Col className="">
-          <Button
-            onClick={submitHandler}
-            type="submit"
-            className="btn btn-primary btn-lg">
-            Create OutGoing Package
-          </Button>
+          </Form>
+        </Col>
+        <Col md={4}>
+          <Form>
+            <Form.Group controlId="exampleForm.ControlSelect1">
+              <Form.Label>Select Address</Form.Label>
+              <Form.Control as="select">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
+          Or add New address
         </Col>
       </Row>
+      <Row></Row>
     </>
   );
 }
