@@ -115,7 +115,7 @@ function Office({ location, history }) {
                 </div>
                 <div className="m-3">
                   <Button
-                    href="/create_outgoing"
+                    href="/incoming"
                     variant="outline-success btn-block"
                     type="button">
                     Create Outgoing Package

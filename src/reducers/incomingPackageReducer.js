@@ -21,10 +21,10 @@ import {
 export const incomingPackageReducers =  ( state = { incomingPackages:[] },action)=>{
     switch(action.type){
         case INCOMING_PACKAGE_REQUEST:
-            return{ loading:true,incomingPackages:[] }
+            return{ loading:true,success:false, incomingPackages:[] }
 
         case INCOMING_PACKAGE_SUCCESS:
-            return{ loading:false,incomingPackages: action.payload } 
+            return{ loading:false,success:true, incomingPackages: action.payload } 
 
 
         case INCOMING_PACKAGE_FAIL:

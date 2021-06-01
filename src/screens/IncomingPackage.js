@@ -116,6 +116,7 @@ JSON.dateParser = function (key, value) {
                        <th>COUNT IN STOCK</th>
                        <th>CREATED AT</th>
                        <th>EDIT/DELETE</th>
+                       <th>REQUEST OUTGOING </th>
                        </tr>
                    </thead>
                    <tbody>
@@ -143,6 +144,16 @@ JSON.dateParser = function (key, value) {
                                        <i className='fas fa-trash' > </i>
 
                                    </Button>
+                               </td>
+                               <td>
+                                   <LinkContainer to={`/users/package/${item._id}/outgoing`} >
+                                       <Button variant='light' className='btn-sm' >
+                                           <i className='fas fa-edit' ></i>
+
+                                       </Button>
+
+                                   </LinkContainer>
+
                                </td>
                                 </tr>
                        ))}

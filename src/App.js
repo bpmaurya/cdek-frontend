@@ -66,7 +66,7 @@ function App() {
           <Route path='/admin/shippingRate' component={ShippingRateScreen} exact />
           <Route path='/admin/add-shippingRate' component={AddShippingRate} exact />
           <Route path='/admin/package/:_id/edit' component={EditPackageAdmin} exact />
-          <Route path='/create_outgoing' component={CreateOutgoingPackage} exact />
+          <Route path='/users/package/:_id/outgoing' component={CreateOutgoingPackage} exact />
 
           
          
