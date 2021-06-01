@@ -55,7 +55,7 @@ function OutGoingPackage({history}) {
                <Table striped border hover responsive className='table-sm'>
                    <thead>
                        <tr>
-                       <th>ID</th>
+                     
                        <th>NAME</th>
                        <th>TRACKING NUMBER</th>
                        <th>PRODUCT NAME</th>
@@ -70,7 +70,7 @@ function OutGoingPackage({history}) {
                        .filter((item) => item.created_by === userInfo.id)
                        .map(item=>(
                            <tr key={item._id} >
-                               <td>{item._id}</td>
+                              
                                <td>{item.outgoing_package_name}</td>
                                <td>{item.trackingNumber}</td>
                                <td>{item.product_name}</td>

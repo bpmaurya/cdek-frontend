@@ -110,7 +110,7 @@ JSON.dateParser = function (key, value) {
                <Table striped border hover responsive className='table-sm'>
                    <thead>
                        <tr>
-                       <th>ID</th>
+                    
                        <th>NAME</th>
                        <th>TRACKING NUMBER</th>
                        <th>COUNT IN STOCK</th>
@@ -124,7 +124,7 @@ JSON.dateParser = function (key, value) {
                        .filter((item) => item.created_by === userInfo.id)
                        .map(item=>(
                            <tr key={item._id} >
-                               <td>{item._id}</td>
+                             
                                <td>{item.name}</td>
                                <td>{item.trackingNumber}</td>
                                <td>{item.countInStock}</td>

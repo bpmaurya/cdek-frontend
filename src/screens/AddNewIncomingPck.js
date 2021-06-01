@@ -116,7 +116,7 @@ function AddNewIncomingPck({ location, history }) {
                   <Form.Control
                     required
                     type="name"
-                    placeholder="enter you package name"
+                    placeholder="Enter Your Package name"
                     value={packageName}
                     onChange={(e) => setPackageName(e.target.value)}
                   />
@@ -126,7 +126,7 @@ function AddNewIncomingPck({ location, history }) {
                   <Form.Control
                     required
                     type="name"
-                    placeholder="tracking number"
+                    placeholder="Tracking Number"
                     value={trackingNumber}
                     onChange={(e) => setTrackingNumber(e.target.value)}
                   />
@@ -137,7 +137,7 @@ function AddNewIncomingPck({ location, history }) {
                   <Form.Control
                     required
                     type="name"
-                    placeholder="enter you package name"
+                    placeholder="Enter Your Comment"
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     rows={3}
@@ -168,7 +168,7 @@ function AddNewIncomingPck({ location, history }) {
                             required
                             name="productType"
                             type="name"
-                            placeholder="enter your product type"
+                            placeholder="Enter Your Product Type"
                             value={x.productType}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -181,7 +181,7 @@ function AddNewIncomingPck({ location, history }) {
                             required
                             name="productBrand"
                             type="name"
-                            placeholder="enter you product brand"
+                            placeholder="Enter You Product Brand"
                             value={x.productBrand}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -194,7 +194,7 @@ function AddNewIncomingPck({ location, history }) {
                             required
                             name="productColor"
                             type="text"
-                            placeholder="product color"
+                            placeholder="Product Color"
                             value={x.productColor}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -207,7 +207,7 @@ function AddNewIncomingPck({ location, history }) {
                             required
                             name="productPrice"
                             type="number"
-                            placeholder="price"
+                            placeholder="Price"
                             value={x.productPrice}
                             onChange={(e) => handleInputChange(e, i)}
                           />
@@ -235,7 +235,7 @@ function AddNewIncomingPck({ location, history }) {
                             required
                             name="productQuantity"
                             type="number"
-                            placeholder="product quantity"
+                            placeholder="Product Quantity"
                             value={x.productQuantity}
                             onChange={(e) => handleInputChange(e, i)}
                           />
