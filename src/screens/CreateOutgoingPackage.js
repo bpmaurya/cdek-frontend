@@ -21,7 +21,7 @@ function CreateOutgoingPackage({ match, location, history }) {
   const [productName, setProductName] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
   const [Address, setAddress] = useState([]);
-
+  
   const [product, setProduct] = useState([]);
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comment, setComment] = useState("");
