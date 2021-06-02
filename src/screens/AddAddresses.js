@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { getUserAddress } from "../actions/addressAction";
+import { getUserAddress, createAddress } from "../actions/addressAction";
 
 function AddAddresses({history}) {
 
@@ -26,6 +26,9 @@ function AddAddresses({history}) {
     const userLogin  = useSelector(state => state.userLogin)
     const { userInfo  } = userLogin
 
+    const createNewAddress = useSelector((state) => state.createNewAddress);
+    const { loading:newAdd, error:newError, success } = createNewAddress;
+  
 
 
 
@@ -52,6 +55,11 @@ function AddAddresses({history}) {
             
         }
     }
+    const submitHandler =(e)=>{
+      // e.preventDefault()
+      console.log(addressData);
+      dispatch(createAddress(addressData) )
+    }
 
 
 
@@ -60,32 +68,47 @@ function AddAddresses({history}) {
       <Row>
         <Col md={6}>
             <h2>Add Address</h2>
-          <Form>
+          <Form onSubmit={submitHandler}>
             <Form.Group controlId="formGridAddress1">
               <Form.Label>Address1</Form.Label>
-              <Form.Control placeholder="1234 Main St" />
+              <Form.Control 
+              required
+              placeholder="1234 Main St"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)} />
             </Form.Group>
 
             <Form.Group controlId="formGridAddress2">
               <Form.Label>Address 2</Form.Label>
-              <Form.Control placeholder="Apartment, studio, or floor" />
+              <Form.Control placeholder="Apartment, studio, or floor"
+               value={address}
+               onChange={(e) => setAddress(e.target.value)}  />
             </Form.Group>
             <Form.Row>
-              <Form.Group as={Col} controlId="formGridEmail">
+              <Form.Group as={Col} controlId="formGridEmadil">
                 <Form.Label>Country</Form.Label>
-                <Form.Control type="text" placeholder="Enter Country" />
+                <Form.Control type="text" placeholder="Enter Country" 
+                required
+                 value={country}
+                 onChange={(e) => setCountry(e.target.value)} />
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridPassword">
                 <Form.Label>Recipient</Form.Label>
-                <Form.Control type="text" placeholder="Enter Recipient" />
+                <Form.Control
+                required type="text" placeholder="Enter Recipient"
+                 value={recipient}
+                 onChange={(e) => setRecipient(e.target.value)}  />
               </Form.Group>
             </Form.Row>
 
             <Form.Row>
               <Form.Group as={Col} controlId="formGridCity">
                 <Form.Label>City</Form.Label>
-                <Form.Control />
+                <Form.Control
+                required 
+                 value={city}
+                 onChange={(e) => setCity(e.target.value)}  />
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridState">
@@ -98,7 +121,10 @@ function AddAddresses({history}) {
 
               <Form.Group as={Col} controlId="formGridZip">
                 <Form.Label>Zip</Form.Label>
-                <Form.Control />
+                <Form.Control 
+                required
+                 value={zipcode}
+                 onChange={(e) => setZipcode(e.target.value)}  />
               </Form.Group>
             </Form.Row>
 

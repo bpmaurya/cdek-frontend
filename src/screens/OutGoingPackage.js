@@ -70,15 +70,13 @@ function OutGoingPackage({history}) {
                        .filter((item) => item.created_by === userInfo.id)
                        .map(item=>(
                            <tr key={item._id} >
-                              
                                <td>{item.outgoing_package_name}</td>
                                <td>{item.trackingNumber}</td>
                                <td>{item.product_name}</td>
-                               <td>{item.product_quantity}</td>
-
+                               <td>{item.product_quantity}</td>  
                                <td>{item.created_at} </td>
                                <td>{item.status} </td>
-                              
+
                                <td>
                                    <LinkContainer to={`/outgoing/edit/${item._id}/edit`} >
                                        <Button variant='light' className='btn-sm' >

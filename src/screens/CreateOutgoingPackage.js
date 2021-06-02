@@ -21,7 +21,8 @@ function CreateOutgoingPackage({ match, location, history }) {
   const [productName, setProductName] = useState("");
   const [productQuantity, setProductQuantity] = useState("");
   const [Address, setAddress] = useState([]);
-  
+
+
   const [product, setProduct] = useState([]);
   const [trackingNumber, setTrackingNumber] = useState("");
   const [comment, setComment] = useState("");
@@ -63,9 +64,10 @@ function CreateOutgoingPackage({ match, location, history }) {
   var rate = [];
   inputList.map((item) => {
     const dicts = {
-      product_id: item.name,
+      product_id: item._id,
       product_name: item.name,
       product_quantity: item.quantity,
+      remains_quantity:item.remains_quantity-item.quantity
     };
     rate.push(dicts);
   });

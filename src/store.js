@@ -27,7 +27,7 @@ const reducer = combineReducers({
 
       createIncomingPackage:createPackageReducers,
       getAddress:getAddressReducers,
-      createAddress:createAddressReducers,
+      createNewAddress:createAddressReducers,
       getCalculators:getCalculatorReducers,
       shippingRate:createShippingRateReducers,
       rateDelete:rateDeleteReducers,
