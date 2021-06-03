@@ -22,6 +22,7 @@ function AddNewIncomingPck({ location, history }) {
       productColor: "",
       productPrice: "",
       productQuantity: "",
+      productLink:""
     },
   ]);
 
@@ -48,6 +49,7 @@ function AddNewIncomingPck({ location, history }) {
         productColor: "",
         productPrice: "",
         productQuantity: "",
+        productLink:"",
       },
     ]);
   };
@@ -68,7 +70,8 @@ function AddNewIncomingPck({ location, history }) {
       size: item.productColor,
       price: item.productPrice,
       quantity: item.productQuantity,
-      remains_quantity:item.productQuantity
+      remains_quantity:item.productQuantity,
+      link:item.productLink,
     };
     rate.push(dict1);
   });
@@ -215,7 +218,7 @@ function AddNewIncomingPck({ location, history }) {
                       </Col>
                     </Row>
                     <Row>
-                    <Col md={8}>
+                    <Col md={3}>
                         <Form.Group controlId="exampleForm.ControlInput2">
                           <Form.Label>Product Name</Form.Label>
                           <Form.Control
@@ -227,6 +230,20 @@ function AddNewIncomingPck({ location, history }) {
                             onChange={(e) => handleInputChange(e, i)}
                           />
                         </Form.Group>
+                      </Col>
+                      <Col md={5}>
+                      <Form.Group controlId="exampleForm.ContrsolInput2">
+                          <Form.Label>Product Link</Form.Label>
+                          <Form.Control
+                            required
+                            name="productLink"
+                            type="url"
+                            placeholder="Enter Product Link"
+                            value={x.productLink}
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </Form.Group>
+                      
                       </Col>
                       <Col>
                         <Form.Group controlId="exampleForm.ControlInput1">

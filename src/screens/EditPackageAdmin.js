@@ -32,6 +32,7 @@ function EditPackageAdmin({ match, history }) {
       size: "",
       price: "",
       quantity: "",
+      link:"",
     },
   ]);
 
@@ -98,6 +99,7 @@ function EditPackageAdmin({ match, history }) {
       size: item.size,
       price: item.price,
       quantity: item.quantity,
+      link:item.link,
     };
     rate.push(dict1);
   });
@@ -345,7 +347,7 @@ function EditPackageAdmin({ match, history }) {
                     </Col>
                   </Row>
                   <Row>
-                    <Col md={8}>
+                    <Col md={3}>
                       <Form.Group controlId="exampleForm.ControlInput2">
                         <Form.Label>Product Name</Form.Label>
                         <Form.Control
@@ -358,6 +360,20 @@ function EditPackageAdmin({ match, history }) {
                         />
                       </Form.Group>
                     </Col>
+                    <Col md={5}>
+                      <Form.Group controlId="exampleForm.ContrsolInput2">
+                          <Form.Label>Product Link</Form.Label>
+                          <Form.Control
+                            required
+                            name="link"
+                            type="url"
+                            placeholder="Enter Product Link"
+                            value={x.link}
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </Form.Group>
+                      
+                      </Col>
                     <Col>
                       <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Product Quantity</Form.Label>
