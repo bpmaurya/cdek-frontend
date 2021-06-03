@@ -85,7 +85,6 @@ function CreateOutgoingPackage({ match, location, history }) {
     if (incomingDetails._id !== packageId) {
       dispatch(listIncomingPackageDetails(packageId));
     } else {
-      setPackageName(incomingDetails.name);
       setTrackingNumber(incomingDetails.trackingNumber);
       setComment(incomingDetails.comment);
       setProduct(incomingDetails.product_package);
@@ -94,7 +93,8 @@ function CreateOutgoingPackage({ match, location, history }) {
 
       // product.map((x)=>{
       //     setInputList({name:x.name,brand:x.brand })
-      // })
+      // })                 
+
     }
   }, [history, success, successDetails, incomingDetails]);
 
@@ -126,11 +126,27 @@ function CreateOutgoingPackage({ match, location, history }) {
 
         <Col md={8}>
           <Form className="m-3" onSubmit={submitHandler}>
+
+          <Col md={12}>
+
+            {/* <Card className="m-3"> */}
+                <Form.Group controlId="exampleForm.ControlInput1">
+                  <Form.Label>Outgoing Package Name</Form.Label>
+                  <Form.Control
+                    required
+                    type="name"
+                    placeholder="Enter Your Package name"
+                    value={packageName}
+                    onChange={(e) => setPackageName(e.target.value)}
+                  />
+                </Form.Group>
+                {/* </Card> */}
+              </Col>
             {product.map((x, i) => {
               return (
                 <Row className="my-4">
                   <Col md={12}>
-                    <h3> {i + 1}. Product Information</h3>
+                    <h5> {i + 1}. Product Information</h5>
                     <Card>
                       <p className="m-3">
                         Please, give a detailed description of each item in your
