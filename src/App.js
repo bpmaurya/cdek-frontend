@@ -25,6 +25,7 @@ import EditPackageUser from "./screens/EditPackageUser";
 import CreateOutgoingPackage from "./screens/CreateOutgoingPackage";
 import AddAddresses from "screens/AddAddresses";
 import OutgoingPackageAdmin from "screens/OutgoingPackageListAdmin";
+import AdminWarehouse from "screens/AdminWarehouse";
 
 function App() {
 
@@ -69,6 +70,7 @@ function App() {
           <Route path='/admin/package/:_id/edit' component={EditPackageAdmin} exact />
           <Route path='/users/package/:_id/outgoing' component={CreateOutgoingPackage} exact />
           <Route path='/admin/outgoing' component={OutgoingPackageAdmin} exact />
+          <Route path='/admin/warehouse' component={AdminWarehouse} exact />
 
           
          
