@@ -31,7 +31,13 @@ function CreateOutgoingPackage({ match, location, history }) {
   const [inputList, setInputList] = useState([
     {
       name: "",
+      type: "",
+      brand: "",
+      size: "",
+      price: "",
       quantity: "",
+      link:"",
+      remains_quantity:"",
     },
   ]);
 
@@ -61,6 +67,13 @@ function CreateOutgoingPackage({ match, location, history }) {
   const getAddress = useSelector((state) => state.getAddress);
   const { loading: loadingAdd, error: errorAdd, address: getAdd } = getAddress;
 
+  const packageUpdate = useSelector((state) => state.packageUpdate);
+  const {
+    error: errorUpdate,
+    loading: loadingUpdate,
+    success: successUpdate,
+  } = packageUpdate;
+
   var rate = [];
   inputList.map((item) => {
     const dicts = {
@@ -80,6 +93,33 @@ function CreateOutgoingPackage({ match, location, history }) {
     outgoing_product: rate,
   };
 
+
+  const rate1 = [];
+  inputList.map((item) => {
+    const dict1 = {
+      name: item.name,
+      type: item.type,
+      brand: item.brand,
+      size: item.size,
+      price: item.price,
+      quantity: item.remains_quantity-item.quantity,
+      link:item.link,
+      remains_quantity:item.remains_quantity-item.quantity,
+    }
+    rate1.push(dict1);
+  });
+
+  if(userInfo){
+    var savePackage = {
+      _id:packageId,
+      name: packageName,
+      trackingNumber: trackingNumber,
+      comment: comment,
+      created_by: userInfo.id,
+      product_package: rate1,
+    }
+  }
+
   useEffect(() => {
     // dispatch(getUserAddress());
     if (incomingDetails._id !== packageId) {
@@ -93,7 +133,7 @@ function CreateOutgoingPackage({ match, location, history }) {
 
       // product.map((x)=>{
       //     setInputList({name:x.name,brand:x.brand })
-      // })                 
+      // })
 
     }
   }, [history, success, successDetails, incomingDetails]);
@@ -102,6 +142,8 @@ function CreateOutgoingPackage({ match, location, history }) {
     e.preventDefault();
     console.log(outgoingData);
     dispatch(createOutgoing(outgoingData));
+    dispatch(updatePackage(savePackage));
+
   };
 
   const handleInputChange = (e, index) => {

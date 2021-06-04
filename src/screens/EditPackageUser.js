@@ -27,6 +27,7 @@ function EditPackageUser({ match, location, history }) {
       price: "",
       quantity: "",
       link:"",
+      remains_quantity:"",
     },
   ]);
 
@@ -62,6 +63,7 @@ function EditPackageUser({ match, location, history }) {
       price: item.price,
       quantity: item.quantity,
       link:item.link,
+      remains_quantity:item.remains_quantity,
     }
     rate.push(dict1);
   });
