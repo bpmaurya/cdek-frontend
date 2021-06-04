@@ -80,7 +80,12 @@ function CreateOutgoingPackage({ match, location, history }) {
       product_id: item._id,
       product_name: item.name,
       product_quantity: item.quantity,
-      remains_quantity:item.remains_quantity-item.quantity
+      remains_quantity:item.remains_quantity-item.quantity,
+      type:item.type,
+      brand:item.brand,
+      link:item.link,
+      size:item.size,
+      price:item.price,
     };
     rate.push(dicts);
   });
@@ -143,7 +148,6 @@ function CreateOutgoingPackage({ match, location, history }) {
     console.log(outgoingData);
     dispatch(createOutgoing(outgoingData));
     dispatch(updatePackage(savePackage));
-
   };
 
   const handleInputChange = (e, index) => {
@@ -152,6 +156,7 @@ function CreateOutgoingPackage({ match, location, history }) {
     list[index][name] = value;
     setInputList(list);
   };
+
   const selectAddress = (e) => {
     setAddress(e.target.value);
   };

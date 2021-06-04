@@ -63,7 +63,7 @@ function EditPackageUser({ match, location, history }) {
       price: item.price,
       quantity: item.quantity,
       link:item.link,
-      remains_quantity:item.remains_quantity,
+      remains_quantity:item.quantity,
     }
     rate.push(dict1);
   });

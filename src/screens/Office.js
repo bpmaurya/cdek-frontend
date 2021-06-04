@@ -84,7 +84,6 @@ function Office({ location, history }) {
           </Card>
         </Col>
 
-         
             <Col className="col-md-3 col-sm-6 col-xs-10">
               <Card
                 style={{ background: "#e5fae8" }}

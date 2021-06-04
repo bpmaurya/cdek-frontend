@@ -9,9 +9,16 @@ import {
 
     OUTGOING_PACKAGE_DELETE_REQUEST,
     OUTGOING_PACKAGE_DELETE_SUCCESS,
-    OUTGOING_PACKAGE_DELETE_FAIL
+    OUTGOING_PACKAGE_DELETE_FAIL,
+
+    OUTGOING_PACKAGE_DETAIL_REQUEST,
+    OUTGOING_PACKAGE_DETAIL_SUCCESS,
+    OUTGOING_PACKAGE_DETAIL_FAIL,
+    OUTGOING_PACKAGE_DETAIL_RESET
 
 } from '../constants/outgoingPackageConstant'
+
+
 
 
 //THIS IS FOR FETCH ALL OUTGOING PACKAGES
@@ -71,4 +78,27 @@ export const outgoingDeleteReducers =  ( state = { },action)=>{
             return state
 
     }
+}
+
+//for get single outgoing Package
+export const outgoingPackageDetailsReducers = ( state = { singlePackage:[] },action)=>{
+    switch(action.type){
+        case OUTGOING_PACKAGE_DETAIL_REQUEST:
+            return{ ...state,loading:true }
+
+        case OUTGOING_PACKAGE_DETAIL_SUCCESS:
+            return{ loading:false,singlePackage: action.payload }
+
+
+        case OUTGOING_PACKAGE_DETAIL_FAIL:
+            return{ loading:false, error:action.payload}
+
+        case OUTGOING_PACKAGE_DETAIL_RESET:
+            return { singlePackage : [] }
+
+        default:
+            return state
+
+    }
+
 }

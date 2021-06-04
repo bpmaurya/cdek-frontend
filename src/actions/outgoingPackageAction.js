@@ -11,7 +11,11 @@ import {
 
     OUTGOING_PACKAGE_DELETE_REQUEST,
     OUTGOING_PACKAGE_DELETE_SUCCESS,
-    OUTGOING_PACKAGE_DELETE_FAIL
+    OUTGOING_PACKAGE_DELETE_FAIL,
+
+    OUTGOING_PACKAGE_DETAIL_REQUEST,
+    OUTGOING_PACKAGE_DETAIL_SUCCESS,
+    OUTGOING_PACKAGE_DETAIL_FAIL,
 
 } from '../constants/outgoingPackageConstant'
 import API from '../apiUrl.json'
@@ -136,3 +140,31 @@ export const deleteOutgoing = (_id) => async (dispatch, getState) => {
       });
     }
   };
+
+  //this is for single outgoing package details
+
+export const outgoingPackageDetails = (_id) => async(dispatch) => {
+  try {
+      dispatch({type:OUTGOING_PACKAGE_DETAIL_REQUEST})
+      var url = API.baseUrl
+      const  {data} = await axios.get(`${url}/outgoing/${_id}/`);
+
+      dispatch({
+          type:OUTGOING_PACKAGE_DETAIL_SUCCESS,
+          payload:data
+      })
+      // console.log(data);
+
+
+  } catch (error) {
+
+      dispatch({
+          type:OUTGOING_PACKAGE_DETAIL_FAIL,
+          payload:error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+      })
+
+  }
+
+}
