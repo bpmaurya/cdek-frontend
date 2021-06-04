@@ -17,6 +17,10 @@ import {
     OUTGOING_PACKAGE_DETAIL_SUCCESS,
     OUTGOING_PACKAGE_DETAIL_FAIL,
 
+    OUTGOING_PACKAGE_UPDATE_REQUEST,
+    OUTGOING_PACKAGE_UPDATE_SUCCESS,
+    OUTGOING_PACKAGE_UPDATE_FAIL,
+
 } from '../constants/outgoingPackageConstant'
 import API from '../apiUrl.json'
 
@@ -168,3 +172,45 @@ export const outgoingPackageDetails = (_id) => async(dispatch) => {
   }
 
 }
+
+//for update outgoing package
+
+
+export const updateOutgoingPackage = (item) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: OUTGOING_PACKAGE_UPDATE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userInfo.token} `,
+      },
+    };
+    var url = API.baseUrl;
+    const { data } = await axios.put(
+      `${url}/outgoing/update/${item._id}/`,
+      item,
+      config
+    );
+
+    dispatch({
+      type: OUTGOING_PACKAGE_UPDATE_SUCCESS,
+      payload: data,
+    });
+   
+  } catch (error) {
+    dispatch({
+      type: OUTGOING_PACKAGE_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};

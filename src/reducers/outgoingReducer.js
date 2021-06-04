@@ -14,7 +14,11 @@ import {
     OUTGOING_PACKAGE_DETAIL_REQUEST,
     OUTGOING_PACKAGE_DETAIL_SUCCESS,
     OUTGOING_PACKAGE_DETAIL_FAIL,
-    OUTGOING_PACKAGE_DETAIL_RESET
+    OUTGOING_PACKAGE_DETAIL_RESET,
+
+    OUTGOING_PACKAGE_UPDATE_REQUEST,
+    OUTGOING_PACKAGE_UPDATE_SUCCESS,
+    OUTGOING_PACKAGE_UPDATE_FAIL,
 
 } from '../constants/outgoingPackageConstant'
 
@@ -61,6 +65,7 @@ export const createOutgoingReducers = ( state = { }, action)=>{
 
 }
 
+
 //for delete outgoing package
 export const outgoingDeleteReducers =  ( state = { },action)=>{
     switch(action.type){
@@ -101,4 +106,27 @@ export const outgoingPackageDetailsReducers = ( state = { singlePackage:[] },act
 
     }
 
+}
+
+//for outgoing package update
+
+export const outgoingUpdateReducers =  ( state = { item:{} },action)=>{
+    switch(action.type){
+        case OUTGOING_PACKAGE_UPDATE_REQUEST:
+            return{ loading:true }
+
+        case OUTGOING_PACKAGE_UPDATE_SUCCESS:
+            return{ loading:false, success:true , item: action.payload } 
+
+
+        case OUTGOING_PACKAGE_UPDATE_FAIL:
+            return{ loading:false}
+
+        // case PACKAGE_UPDATE_RESET:
+        //     return{ item:{ } }
+
+        default:
+            return state
+
+    }
 }
