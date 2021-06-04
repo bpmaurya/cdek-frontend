@@ -116,7 +116,7 @@ function EditPackageAdmin({ match, history }) {
       partial_received: partial_received,
       remarks: remarks,
       product_package: rate,
-      created_by: userInfo.id,
+      
     };
   }
 
