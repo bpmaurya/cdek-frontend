@@ -153,9 +153,9 @@ function OutGoingPackage({ history }) {
                       <td>{item.outgoing_package_name}</td>
                       <td>{item.trackingNumber}</td>
                       <td>{item.product_name}</td>
-                      <td>{item.product_quantity}</td>
+                      <td>{(item.outgoing_product).length}</td>
                       <td>{item.created_at} </td>
-                      <td>{item.status} </td>
+                      <td style={{color:"red"}} > <strong>{item.status} </strong></td>
 
                       <td>
                         <LinkContainer to={`/outgoing/edit/${item._id}/edit`}>

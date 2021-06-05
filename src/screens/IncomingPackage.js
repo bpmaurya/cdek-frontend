@@ -1,75 +1,73 @@
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 
 import React, { useState, useEffect } from "react";
 
-import { LinkContainer } from 'react-router-bootstrap'
-import { Row, Col,Table, Form, FormControl, Button} from "react-bootstrap";
-import { listIncomingPackage } from "../actions/incomimgPackageActions"
-import Loader from '../components/Loader'
-import Message from '../components/Message'
-import { ListGroup ,ListGroupItem} from 'reactstrap';
+import { LinkContainer } from "react-router-bootstrap";
+import { Row, Col, Table, Form, FormControl, Button } from "react-bootstrap";
+import { listIncomingPackage } from "../actions/incomimgPackageActions";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import { ListGroup, ListGroupItem } from "reactstrap";
 
-function IncomingPackage({history}) {
+function IncomingPackage({ history }) {
   const [open, setOpen] = useState(false);
-  const dispatch = useDispatch()
-  const incomingPackageList = useSelector(state=> state.incomingPackageList)
-  const {error,loading, incomingPackages} = incomingPackageList
+  const dispatch = useDispatch();
+  const incomingPackageList = useSelector((state) =>  state.incomingPackageList);
+  const { error, loading, incomingPackages } = incomingPackageList;
 
-  const userLogin  = useSelector(state => state.userLogin)
-  const { userInfo  } = userLogin
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   useEffect(() => {
-    if(userInfo){
-      dispatch(listIncomingPackage())
-  }else{
-      history.push('/login')
-  }
-    
-    // fetchProduct()
+    if (userInfo) {
+      dispatch(listIncomingPackage());
+    } else {
+      history.push("/login");
+    }
 
-  }, [dispatch,history]);
+    // fetchProduct()
+  }, [dispatch, history]);
 
   console.log(incomingPackages);
 
-  const deleteHandler = (id)=>{
-    if(window.confirm('Are you sure you want to delete this package?')){
-        // dispatch(deleteUsers(id))
-        
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure you want to delete this package?")) {
+      // dispatch(deleteUsers(id))
     }
     // console.log("delete:",id);
-    
-}
-const createPackageHandler = (  )=>{
+  };
+  const createPackageHandler = () => {
     //create incoming package
+  };
 
-}
-  
+  var reISO =
+    /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
+  var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
 
-var reISO = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*))(?:Z|(\+|-)([\d|:]*))?$/;
-var reMsAjax = /^\/Date\((d|-|.*)\)[\/|\\]$/;
-
-JSON.dateParser = function (key, value) {
-    if (typeof value === 'string') {
-        var a = reISO.exec(value);
-        if (a)
-            return new Date(value);
-        a = reMsAjax.exec(value);
-        if (a) {
-            var b = a[1].split(/[-+,.]/);
-            return new Date(b[0] ? +b[0] : 0 - +b[1]);
-        }
+  JSON.dateParser = function (key, value) {
+    if (typeof value === "string") {
+      var a = reISO.exec(value);
+      if (a) return new Date(value);
+      a = reMsAjax.exec(value);
+      if (a) {
+        var b = a[1].split(/[-+,.]/);
+        return new Date(b[0] ? +b[0] : 0 - +b[1]);
+      }
     }
     return value;
-};
+  };
 
-const count = incomingPackages.filter(item => item.created_by === userInfo._id).length;
-const warehouse = incomingPackages.filter(item=>item.created_by=== userInfo._id === item.full_received==='YES').length
+  const count = incomingPackages.filter(
+    (item) => item.created_by === userInfo._id
+  ).length;
+  const warehouse = incomingPackages.filter(
+    (item) =>
+      ((item.created_by === userInfo._id) === item.full_received) === "YES"
+  ).length;
 
-const warehouse1 = 
-  (incomingPackages.filter(item=>item.created_by=== userInfo._id)
-  .filter(item=>item.full_received==='YES')).length
-
-
+  const warehouse1 = incomingPackages
+    .filter((item) => item.created_by === userInfo._id)
+    .filter((item) => item.full_received === "YES").length;
 
   return (
     <div>
@@ -77,7 +75,11 @@ const warehouse1 =
       <Row>
         <Col md={8}>
           <Form className="mt-2">
-            <FormControl type="text" placeholder="Search Package By Name" className="mr-sm-2" />
+            <FormControl
+              type="text"
+              placeholder="Search Package By Name"
+              className="mr-sm-2"
+            />
           </Form>
         </Col>
 
@@ -95,101 +97,93 @@ const warehouse1 =
           <h2>Incoming Packages </h2>
         </Col>
         <Col md={4}>
-
-        <ListGroup>
-        <ListGroupItem>
-          <Row>
-        <Col md={12}>
-        <i class="fas fa-warehouse mx-3"></i><strong>At the Warehouse:</strong>{'  '}{warehouse1}  Items | status |  
-                        </Col>
-                        {/* <Col md={6}>
+          <ListGroup>
+            <ListGroupItem>
+              <Row>
+                <Col md={12}>
+                  <i class="fas fa-warehouse mx-3"></i>
+                  <strong>At the Warehouse:</strong>
+                  {"  "}
+                  {warehouse1} Items | status |
+                </Col>
+                {/* <Col md={6}>
              {incomingPackages.countInStock} Items | status | 
               </Col> */}
-             </Row>
-        </ListGroupItem>
-              </ListGroup>
-
+              </Row>
+            </ListGroupItem>
+          </ListGroup>
         </Col>
-       
+
         <Col md={4} className="text-center align-items-center">
-        <ListGroup>
-        <ListGroupItem>
-          <Row>
-        <Col md={6}>
-        <i className="far fa-clock mx-3"></i><strong>Arriving:</strong>{'  '} 
-                        </Col>
-                        <Col>
-             {count} Items 
-              </Col>
-             </Row>
-        </ListGroupItem>
-              </ListGroup>
-              
+          <ListGroup>
+            <ListGroupItem>
+              <Row>
+                <Col md={6}>
+                  <i className="far fa-clock mx-3"></i>
+                  <strong>Arriving:</strong>
+                  {"  "}
+                </Col>
+                <Col>{count} Items</Col>
+              </Row>
+            </ListGroupItem>
+          </ListGroup>
         </Col>
       </Row>
 
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant="danger"> {error} </Message>
+      ) : (
+        <Table striped border hover responsive className="table-sm">
+          <thead>
+            <tr>
+              <th>NAME</th>
+              <th>TRACKING NUMBER</th>
+              <th>COUNT IN STOCK</th>
+              <th>CREATED AT</th>
+              <th>STATUS</th>
+              <th>EDIT/DELETE</th>
+              <th>REQUEST OUTGOING </th>
+            </tr>
+          </thead>
+          <tbody>
+            {incomingPackages
+              .filter((item) => item.created_by === userInfo.id)
+              .map((item) => (
+                <tr key={item._id}>
+                  <td>{item.name}</td>
+                  <td>{item.trackingNumber}</td>
+                  <td>{item.countInStock}</td>
+                  <td>{item.created_at} </td>
+                  <td style={{color:"green"}} ><strong>{item.status}</strong> </td>
 
+                  <td>
+                    <LinkContainer to={`/users/package/${item._id}/edit`}>
+                      <Button variant="light" className="btn-sm">
+                        <i className="fas fa-edit"></i>
+                      </Button>
+                    </LinkContainer>
 
-      {loading
-            ? (<Loader/>)
-            : error 
-            ? (<Message variant='danger' > {error} </Message>)
-            :(
-               <Table striped border hover responsive className='table-sm'>
-                   <thead>
-                       <tr>
-                    
-                       <th>NAME</th>
-                       <th>TRACKING NUMBER</th>
-                       <th>COUNT IN STOCK</th>
-                       <th>CREATED AT</th>
-                       <th>EDIT/DELETE</th>
-                       <th>REQUEST OUTGOING </th>
-                       </tr>
-                   </thead>
-                   <tbody>
-                       {incomingPackages
-                       .filter((item) => item.created_by === userInfo.id)
-                       .map(item=>(
-                           <tr key={item._id} >
-                             
-                               <td>{item.name}</td>
-                               <td>{item.trackingNumber}</td>
-                               <td>{item.countInStock}</td>
-                               <td>{item.created_at} </td>
-                              
-                               <td>
-                                   <LinkContainer to={`/users/package/${item._id}/edit`} >
-                                       <Button variant='light' className='btn-sm' >
-                                           <i className='fas fa-edit' ></i>
-
-                                       </Button>
-                                   
-                                   </LinkContainer>
-
-                                   <Button variant='danger' className='btn-sm'  onClick={()=> deleteHandler(item._id) } >
-
-                                       <i className='fas fa-trash' > </i>
-
-                                   </Button>
-                               </td>
-                               <td>
-                                   <LinkContainer to={`/users/package/${item._id}/outgoing`} >
-                                       <Button variant='light' className='btn-sm' >
-                                           <i className='fas fa-edit' ></i>
-
-                                       </Button>
-
-                                   </LinkContainer>
-
-                               </td>
-                                </tr>
-                       ))}
-                   </tbody>
-
-
-               </Table>
-            ) }
+                    <Button
+                      variant="danger"
+                      className="btn-sm"
+                      onClick={() => deleteHandler(item._id)}>
+                      <i className="fas fa-trash"> </i>
+                    </Button>
+                  </td>
+                  <td>
+                    <LinkContainer to={`/users/package/${item._id}/outgoing`}>
+                      <Button variant="light" className="btn-sm">
+                        <i className="fas fa-edit"></i>
+                      </Button>
+                    </LinkContainer>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
+      )}
     </div>
   );
 }

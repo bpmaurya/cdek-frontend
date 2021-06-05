@@ -10,6 +10,7 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+import {ListGroup,ListGroupItem } from 'reactstrap'
 
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -49,9 +50,50 @@ function OutgoingPackageAdmin({ history, }) {
     }
     // console.log("delete:",id);
   };
+
+  const warehouse1 = outgoingPackages.filter(
+    (item) => item.full_received === "YES"
+  ).length;
+
   return (
     <div>
-      <h2>THis is OutGoing package Page</h2>
+      <Row className="my-3">
+        <Col md={4}>
+          <h2>Outgoing Packages </h2>
+        </Col>
+        <Col md={4}>
+          <ListGroup>
+            <ListGroupItem>
+              <Row>
+                <Col md={12}>
+                  <i class="fas fa-warehouse mx-3"></i>
+                  <strong>At the Warehouse:</strong>
+                  {"  "}
+                  {warehouse1} Items | status |
+                </Col>
+                {/* <Col md={6}>
+             {incomingPackages.countInStock} Items | status | 
+              </Col> */}
+              </Row>
+            </ListGroupItem>
+          </ListGroup>
+        </Col>
+
+        <Col md={4} className="text-center align-items-center">
+          <ListGroup>
+            <ListGroupItem>
+              <Row>
+                <Col md={6}>
+                  <i className="far fa-clock mx-3"></i>
+                  <strong>Package:</strong>
+                  {"  "}
+                </Col>
+                <Col>{outgoingPackages.length} Items</Col>
+              </Row>
+            </ListGroupItem>
+          </ListGroup>
+        </Col>
+      </Row>
       <Row>
         <Col>
           {loading ? (
@@ -81,7 +123,7 @@ function OutgoingPackageAdmin({ history, }) {
                     <td>{item.product_name}</td>
                     <td>{item.product_quantity}</td>
                     <td>{item.created_at} </td>
-                    <td>{item.status} </td>
+                    <td style={{color:"red"}} > <strong>{item.status} </strong></td>
                     <td>
                   <LinkContainer to={`/outgoing/edit/${item._id}/edit`}>
                          <Button variant="light" className="btn-sm">
