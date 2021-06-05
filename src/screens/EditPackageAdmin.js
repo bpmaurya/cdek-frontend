@@ -200,28 +200,14 @@ function EditPackageAdmin({ match, history }) {
                   </Col>
                 </Row>
                 <Row>
-                  <Col md={3}>
-                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                      <Form.Label> If Partial Received</Form.Label>
-                      <Form.Control
-                        required
-                        type="text"
-                        as="textarea"
-                        placeholder=""
-                        value={partial_received}
-                        onChange={(e) => setPartial_received(e.target.value)}
-                        rows={3}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col md={9}>
+                  <Col md={12}>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Label> Add Remarks</Form.Label>
                       <Form.Control
                         required
                         type="text"
                         as="textarea"
-                        placeholder="enter  package name"
+                        placeholder="Enter Remarks"
                         value={remarks}
                         onChange={(e) => setRemarks(e.target.value)}
                         rows={3}
@@ -254,7 +240,7 @@ function EditPackageAdmin({ match, history }) {
 
                 <Form.Group as={Row} controlId="full_received">
                   <Form.Label column sm="3">
-                    Is full Received
+                  Full Received
                   </Form.Label>
                   <Col sm="9">
                     <Form.Control
@@ -272,6 +258,7 @@ function EditPackageAdmin({ match, history }) {
                     </Form.Control>
                   </Col>
                 </Form.Group>
+              
               </Form>
             </Card>
           )}
