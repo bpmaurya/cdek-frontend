@@ -62,6 +62,7 @@ JSON.dateParser = function (key, value) {
     return value;
 };
 const count = incomingPackages.filter(item => item.created_by === userInfo._id).length;
+const warehouse = incomingPackages.filter(item=>item.created_by=== userInfo._id=== item.full_received==='YES').length
 
   return (
     <div>
@@ -92,7 +93,7 @@ const count = incomingPackages.filter(item => item.created_by === userInfo._id).
         <ListGroupItem>
           <Row>
         <Col md={12}>
-        <i class="fas fa-warehouse mx-3"></i><strong>At the Warehouse:</strong>{'  '}{count}  Items | status |  
+        <i class="fas fa-warehouse mx-3"></i><strong>At the Warehouse:</strong>{'  '}{warehouse}  Items | status |  
                         </Col>
                         {/* <Col md={6}>
              {incomingPackages.countInStock} Items | status | 
