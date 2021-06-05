@@ -90,7 +90,7 @@ function OutgoingPackageDetails({ match, history }) {
   const handleShow=(e)=>{
     e.preventDefault();
     dispatch(updateOutgoingPackage(outgoingData))
-      history.push('/admin/outgoing')
+    window.location.reload(false)
   }
   
 
@@ -163,6 +163,12 @@ function OutgoingPackageDetails({ match, history }) {
                   <Row>
                     <Col>Created At:</Col>
                     <Col>{singlePackage.created_at}</Col>
+                  </Row>
+                </ListGroupItem>
+                <ListGroupItem>
+                  <Row>
+                    <Col>Status:</Col>
+                    <Col style= {{color:"red"}}> <strong>{singlePackage.status} </strong> </Col>
                   </Row>
                 </ListGroupItem>
                 <ListGroupItem>
