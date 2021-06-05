@@ -116,7 +116,6 @@ function EditPackageAdmin({ match, history }) {
       partial_received: partial_received,
       remarks: remarks,
       product_package: rate,
-      
     };
   }
 
@@ -128,10 +127,12 @@ function EditPackageAdmin({ match, history }) {
     console.log("submit");
     window.scrollTo(0, 0);
   };
-   
+
   const cancelHandler=(e)=>{
     history.push("/admin/package");
   }
+
+  
   return (
     <>
       <Link to="/admin/package">Go Back</Link>

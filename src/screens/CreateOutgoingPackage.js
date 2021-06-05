@@ -178,7 +178,7 @@ function CreateOutgoingPackage({ match, location, history }) {
 
             {/* <Card className="m-3"> */}
                 <Form.Group controlId="exampleForm.ControlInput1">
-                  <Form.Label>Outgoing Package Name</Form.Label>
+                  <Form.Label> <strong> Outgoing Package Name</strong></Form.Label>
                   <Form.Control
                     required
                     type="name"
