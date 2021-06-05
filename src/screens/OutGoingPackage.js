@@ -5,6 +5,7 @@ import { Row, Col,Card,Table, Form, FormControl, Button} from "react-bootstrap";
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listOutgoingPackage, deleteOutgoing } from '../actions/outgoingPackageAction'
+import {ListGroup,ListGroupItem} from 'reactstrap'
 
 
 
@@ -44,7 +45,59 @@ function OutGoingPackage({history}) {
 }
   return (
     <div>
-      <h2>THis is OutGoing package Page</h2>
+      <Row>
+        <Col md={8}>
+          <Form className="mt-2">
+            <FormControl type="text" placeholder="Search Package By Name" className="mr-sm-2" />
+          </Form>
+        </Col>
+
+        <Col md={4}>
+          <Button
+            href="/add-incoming"
+            variant="outline-success btn-block"
+            type="button">
+            +Add new incoming package
+          </Button>
+        </Col>
+      </Row>
+      <Row className="my-3">
+        <Col md={4}>
+          <h2>Outgoing Packages </h2>
+        </Col>
+        <Col md={4}>
+
+        <ListGroup>
+        <ListGroupItem>
+          <Row>
+        <Col md={12}>
+        <i class="fas fa-warehouse mx-3"></i><strong>At the Warehouse:</strong>{'  '}{outgoingPackages.length}  Items | status |  
+                        </Col>
+                        {/* <Col md={6}>
+             {incomingPackages.countInStock} Items | status | 
+              </Col> */}
+             </Row>
+        </ListGroupItem>
+              </ListGroup>
+
+        </Col>
+       
+        <Col md={4} className="text-center align-items-center">
+        <ListGroup>
+        <ListGroupItem>
+          <Row>
+        <Col md={6}>
+        <i className="far fa-clock mx-3"></i><strong>Arriving:</strong>{'  '} 
+                        </Col>
+                        <Col>
+             {outgoingPackages.length} Items 
+              </Col>
+             </Row>
+        </ListGroupItem>
+              </ListGroup>
+              
+        </Col>
+      </Row>
       <Row>
         <Col>
         {loading

@@ -7,6 +7,7 @@ import { Row, Col,Table, Form, FormControl, Button} from "react-bootstrap";
 import { listIncomingPackage } from "../actions/incomimgPackageActions"
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import { ListGroup ,ListGroupItem} from 'reactstrap';
 
 function IncomingPackage({history}) {
   const [open, setOpen] = useState(false);
@@ -82,21 +83,40 @@ JSON.dateParser = function (key, value) {
         </Col>
       </Row>
       <Row className="my-3">
-        <Col md={8}>
+        <Col md={4}>
           <h2>Incoming Packages </h2>
         </Col>
-        {/* <Col md={3}>
-          <Form>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          </Form>
-        </Col> */}
+        <Col md={4}>
+
+        <ListGroup>
+        <ListGroupItem>
+          <Row>
+        <Col md={12}>
+        <i class="fas fa-warehouse mx-3"></i><strong>At the Warehouse:</strong>{'  '}{incomingPackages.length}  Items | status |  
+                        </Col>
+                        {/* <Col md={6}>
+             {incomingPackages.countInStock} Items | status | 
+              </Col> */}
+             </Row>
+        </ListGroupItem>
+              </ListGroup>
+
+        </Col>
+       
         <Col md={4} className="text-center align-items-center">
-        <Button
-            href="/create_outgoing"
-            variant="outline-success btn-block"
-            type="button">
-            +Create New Outgoing package
-          </Button>
+        <ListGroup>
+        <ListGroupItem>
+          <Row>
+        <Col md={6}>
+        <i className="far fa-clock mx-3"></i><strong>Arriving:</strong>{'  '} 
+                        </Col>
+                        <Col>
+             {incomingPackages.length} Items 
+              </Col>
+             </Row>
+        </ListGroupItem>
+              </ListGroup>
+              
         </Col>
       </Row>
 
