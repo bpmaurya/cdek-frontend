@@ -231,10 +231,7 @@ function EditPackageAdmin({ match, history }) {
                       </option>
 
                       <option value="INCOMING">INCOMING</option>
-                      <option value="PENDING">PENDING</option>
                       <option value="RECEIVED">RECEIVED</option>
-                      <option value="OUTGOING">OUTGOING</option>
-                      <option value="DELIVERED">DELIVERED</option>
                     </Form.Control>
                   </Col>
                 </Form.Group>

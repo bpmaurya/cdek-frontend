@@ -171,6 +171,13 @@ function OutGoingPackage({ history }) {
                           <i className="fas fa-trash"> </i>
                         </Button>
                       </td>
+                      <td>
+                      <LinkContainer to={`/outgoing/user/detail/${item._id}`}>
+                        <Button variant="light" className="btn-sm">
+                          DETAILS
+                        </Button>
+                      </LinkContainer>
+                    </td>
                     </tr>
                   ))}
               </tbody>
