@@ -194,6 +194,8 @@ function CreateOutgoingPackage({ match, location, history }) {
                 <Row className="my-4">
                   <Col md={12}>
                     <h5> {i + 1}. Product Information</h5>
+
+                    {x.quantity > '0' ? (
                     <Card>
                       <p className="m-3">
                         Please, give a detailed description of each item in your
@@ -271,6 +273,7 @@ function CreateOutgoingPackage({ match, location, history }) {
                           </Form.Group>
                         </Col>
                         <Col>
+                       
                           <Form.Group controlId="exampleForm.ControlInput1">
                             <Form.Label>Product Quantity</Form.Label>
                             <Form.Control
@@ -288,6 +291,10 @@ function CreateOutgoingPackage({ match, location, history }) {
                         </Col>
                       </Row>
                     </Card>
+                        ):(
+                           <h4 className="mt-3" style={{color:"red"}}><strong>You have No  Quantity Remaining for this Product </strong> </h4> 
+                        )}
+
                   </Col>
                 </Row>
               );
