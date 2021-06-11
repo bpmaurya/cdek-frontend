@@ -122,11 +122,11 @@ function PackageListScreen({ history, match }) {
                   </Button>
                 </td>
                 <td>
-                  <LinkContainer to={`/incoming/detail/${user._id}`}>
+                  {/* <LinkContainer to={`/incoming/detail/${user._id}`}>
                     <Button variant="light" className="btn-sm">
                       DETAILS
                     </Button>
-                  </LinkContainer>
+                  </LinkContainer> */}
                 </td>
               </tr>
             ))}
