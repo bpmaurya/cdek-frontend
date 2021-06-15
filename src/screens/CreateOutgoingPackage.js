@@ -92,7 +92,7 @@ function CreateOutgoingPackage({ match, location, history }) {
 
   const outgoingData = {
     incoming_package_name: packageName,
-    outgoing_package_name: packageName,
+    outgoing_package_name: outgoingPackageName,
     trackingNumber: trackingNumber,
     created_by: userInfo._id,
     outgoing_product: rate,
@@ -132,6 +132,7 @@ function CreateOutgoingPackage({ match, location, history }) {
     } else {
       setTrackingNumber(incomingDetails.trackingNumber);
       setComment(incomingDetails.comment);
+      setPackageName(incomingDetails.name);
       setProduct(incomingDetails.product_package);
       setInputList(incomingDetails.product_package);
       dispatch(getUserAddress());
@@ -181,10 +182,10 @@ function CreateOutgoingPackage({ match, location, history }) {
                   <Form.Label> <strong> Outgoing Package Name</strong></Form.Label>
                   <Form.Control
                     required
-                    type="name"
+                    type="outgoingPackageName"
                     placeholder="Enter Your Package name"
-                    value={packageName}
-                    onChange={(e) => setPackageName(e.target.value)}
+                    value={outgoingPackageName}
+                    onChange={(e) => setOutgoingPackageName(e.target.value)}
                   />
                 </Form.Group>
                 {/* </Card> */}
