@@ -8,7 +8,7 @@ import { userLoginReducers,userRegistrationReducers, userDetailsReducers,userUpd
 import { createPackageReducers } from './reducers/createPackageReduser'
 import { getAddressReducers,createAddressReducers } from './reducers/deliveryAddressReduser'
 import { getCalculatorReducers,createShippingRateReducers,rateDeleteReducers } from './reducers/calculatorReduser'
-import { deleteRates } from './actions/calculatorAction'
+// import { deleteRates } from './actions/calculatorAction'
 import {createOutgoingReducers ,outgoingPackageReducers,outgoingDeleteReducers,outgoingPackageDetailsReducers,outgoingUpdateReducers } from './reducers/outgoingReducer'
 
 

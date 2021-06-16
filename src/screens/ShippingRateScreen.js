@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Card, Button, Form, Row, Col, Table } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Button, Row, Col, Table } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { getCalculator, deleteRates } from "../actions/calculatorAction";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { Link } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
 
 

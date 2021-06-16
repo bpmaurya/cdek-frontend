@@ -91,6 +91,7 @@ function IncomingPackage({ history }) {
     setExpandedRows(newExpandedRows);
   };
   const [showProduct1, setShowProduct1] = useState("");
+  const [outgoingState, setOutgoingState] = useState("")
 
   const showProduct = () => {
     if (showProduct1) {
@@ -99,6 +100,13 @@ function IncomingPackage({ history }) {
       setShowProduct1(true);
     }
   };
+  const showOutgoing=()=>{
+    if(outgoingState){
+      setOutgoingState(false)
+    }else{
+      setOutgoingState(true)
+    }
+  }
   return (
     <div>
       {/* <h1>This is Incoming package Page</h1> */}
@@ -261,7 +269,7 @@ function IncomingPackage({ history }) {
                                   </ListGroupItem>
                                   <ListGroupItem>
                                     <i className="fas fa-box-open m-2"></i>
-                                    <Link>
+                                    <Link onClick={showOutgoing} >
                                       <strong>
                                         Request for outgoing package
                                       </strong>

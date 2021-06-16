@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { listUsers, deleteUsers } from "../actions/userActions";
 import { listIncomingPackage } from "../actions/incomimgPackageActions";
 import { ListGroup, ListGroupItem } from "reactstrap";
 
@@ -32,9 +31,7 @@ function PackageListScreen({ history, match }) {
     }
     // console.log("delete:",id);
   };
-  const createPackageHandler = () => {
-    //create incoming package
-  };
+ 
 
   const warehouse1 = incomingPackages.filter(
     (item) => item.full_received === "YES"

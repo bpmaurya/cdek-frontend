@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Image, ListGroup, Button, Card } from "react-bootstrap";
+import { Row, Col,  Button, Card } from "react-bootstrap";
 import { listIncomingPackage } from "../actions/incomimgPackageActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -22,12 +22,16 @@ function Office({ location, history }) {
   };
 
   useEffect(() => {
+    if (userInfo) {
     dispatch(listIncomingPackage());
+    }else{
+      history.push("/login");
+    }
     // fetchProduct()
     //   if(!userInfo){
     //     history.push(redirect)
     //  }
-  }, [dispatch, history, userInfo, redirect]);
+  }, [dispatch, history]);
 
   var count=0
   if(userInfo){
@@ -53,22 +57,22 @@ function Office({ location, history }) {
               <div className="profile">
                 <div className="info-client">
                   <div className="num m-4">
-                    Customer number: #{userInfo.id}{" "}
+                    Customer number: {userInfo.id}{" "}
                   </div>
                   <div className="fio">{userInfo.name} </div>
                   <li>
-                    <a href="/office/profile" className="profile-link">
+                    <a href="/profile" className="profile-link">
                       Profile
                     </a>
                   </li>
                  
                   <li>
-                    <a href="/office/recipient" className="recipients">
+                    <a href="/recipient" className="recipients">
                       Recipients
                     </a>
                   </li>
                   <li>
-                    <a href="/office/address" className="address">
+                    <a href="/address" className="address">
                       Delivery addresses
                     </a>
                   </li>

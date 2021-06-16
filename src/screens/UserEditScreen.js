@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { login, register, getUserDetails,updateUser } from "../actions/userActions";
+import { getUserDetails,updateUser } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
 import { USER_UPDATE_RESET } from '../constants/userConstant'
 
@@ -21,7 +21,7 @@ function UserEditScreen({ match, history }) {
   const { error, loading, user } = userDetails;
 
   const userUpdate = useSelector((state) => state.userUpdate);
-  const { error:errorUpdate, loading:loadingUpdate,success:successUpdate } = userUpdate;
+  const {success:successUpdate } = userUpdate;
 
   useEffect(() => {
     if(successUpdate){
