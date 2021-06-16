@@ -8,11 +8,12 @@ import { listIncomingPackage } from "../actions/incomimgPackageActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { ListGroup, ListGroupItem } from "reactstrap";
+import { Link } from "react-router-dom";
 
 function IncomingPackage({ history }) {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-  const incomingPackageList = useSelector((state) =>  state.incomingPackageList);
+  const incomingPackageList = useSelector((state) => state.incomingPackageList);
   const { error, loading, incomingPackages } = incomingPackageList;
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -69,6 +70,35 @@ function IncomingPackage({ history }) {
     .filter((item) => item.created_by === userInfo._id)
     .filter((item) => item.full_received === "YES").length;
 
+  //expandable table row content
+  const [expandedRows, setExpandedRows] = useState([]);
+  const [expandState, setExpandState] = useState({});
+
+  const handleEpandRow = (event, userId) => {
+    const currentExpandedRows = expandedRows;
+    const isRowExpanded = currentExpandedRows.includes(userId);
+
+    let obj = {};
+    isRowExpanded ? (obj[userId] = false) : (obj[userId] = true);
+    setExpandState(obj);
+
+    // If the row is expanded, we are here to hide it. Hence remove
+    // it from the state variable. Otherwise add to it.
+    const newExpandedRows = isRowExpanded
+      ? currentExpandedRows.filter((id) => id !== userId)
+      : currentExpandedRows.concat(userId);
+
+    setExpandedRows(newExpandedRows);
+  };
+  const [showProduct1, setShowProduct1] = useState("");
+
+  const showProduct = () => {
+    if (showProduct1) {
+      setShowProduct1(false);
+    } else {
+      setShowProduct1(true);
+    }
+  };
   return (
     <div>
       {/* <h1>This is Incoming package Page</h1> */}
@@ -143,7 +173,7 @@ function IncomingPackage({ history }) {
               <th>COUNT IN STOCK</th>
               <th>CREATED AT</th>
               <th>STATUS</th>
-              <th>EDIT/DELETE</th>
+
               <th>REQUEST OUTGOING </th>
             </tr>
           </thead>
@@ -151,35 +181,137 @@ function IncomingPackage({ history }) {
             {incomingPackages
               .filter((item) => item.created_by === userInfo.id)
               .map((item) => (
-                <tr key={item._id}>
-                  <td>{item.name}</td>
-                  <td>{item.trackingNumber}</td>
-                  <td>{item.countInStock}</td>
-                  <td>{item.created_at} </td>
-                  <td style={{color:"green"}} ><strong>{item.status}</strong> </td>
+                <>
+                  <tr key={item._id} onClick={(event) => handleEpandRow(event, item._id)} style={{cursor:"pointer"}} >
+                    <td>{item.name}</td>
+                    <td>{item.trackingNumber}</td>
+                    <td>{item.countInStock}</td>
+                    <td>{item.created_at} </td>
+                    <td style={{ color: "green" }}>
+                      <strong>{item.status}</strong>{" "}
+                    </td>
 
-                  <td>
-                    <LinkContainer to={`/users/package/${item._id}/edit`}>
-                      <Button variant="light" className="btn-sm">
-                        <i className="fas fa-edit"></i>
-                      </Button>
-                    </LinkContainer>
+                    <td>
+                      <LinkContainer to={`/users/package/${item._id}/outgoing`}>
+                        <Button variant="light" className="btn-sm">
+                          <i className="fas fa-edit"></i>
+                        </Button>
+                      </LinkContainer>
+                    </td>
 
-                    <Button
-                      variant="danger"
-                      className="btn-sm"
-                      onClick={() => deleteHandler(item._id)}>
-                      <i className="fas fa-trash"> </i>
-                    </Button>
-                  </td>
-                  <td>
-                    <LinkContainer to={`/users/package/${item._id}/outgoing`}>
-                      <Button variant="light" className="btn-sm">
-                        <i className="fas fa-edit"></i>
+                    {/* <td>
+                      <Button
+                        variant="link"
+                        onClick={(event) => handleEpandRow(event, item._id)}>
+                        {expandState[item._id] ? "Hide" : "Show"}
                       </Button>
-                    </LinkContainer>
-                  </td>
-                </tr>
+                    </td> */}
+                  </tr>
+                  
+                  <>
+                    {expandedRows.includes(item._id) ? (
+                      <tr>
+                        <td colspan="12">
+                          <div style={{ padding: "10px" }}>
+                            <Row>
+                              <Col md={12}>
+                                <ListGroup variant="flush">
+                                  <ListGroupItem>
+                                    <i className="fas fa-box-open m-2"></i>
+                                    <Link onClick={showProduct }>
+                                      <strong>Products in the package</strong>
+                                    </Link>
+                                    {showProduct1 && (
+                                      <ListGroup>
+                                        <Table
+                                          striped
+                                          border
+                                          hover
+                                          responsive
+                                          className="table-sm">
+                                          <thead>
+                                            <tr>
+                                              <th>Name</th>
+                                              <th>Price</th>
+                                              <th>quantity</th>
+                                              <th>Total</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            {item.product_package.map(
+                                              (item) => (
+                                                <tr key={item._id}>
+                                                  <td>{item.name}</td>
+                                                  <td>${item.price}</td>
+                                                  <td>{item.quantity}</td>
+                                                  <td>
+                                                    {" "}
+                                                    ${" "}
+                                                    {(
+                                                      item.quantity * item.price
+                                                    ).toFixed(2)}{" "}
+                                                  </td>
+                                                </tr>
+                                              )
+                                            )}
+                                          </tbody>
+                                        </Table>
+                                      </ListGroup>
+                                    )}
+                                  </ListGroupItem>
+                                  <ListGroupItem>
+                                    <i className="fas fa-box-open m-2"></i>
+                                    <Link>
+                                      <strong>
+                                        Request for outgoing package
+                                      </strong>
+                                    </Link>
+                                  </ListGroupItem>
+                                  <ListGroupItem>
+                                    <i className="fas fa-box-open m-2"></i>
+                                    <Link>
+                                      <strong>Package processing</strong>
+                                    </Link>
+                                  </ListGroupItem>
+                                  <ListGroupItem>
+                                    <Row>
+                                      <Col md={4}>
+                                        <i className="far fa-edit m-2"></i>{" "}
+                                        <LinkContainer
+                                          to={`/users/package/${item._id}/edit`}>
+                                          <Button
+                                            variant="light"
+                                            className="btn-sm">
+                                            EDIT
+                                          </Button>
+                                        </LinkContainer>
+                                      </Col>
+                                      <Col md={4}>
+                                        <i className="fas fa-columns m-2"></i>{" "}
+                                        <Link> SPLIT</Link>
+                                      </Col>
+                                      <Col md={4}>
+                                        <i className="fas fa-trash-alt m-2"></i>{" "}
+                                        <Button
+                                          variant="danger"
+                                          className="btn-sm"
+                                          onClick={() =>
+                                            deleteHandler(item._id)
+                                          }>
+                                          DELETE
+                                        </Button>
+                                      </Col>
+                                    </Row>
+                                  </ListGroupItem>
+                                </ListGroup>
+                              </Col>
+                            </Row>
+                          </div>
+                        </td>
+                      </tr>
+                    ) : null}
+                  </>
+                </>
               ))}
           </tbody>
         </Table>
