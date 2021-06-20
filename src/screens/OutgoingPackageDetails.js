@@ -31,8 +31,10 @@ function OutgoingPackageDetails({ match, history }) {
   const [comment, setComment] = useState("");
   const [ready, setReady] = useState("");
   const [selectProduct, setSelectProduct] = useState([]);
+  const [createdBy, setCreatedBy] = useState('')
   const [status, setStatus] = useState('')
-  const [packageName, setPackageName] = useState('')
+  const [packageName, setPackageName] = useState('');
+  const [incomingPackageName, setincomingPackageName] = useState('')
   const [inputList, setInputList] = useState([
     {
       name: "",
@@ -49,9 +51,9 @@ function OutgoingPackageDetails({ match, history }) {
   inputList.map((item) => {
     const dicts = {
       product_id: item._id,
-      product_name: item.name,
-      product_quantity: item.quantity,
-      remains_quantity:item.remains_quantity-item.quantity,
+      product_name: item.product_name,
+      product_quantity: item.product_quantity,
+      remains_quantity:item.remains_quantity,
       type:item.type,
       brand:item.brand,
       link:item.link,
@@ -63,7 +65,7 @@ function OutgoingPackageDetails({ match, history }) {
 
   const outgoingData = {
     _id:packageId,
-    incoming_package_name: packageName,
+    incoming_package_name: incomingPackageName,
     outgoing_package_name: packageName,
     trackingNumber: trackingNumber,
     created_by: userInfo._id,
@@ -77,8 +79,12 @@ function OutgoingPackageDetails({ match, history }) {
       // setProduct(singlePackage.outgoing_product)
     } else {
       setProduct(singlePackage.outgoing_product);
+      setCreatedBy(singlePackage.created_by);
       setInputList(singlePackage.outgoing_product);
       setPackageName(singlePackage.outgoing_package_name);
+      setincomingPackageName(singlePackage.incoming_package_name);
+      setTrackingNumber(singlePackage.trackingNumber)
+
     }
     // fetchProduct()
   }, [dispatch, history, singlePackage]);
@@ -89,6 +95,8 @@ function OutgoingPackageDetails({ match, history }) {
 
   const handleShow=(e)=>{
     e.preventDefault();
+    // console.log(outgoingData);
+    
     dispatch(updateOutgoingPackage(outgoingData))
     window.location.reload(false)
   }
