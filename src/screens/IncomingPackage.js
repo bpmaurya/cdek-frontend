@@ -259,11 +259,11 @@ function IncomingPackage({ history }) {
                                             Products in the package
                                           </strong>
                                         </Col>
-                                        <Col md={3}>
+                                        <Col md={3} style={{textAlign:"right"}}>
                                           {showProduct1.includes(item._id) ? (
-                                            <i className="fas fa-chevron-down ml-4"></i>
+                                            <i className="fas fa-chevron-down mr-4"></i>
                                           ) : (
-                                            <i className="fas fa-chevron-up ml-4"></i>
+                                            <i className="fas fa-chevron-up mr-4"></i>
                                           )}
                                         </Col>
                                       </Row>
@@ -319,11 +319,11 @@ function IncomingPackage({ history }) {
                                             Request for outgoing package
                                           </strong>
                                         </Col>
-                                        <Col md={3}>
+                                        <Col md={3} style={{textAlign:"right"}}>
                                           {outgoingState.includes(item._id) ? (
-                                            <i className="fas fa-chevron-down ml-4"></i>
+                                            <i className="fas fa-chevron-down pr-4"></i>
                                           ) : (
-                                            <i className="fas fa-chevron-up ml-4"></i>
+                                            <i className="fas fa-chevron-up pr-4"></i>
                                           )}
                                         </Col>
                                       </Row>
@@ -358,16 +358,16 @@ function IncomingPackage({ history }) {
                                       }
                                       style={{ textDecoration: "none" }}>
                                      
-                                      <Row className="pb-2 pt-2">
+                                      <Row className="pb-2 pt-2" style={{justifyContent:"center",itemAlign:"center"}}>
                                         <Col md={9}>
                                           <i className="fas fa-box-open m-2"></i>{" "}
                                           <strong>Package processing</strong>
                                         </Col>
-                                        <Col md={3}>
+                                        <Col md={3} style={{textAlign:"right"}}>
                                           {processing.includes(item._id) ? (
-                                            <i className="fas fa-chevron-down ml-4"></i>
+                                            <i className="fas fa-chevron-down mr-4"></i>
                                           ) : (
-                                            <i className="fas fa-chevron-up ml-4"></i>
+                                            <i className="fas fa-chevron-up mr-4"></i>
                                           )}
                                         </Col>
                                       </Row>
