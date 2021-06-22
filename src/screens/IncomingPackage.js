@@ -211,7 +211,7 @@ function IncomingPackage({ history }) {
             .map((item) => (
               <>
                 <ListGroup
-                  className="m-3"
+                  className="m-2"
                   style={{ cursor: "pointer" }}
                   onClick={(event) => handleEpandRow(event, item._id)}>
                   <ListGroupItem className="p-4">
