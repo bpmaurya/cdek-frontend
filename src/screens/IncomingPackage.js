@@ -90,22 +90,53 @@ function IncomingPackage({ history }) {
 
     setExpandedRows(newExpandedRows);
   };
-  const [showProduct1, setShowProduct1] = useState("");
-  const [outgoingState, setOutgoingState] = useState("")
+  const [showProduct1, setShowProduct1] = useState([]);
+  const [expandState1, setExpandState1] = useState({});
+  const [outgoingState, setOutgoingState] = useState([])
+  const [expandState2, setExpandState2] = useState({});
+  const [processing, setProcessing] = useState([])
+  const [expandState3, setExpandState3] = useState({});
 
-  const showProduct = () => {
-    if (showProduct1) {
-      setShowProduct1(false);
-    } else {
-      setShowProduct1(true);
-    }
+  const showProduct = (e,id) => {
+    const currentExpandedRows1 = showProduct1;
+    const isRowExpanded1 = currentExpandedRows1.includes(id);
+
+    let obj1 = {};
+    isRowExpanded1 ? (obj1[id] = false) : (obj1[id] = true);
+    setExpandState1(obj1);
+    const newExpandedRows1 = isRowExpanded1
+      ? currentExpandedRows1.filter((id1) => id1 !== id)
+      : currentExpandedRows1.concat(id);
+
+      setShowProduct1(newExpandedRows1);
   };
-  const showOutgoing=()=>{
-    if(outgoingState){
-      setOutgoingState(false)
-    }else{
-      setOutgoingState(true)
-    }
+
+  const showOutgoing=(e,id)=>{
+    const currentExpandedRows2 = outgoingState;
+    const isRowExpanded2 = currentExpandedRows2.includes(id);
+
+    let obj1 = {};
+    isRowExpanded2 ? (obj1[id] = false) : (obj1[id] = true);
+    setExpandState1(obj1);
+    const newExpandedRows2 = isRowExpanded2
+      ? currentExpandedRows2.filter((id1) => id1 !== id)
+      : currentExpandedRows2.concat(id);
+
+      setOutgoingState(newExpandedRows2);
+  }
+
+  const packageProcessing=(e,id)=>{
+    const currentExpandedRows3 = processing;
+    const isRowExpanded3 = currentExpandedRows3.includes(id);
+
+    let obj1 = {};
+    isRowExpanded3 ? (obj1[id] = false) : (obj1[id] = true);
+    setExpandState1(obj1);
+    const newExpandedRows3 = isRowExpanded3
+      ? currentExpandedRows3.filter((id1) => id1 !== id)
+      : currentExpandedRows3.concat(id);
+
+      setProcessing(newExpandedRows3);
   }
   return (
     <div>
@@ -181,8 +212,7 @@ function IncomingPackage({ history }) {
               <th>COUNT IN STOCK</th>
               <th>CREATED AT</th>
               <th>STATUS</th>
-
-              <th>REQUEST OUTGOING </th>
+            
             </tr>
           </thead>
           <tbody>
@@ -198,14 +228,7 @@ function IncomingPackage({ history }) {
                     <td style={{ color: "green" }}>
                       <strong>{item.status}</strong>{" "}
                     </td>
-
-                    <td>
-                      <LinkContainer to={`/users/package/${item._id}/outgoing`}>
-                        <Button variant="light" className="btn-sm">
-                          <i className="fas fa-edit"></i>
-                        </Button>
-                      </LinkContainer>
-                    </td>
+                    
 
                     {/* <td>
                       <Button
@@ -226,10 +249,10 @@ function IncomingPackage({ history }) {
                                 <ListGroup variant="flush">
                                   <ListGroupItem>
                                     <i className="fas fa-box-open m-2"></i>
-                                    <Link onClick={showProduct }>
+                                    <Link onClick={(e)=>showProduct(e,item._id) }>
                                       <strong>Products in the package</strong>
                                     </Link>
-                                    {showProduct1 && (
+                                     {showProduct1.includes(item._id) && (
                                       <ListGroup>
                                         <Table
                                           striped
@@ -269,17 +292,38 @@ function IncomingPackage({ history }) {
                                   </ListGroupItem>
                                   <ListGroupItem>
                                     <i className="fas fa-box-open m-2"></i>
-                                    <Link onClick={showOutgoing} >
+                                    <Link onClick={(e)=>showOutgoing(e,item._id)} >
                                       <strong>
                                         Request for outgoing package
                                       </strong>
                                     </Link>
+                                    {outgoingState.includes(item._id) &&
+                                    <ListGroup>
+                                      <p className="m-3">If you want to send this package quicker, without uniting it with other packages, create a request for its sending before the package is registered at the warehouse.</p>
+                                    <Row>
+                                      <Col md={4}>
+                                     
+                                    <LinkContainer to={`/users/package/${item._id}/outgoing`}>
+                                    <Button className="btn  btn-primary m-3">
+                                      Create Request
+                                    </Button>
+                                   </LinkContainer>
+                                    </Col>
+                                    </Row>
+                                    </ListGroup>
+                                    }
                                   </ListGroupItem>
                                   <ListGroupItem>
                                     <i className="fas fa-box-open m-2"></i>
-                                    <Link>
-                                      <strong>Package processing</strong>
+                                    <Link onClick={(e)=>packageProcessing(e,item._id)} >
+                                      <strong >Package processing</strong>
                                     </Link>
+                                    {processing.includes(item._id) &&
+                                    <ListGroup>
+                                      <spang className="m-3">Processing status</spang>
+                                      <p  className="m-3">Created:<span className="ml-2">{item.created_at}</span></p>
+                                    </ListGroup>
+                                   }
                                   </ListGroupItem>
                                   <ListGroupItem>
                                     <Row>
