@@ -217,7 +217,7 @@ function IncomingPackage({ history }) {
                   <ListGroupItem className="p-4">
                     <Row>
                       <Col md={3} > <span style={{color:"#1ab248"}}>{item.name}</span> </Col>
-                      <Col md={3}> <span style={{color:"#1ab248"}}>Tracing number:</span> {item.trackingNumber}</Col>
+                      <Col md={3}> <span style={{color:"#1ab248"}}>Tracking number:</span> {item.trackingNumber}</Col>
                       <Col md={3}>{(item.product_package).length} Products</Col>
                       <Col md={3}>
                         New incoming <i className="far fa-clock mx-3"></i>
