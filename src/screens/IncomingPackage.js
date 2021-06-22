@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
 
 import { LinkContainer } from "react-router-bootstrap";
-import { Row, Col, Table, Form, FormControl, Button } from "react-bootstrap";
+import { Row, Col, Table, Form, FormControl, Button,Card } from "react-bootstrap";
 import { listIncomingPackage } from "../actions/incomimgPackageActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -204,230 +204,211 @@ function IncomingPackage({ history }) {
       ) : error ? (
         <Message variant="danger"> {error} </Message>
       ) : (
-        <Table striped border hover responsive className="table-sm">
-          <thead>
-            <tr>
-              <th>NAME</th>
-              <th>TRACKING NUMBER</th>
-              <th>COUNT IN STOCK</th>
-              <th>CREATED AT</th>
-              <th>STATUS</th>
-            </tr>
-          </thead>
-          <tbody>
-            {incomingPackages
-              .filter((item) => item.created_by === userInfo.id)
-              .map((item) => (
+        <>
+        <Card>
+          {incomingPackages
+            .filter((item) => item.created_by === userInfo.id)
+            .map((item) => (
+              <>
+                <ListGroup
+                  className="m-3"
+                  style={{ cursor: "pointer" }}
+                  onClick={(event) => handleEpandRow(event, item._id)}>
+                  <ListGroupItem className="p-4">
+                    <Row>
+                      <Col md={3} > <span style={{color:"#1ab248"}}>{item.name}</span> </Col>
+                      <Col md={3}> <span style={{color:"#1ab248"}}>Tracing number:</span> {item.trackingNumber}</Col>
+                      <Col md={3}>{(item.product_package).length} Products</Col>
+                      <Col md={3}>
+                        New incoming <i className="far fa-clock mx-3"></i>
+                      </Col>
+                    </Row>
+                  </ListGroupItem>
+               
+                  </ListGroup>
                 <>
-                  <tr
-                    key={item._id}
-                    onClick={(event) => handleEpandRow(event, item._id)}
-                    style={{ cursor: "pointer" }}>
-                    <td>{item.name}</td>
-                    <td>{item.trackingNumber}</td>
-                    <td>{item.countInStock}</td>
-                    <td>{item.created_at} </td>
-                    <td style={{ color: "green" }}>
-                      <strong>{item.status}</strong>{" "}
-                    </td>
-
-                    {/* <td>
-                      <Button
-                        variant="link"
-                        onClick={(event) => handleEpandRow(event, item._id)}>
-                        {expandState[item._id] ? "Hide" : "Show"}
-                      </Button>
-                    </td> */}
-                  </tr>
-
-                  <>
-                    {expandedRows.includes(item._id) ? (
-                      <tr>
-                        <td colspan="12">
-                          <div style={{ padding: "10px" }}>
-                            <Row>
-                              <Col md={12}>
-                                <ListGroup variant="flush">
-                                  <ListGroupItem>
-                                    <Link
-                                      onClick={(e) => showProduct(e, item._id)}
-                                      style={{ textDecoration: "none" }}>
-                                      <Row className="pb-2 pt-2">
-                                        <Col md={9}>
-                                          <i className="fas fa-box-open m-2"></i>
-                                          <strong>
-                                            Products in the package
-                                          </strong>
-                                        </Col>
-                                        <Col md={3} style={{textAlign:"right"}}>
-                                          {showProduct1.includes(item._id) ? (
-                                            <i className="fas fa-chevron-down mr-4"></i>
-                                          ) : (
-                                            <i className="fas fa-chevron-up mr-4"></i>
-                                          )}
-                                        </Col>
-                                      </Row>
-                                    </Link>
-                                    {showProduct1.includes(item._id) && (
-                                      <ListGroup>
-                                        <Table
-                                          striped
-                                          border
-                                          hover
-                                          responsive
-                                          className="table-sm">
-                                          <thead>
-                                            <tr>
-                                              <th>Name</th>
-                                              <th>Price</th>
-                                              <th>quantity</th>
-                                              <th>Total</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            {item.product_package.map(
-                                              (item) => (
-                                                <tr key={item._id}>
-                                                  <td>{item.name}</td>
-                                                  <td>${item.price}</td>
-                                                  <td>{item.quantity}</td>
-                                                  <td>
-                                                    {" "}
-                                                    ${" "}
-                                                    {(
-                                                      item.quantity * item.price
-                                                    ).toFixed(2)}{" "}
-                                                  </td>
-                                                </tr>
-                                              )
-                                            )}
-                                          </tbody>
-                                        </Table>
-                                      </ListGroup>
+                  {expandedRows.includes(item._id) ? (
+                    <div style={{ padding: "10px" }}>
+                      <Row>
+                        <Col md={12}>
+                          <ListGroup variant="flush">
+                            <ListGroupItem>
+                              <Link
+                                onClick={(e) => showProduct(e, item._id)}
+                                style={{ textDecoration: "none" }}>
+                                <Row className="pb-2 pt-2">
+                                  <Col md={9}>
+                                    <i className="fas fa-box-open m-2"></i>
+                                    <strong>Products in the package</strong>
+                                  </Col>
+                                  <Col md={3} style={{ textAlign: "right" }}>
+                                    {showProduct1.includes(item._id) ? (
+                                      <i className="fas fa-chevron-down mr-4"></i>
+                                    ) : (
+                                      <i className="fas fa-chevron-up mr-4"></i>
                                     )}
-                                  </ListGroupItem>
-                                  <ListGroupItem>
-                                    <Link
-                                      onClick={(e) =>
-                                        showOutgoing(e, item._id)
-                                      }
-                                      style={{ textDecoration: "none" }}>
-                                      <Row className="pb-2 pt-2">
-                                        <Col md={9}>
-                                          <i className="fas fa-box-open m-2"></i>{" "}
-                                          <strong>
-                                            Request for outgoing package
-                                          </strong>
-                                        </Col>
-                                        <Col md={3} style={{textAlign:"right"}}>
-                                          {outgoingState.includes(item._id) ? (
-                                            <i className="fas fa-chevron-down pr-4"></i>
-                                          ) : (
-                                            <i className="fas fa-chevron-up pr-4"></i>
-                                          )}
-                                        </Col>
-                                      </Row>
-                                    </Link>
-                                    {outgoingState.includes(item._id) && (
-                                      <ListGroup>
-                                        <p className="m-3">
-                                          If you want to send this package
-                                          quicker, without uniting it with other
-                                          packages, create a request for its
-                                          sending before the package is
-                                          registered at the warehouse.
-                                        </p>
-                                        <Row>
-                                          <Col md={4}>
-                                            <LinkContainer
-                                              to={`/users/package/${item._id}/outgoing`}>
-                                              <Button className="btn  btn-primary m-3">
-                                                Create Request
-                                              </Button>
-                                            </LinkContainer>
-                                          </Col>
-                                        </Row>
-                                      </ListGroup>
-                                    )}
-                                  </ListGroupItem>
-                                  <ListGroupItem>
-                              
-                                    <Link
-                                      onClick={(e) =>
-                                        packageProcessing(e, item._id)
-                                      }
-                                      style={{ textDecoration: "none" }}>
-                                     
-                                      <Row className="pb-2 pt-2" style={{justifyContent:"center",itemAlign:"center"}}>
-                                        <Col md={9}>
-                                          <i className="fas fa-box-open m-2"></i>{" "}
-                                          <strong>Package processing</strong>
-                                        </Col>
-                                        <Col md={3} style={{textAlign:"right"}}>
-                                          {processing.includes(item._id) ? (
-                                            <i className="fas fa-chevron-down mr-4"></i>
-                                          ) : (
-                                            <i className="fas fa-chevron-up mr-4"></i>
-                                          )}
-                                        </Col>
-                                      </Row>
-                                    </Link>
-                                    {processing.includes(item._id) && (
-                                      <ListGroup>
-                                        <spang className="m-3">
-                                          Processing status
-                                        </spang>
-                                        <p className="m-3">
-                                          Created:
-                                          <span className="ml-2">
-                                            {item.created_at}
-                                          </span>
-                                        </p>
-                                      </ListGroup>
-                                    )}
-                                  </ListGroupItem>
+                                  </Col>
+                                </Row>
+                              </Link>
+                              {showProduct1.includes(item._id) && (
+                                <ListGroup>
                                   <ListGroupItem>
                                     <Row>
-                                      <Col md={4}>
-                                        <i className="far fa-edit m-2"></i>{" "}
-                                        <LinkContainer
-                                          to={`/users/package/${item._id}/edit`}>
-                                          <Button
-                                            variant="light"
-                                            className="btn-sm">
-                                            EDIT
-                                          </Button>
-                                        </LinkContainer>
-                                      </Col>
-                                      <Col md={4}>
-                                        <i className="fas fa-columns m-2"></i>{" "}
-                                        <Link> SPLIT</Link>
-                                      </Col>
-                                      <Col md={4}>
-                                        <i className="fas fa-trash-alt m-2"></i>{" "}
-                                        <Button
-                                          variant="danger"
-                                          className="btn-sm"
-                                          onClick={() =>
-                                            deleteHandler(item._id)
-                                          }>
-                                          DELETE
-                                        </Button>
-                                      </Col>
+                                      <Col md={3}>Name</Col>
+                                      <Col md={3}>Price per item</Col>
+                                      <Col md={3}>Quantity</Col>
+                                      <Col md={3}>Total</Col>
                                     </Row>
                                   </ListGroupItem>
+                                  <>
+                                    {item.product_package.map((item) => (
+                                      // <tr key={item._id}>
+                                      //   <td>{item.name}</td>
+                                      //   <td>${item.price}</td>
+                                      //   <td>{item.quantity}</td>
+                                      //   <td>
+                                      //     {" "}
+                                      //     ${" "}
+                                      //     {(
+                                      //       item.quantity * item.price
+                                      //     ).toFixed(2)}{" "}
+                                      //   </td>
+                                      // </tr>
+                                      <ListGroupItem>
+                                        <Row>
+                                          <Col md={3}>{item.name}</Col>
+                                          <Col md={3}>${item.price}</Col>
+                                          <Col md={3}>{item.quantity}</Col>
+                                          <Col md={3}>
+                                            {" "}
+                                            ${" "}
+                                            {(
+                                              item.quantity * item.price
+                                            ).toFixed(2)}{" "}
+                                          </Col>
+                                        </Row>
+                                      </ListGroupItem>
+                                    ))}
+                                  </>
                                 </ListGroup>
-                              </Col>
-                            </Row>
-                          </div>
-                        </td>
-                      </tr>
-                    ) : null}
-                  </>
+                              )}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              <Link
+                                onClick={(e) => showOutgoing(e, item._id)}
+                                style={{ textDecoration: "none" }}>
+                                <Row className="pb-2 pt-2">
+                                  <Col md={9}>
+                                    <i className="fas fa-box-open m-2"></i>{" "}
+                                    <strong>
+                                      Request for outgoing package
+                                    </strong>
+                                  </Col>
+                                  <Col md={3} style={{ textAlign: "right" }}>
+                                    {outgoingState.includes(item._id) ? (
+                                      <i className="fas fa-chevron-down pr-4"></i>
+                                    ) : (
+                                      <i className="fas fa-chevron-up pr-4"></i>
+                                    )}
+                                  </Col>
+                                </Row>
+                              </Link>
+                              {outgoingState.includes(item._id) && (
+                                <ListGroup>
+                                  <p className="m-3">
+                                    If you want to send this package quicker,
+                                    without uniting it with other packages,
+                                    create a request for its sending before the
+                                    package is registered at the warehouse.
+                                  </p>
+                                  <Row>
+                                    <Col md={4}>
+                                      <LinkContainer
+                                        to={`/users/package/${item._id}/outgoing`}>
+                                        <Button className="btn  btn-primary m-3">
+                                          Create Request
+                                        </Button>
+                                      </LinkContainer>
+                                    </Col>
+                                  </Row>
+                                </ListGroup>
+                              )}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              <Link
+                                onClick={(e) => packageProcessing(e, item._id)}
+                                style={{ textDecoration: "none" }}>
+                                <Row
+                                  className="pb-2 pt-2"
+                                  style={{
+                                    justifyContent: "center",
+                                    itemAlign: "center",
+                                  }}>
+                                  <Col md={9}>
+                                    <i className="fas fa-box-open m-2"></i>{" "}
+                                    <strong>Package processing</strong>
+                                  </Col>
+                                  <Col md={3} style={{ textAlign: "right" }}>
+                                    {processing.includes(item._id) ? (
+                                      <i className="fas fa-chevron-down mr-4"></i>
+                                    ) : (
+                                      <i className="fas fa-chevron-up mr-4"></i>
+                                    )}
+                                  </Col>
+                                </Row>
+                              </Link>
+                              {processing.includes(item._id) && (
+                                <ListGroup>
+                                  <spang className="m-3">
+                                    Processing status
+                                  </spang>
+                                  <p className="m-3">
+                                    Created:
+                                    <span className="ml-2">
+                                      {item.created_at}
+                                    </span>
+                                  </p>
+                                </ListGroup>
+                              )}
+                            </ListGroupItem>
+                            <ListGroupItem>
+                              <Row>
+                                <Col md={4}>
+                                  <i className="far fa-edit m-2"></i>{" "}
+                                  <LinkContainer
+                                    to={`/users/package/${item._id}/edit`}>
+                                    <Button variant="light" className="btn-sm">
+                                      EDIT
+                                    </Button>
+                                  </LinkContainer>
+                                </Col>
+                                <Col md={4}>
+                                  <i className="fas fa-columns m-2"></i>{" "}
+                                  <Link> SPLIT</Link>
+                                </Col>
+                                <Col md={4}>
+                                  <i className="fas fa-trash-alt m-2"></i>{" "}
+                                  <Button
+                                    variant="danger"
+                                    className="btn-sm"
+                                    onClick={() => deleteHandler(item._id)}>
+                                    DELETE
+                                  </Button>
+                                </Col>
+                              </Row>
+                            </ListGroupItem>
+                          </ListGroup>
+                        </Col>
+                      </Row>
+                    </div>
+                  ) : null}
+                   
                 </>
-              ))}
-          </tbody>
-        </Table>
+                
+              </>
+            ))}
+           </Card>
+        </>
       )}
     </div>
   );
