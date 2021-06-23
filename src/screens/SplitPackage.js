@@ -85,75 +85,101 @@ function SplitPackage({ match, history }) {
   const handleAddClick = () => {};
   return (
     <>
-
-{loadingDetails ? (
+      {loadingDetails ? (
         <Loader />
       ) : errorDetails ? (
         <Message variant="danger"> {error} </Message>
       ) : (
         <>
-      <h2>
-        Divide a package{" "}
-        <span style={{ color: "green" }}> {incomingDetails.name}</span>{" "}
-      </h2>
-        <h3>  <i className="fas fa-box-open"></i> Items to be divided</h3>
-        <Card className="mb-4 p-4">
-          <ListGroup>
-            <ListGroupItem>
-              <Row>
-                <Col md={6}>Name</Col>
-                <Col md={3}>Quantity</Col>
-                <Col md={3}>Remains to be divided</Col>
-              </Row>
-            </ListGroupItem>
-            {product.map((item) => (
+          <h2>
+            Divide a package{" "}
+            <span style={{ color: "green" }}> {incomingDetails.name}</span>{" "}
+          </h2>
+          <h3>
+            {" "}
+            <i className="fas fa-box-open"></i> Items to be divided
+          </h3>
+          <Card className="mb-4 p-4">
+            <ListGroup>
               <ListGroupItem>
                 <Row>
-                  <Col md={6}>{item.name}</Col>
-                  <Col md={3}>{item.quantity}</Col>
-                  <Col md={3}>{item.quantity}</Col>
+                  <Col md={6}>Name</Col>
+                  <Col md={3}>Quantity</Col>
+                  <Col md={3}>Remains to be divided</Col>
                 </Row>
               </ListGroupItem>
-            ))}
-          </ListGroup>
-        </Card>
+              {product.map((item) => (
+                <ListGroupItem>
+                  <Row>
+                    <Col md={6}>{item.name}</Col>
+                    <Col md={3}>{item.quantity}</Col>
+                    <Col md={3}>{item.quantity}</Col>
+                  </Row>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </Card>
 
-        <Card className=" p-3">
-         
-              <Form>
+          <Card className=" p-3">
+            <Form>
+              <Form.Group controlId="exampleForm.ControlInput1">
+                <Form.Label>Package Name</Form.Label>
+                <Form.Control
+                  required
+                  type="name"
+                  placeholder="Enter Your Package name"
+                  value={packageName}
+                  onChange={(e) => setPackageName(e.target.value)}
+                />
+              </Form.Group>
+            </Form>
+
+            <p>Package contents</p>
+
+            <Row>
+              <Col md={6}>
                 <Form.Group controlId="exampleForm.ControlInput1">
-                  <Form.Label>Package Name</Form.Label>
+                  <Form.Label>Product</Form.Label>
+                  <Form.Control as="select">
+             {product.map(item=> <option>{item.name} </option>)}
+      
+    </Form.Control>
+                </Form.Group>
+              </Col>
+              <Col md={2} style={{textAlign:"right",marginTop:"29px"}}>
+                <Link>
+                  <i className="fas fa-minus"></i>
+                </Link>
+              </Col>
+              <Col md={2}>
+                <Form.Group controlId="exampleForm.ControlInput1">
+                  <Form.Label>Quantity</Form.Label>
                   <Form.Control
                     required
-                    type="name"
-                    placeholder="Enter Your Package name"
-                    value={packageName}
-                    onChange={(e) => setPackageName(e.target.value)}
+                    disabled
+                    name="quantity"
+                    type="number"
+                    placeholder=""
+                    // value={x.productQuantity}
                   />
                 </Form.Group>
-              </Form>
-    
-            <p>Package contents</p>
-            
-              <Link
-                onClick={handleAddClick}
-               >
-                +Add A Product{" "}
-              </Link>
-            
-      
-        </Card>
-        <Link
-                onClick={handleAddClick}
-               >
-                +Add A Package{" "}
-              </Link>
+              </Col>
+              <Col md={2} style={{marginTop:"29px"}} >
+                <Link>
+                  <i className="fas fa-plus"></i>
+                </Link>
+              </Col>
+            </Row>
 
-              <div className="m-4">
+            <Link onClick={handleAddClick}>+Add A Product </Link>
+          </Card>
+          <Link onClick={handleAddClick}>+Add A Package </Link>
+
+          <div className="m-4">
             <Button className="btn btn-lg blockquote-primary mr-4">Save</Button>
             <Button className="btn btn-lg btn-danger">Cancel</Button>
           </div>
-      </>
+        </>
       )}
     </>
   );
