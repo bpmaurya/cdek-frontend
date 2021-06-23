@@ -166,203 +166,200 @@ function CreateRequest({ match, params, history }) {
 
   return (
     <>
-    
-      {loadingDetails ?
-      (
-      
-      <Loader /> 
-      
-      ): errorDetails ?(
+      {loadingDetails ? (
+        <Loader />
+      ) : errorDetails ? (
         <Message variant="danger"> {error} </Message>
-      ):(
-          
-      
-          <>
-      <h2>Request for a package shipping</h2>
-        <h3>1. Package contents {product.length} products </h3>
-        <Card className="mb-4">
-          <ListGroup>
-            <ListGroupItem>
-              <Row>
-                <Col md={2}>Incoming package number</Col>
-                <Col md={3}>Name</Col>
-                <Col md={3}>Price per item</Col>
-                <Col md={2}>Quantity</Col>
-                <Col md={2}>Total</Col>
-              </Row>
-            </ListGroupItem>
-            {product.map((item) => (
+      ) : (
+        <>
+          <h2>Request for a package shipping</h2>
+          <h3>1. Package contents {product.length} products </h3>
+          <Card className="mb-4">
+            <ListGroup>
               <ListGroupItem>
                 <Row>
-                  <Col md={2}>{item._id}</Col>
-                  <Col md={3}>{item.name}</Col>
-                  <Col md={3}>${item.price}</Col>
-                  <Col md={2}>{item.quantity}</Col>
-                  <Col md={2}>
-                    {" "}
-                    $ {(item.quantity * item.price).toFixed(2)}{" "}
+                  <Col md={2}>Incoming package number</Col>
+                  <Col md={3}>Name</Col>
+                  <Col md={3}>Price per item</Col>
+                  <Col md={2}>Quantity</Col>
+                  <Col md={2}>Total</Col>
+                </Row>
+              </ListGroupItem>
+              {product.map((item) => (
+                <ListGroupItem>
+                  <Row>
+                    <Col md={2}>{item._id}</Col>
+                    <Col md={3}>{item.name}</Col>
+                    <Col md={3}>${item.price}</Col>
+                    <Col md={2}>{item.quantity}</Col>
+                    <Col md={2}>
+                      {" "}
+                      $ {(item.quantity * item.price).toFixed(2)}{" "}
+                    </Col>
+                  </Row>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </Card>
+
+          <h3>2. Select the recipient </h3>
+          <Card className="p-4">
+            <Row>
+              <Col md={5}>
+                <Form.Group>
+                  <Form.Label></Form.Label>
+                  <Form.Control></Form.Control>
+                </Form.Group>
+              </Col>
+              <Col md={7} style={{ textAlign: "right" }}>
+                <Button className="btn btn-primary">
+                  + Add a new recipient
+                </Button>
+              </Col>
+            </Row>
+          </Card>
+
+          <h3>3. Delivery type </h3>
+          <Card className="mb-4 ">
+            <Form className="m-4">
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Delivery to the pick-up point"
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Delivery at the address" />
+              </Form.Group>
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </Form>
+          </Card>
+
+          <h3>4. Customs limit</h3>
+
+          <Card className="mb-4">
+            <ListGroup>
+              <ListGroupItem>
+                <Row>
+                  <Col md={6}>Items selected for shipment</Col>
+                  <Col md={6} style={{ textAlign: "right" }}>
+                    415,84 €
                   </Col>
                 </Row>
               </ListGroupItem>
-            ))}
-          </ListGroup>
-        </Card>
+              <ListGroupItem>
+                <Row>
+                  <Col md={6}>
+                    Duty-free limit in the Russian Federation per package
+                  </Col>
+                  <Col md={6} style={{ textAlign: "right" }}>
+                    200 €
+                  </Col>
+                </Row>
+              </ListGroupItem>
+              <ListGroupItem>
+                <Row style={{ color: "red" }}>
+                  <Col md={6}>Expected exceeding of the duty-free limit:</Col>
+                  <Col md={6} style={{ textAlign: "right" }}>
+                    215,84 €
+                  </Col>
+                </Row>
+              </ListGroupItem>
+            </ListGroup>
+          </Card>
 
-        <h3>2. Select the recipient </h3>
-        <Card className="p-4">
-          <Row>
-            <Col md={5}>
-              <Form.Group>
-                <Form.Label></Form.Label>
-                <Form.Control></Form.Control>
-              </Form.Group>
-            </Col>
-            <Col md={7} style={{ textAlign: "right" }}>
-              <Button className="btn btn-primary">+ Add a new recipient</Button>
-            </Col>
-          </Row>
-        </Card>
+          <h3>5. Confirm shipping</h3>
+          <Card md={12}>
+            <Row>
+              <Col style={{ justifyContent: "center" }}>
+                <input
+                  type="checkbox"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginLeft: "20px",
+                    marginRight: "20px",
+                    marginTop: "4px",
+                  }}
+                />
+                <p style={{ display: "inline" }}>
+                  Send manually (not send a parcel automatically)
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <Col style={{ justifyContent: "center" }}>
+                <input
+                  type="checkbox"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginLeft: "20px",
+                    marginRight: "20px",
+                    marginTop: "4px",
+                  }}
+                />
+                <p style={{ display: "inline" }}>
+                  Send an SMS with a payment link for a parcel
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <Col style={{ justifyContent: "center" }}>
+                <input
+                  type="checkbox"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    marginLeft: "20px",
+                    marginRight: "20px",
+                    marginTop: "4px",
+                  }}
+                />
+                <p style={{ display: "inline" }}>
+                  Send an SMS with tracking number of the parcel after
+                  dispatching
+                </p>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="m-4">
+                <Form>
+                  <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>
+                      {" "}
+                      <span style={{ fontSize: "18px" }}>Comments</span>
+                    </Form.Label>
+                    <Form.Control as="textarea" rows={3} />
+                  </Form.Group>
+                </Form>
+              </Col>
+            </Row>
+            <Row>
+              <Col className="m-4">
+                <p>
+                  {" "}
+                  <span style={{ fontSize: "17px" }}> Insurance: 279,66 ₽</span>
+                </p>
+                <p>
+                  Please note that the calculation may be not correct, since the
+                  weight may change both up and down after packaging. The
+                  delivery price will include mandatory insurance – 0.75% of the
+                  declared value of the goods Sending SMS notifications is
+                  chargeable: 10 RUB per message.
+                </p>
+              </Col>
+            </Row>
+          </Card>
 
-        <h3>3. Delivery type </h3>
-        <Card className="mb-4 ">
-          <Form className="m-4">
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="Delivery to the pick-up point"
-              />
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Delivery at the address" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Card>
-
-        <h3>4. Customs limit</h3>
-
-        <Card className="mb-4">
-          <ListGroup>
-            <ListGroupItem>
-              <Row>
-                <Col md={6}>Items selected for shipment</Col>
-                <Col md={6} style={{ textAlign: "right" }}>
-                  415,84 €
-                </Col>
-              </Row>
-            </ListGroupItem>
-            <ListGroupItem>
-              <Row>
-                <Col md={6}>
-                  Duty-free limit in the Russian Federation per package
-                </Col>
-                <Col md={6} style={{ textAlign: "right" }}>
-                  200 €
-                </Col>
-              </Row>
-            </ListGroupItem>
-            <ListGroupItem>
-              <Row style={{ color: "red" }}>
-                <Col md={6}>Expected exceeding of the duty-free limit:</Col>
-                <Col md={6} style={{ textAlign: "right" }}>
-                  215,84 €
-                </Col>
-              </Row>
-            </ListGroupItem>
-          </ListGroup>
-        </Card>
-
-        <h3>5. Confirm shipping</h3>
-        <Card md={12}>
-          <Row>
-            <Col style={{ justifyContent: "center" }}>
-              <input
-                type="checkbox"
-                style={{
-                  width: "30px",
-                  height: "30px",
-                  marginLeft: "20px",
-                  marginRight: "20px",
-                  marginTop: "4px",
-                }}
-              />
-              <p style={{ display: "inline" }}>
-                Send manually (not send a parcel automatically)
-              </p>
-            </Col>
-          </Row>
-          <Row>
-            <Col style={{ justifyContent: "center" }}>
-              <input
-                type="checkbox"
-                style={{
-                  width: "30px",
-                  height: "30px",
-                  marginLeft: "20px",
-                  marginRight: "20px",
-                  marginTop: "4px",
-                }}
-              />
-              <p style={{ display: "inline" }}>
-                Send an SMS with a payment link for a parcel
-              </p>
-            </Col>
-          </Row>
-          <Row>
-            <Col style={{ justifyContent: "center" }}>
-              <input
-                type="checkbox"
-                style={{
-                  width: "30px",
-                  height: "30px",
-                  marginLeft: "20px",
-                  marginRight: "20px",
-                  marginTop: "4px",
-                }}
-              />
-              <p style={{ display: "inline" }}>
-                Send an SMS with tracking number of the parcel after dispatching
-              </p>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="m-4">
-              <Form>
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                  <Form.Label>
-                    {" "}
-                    <span style={{ fontSize: "18px" }}>Comments</span>
-                  </Form.Label>
-                  <Form.Control as="textarea" rows={3} />
-                </Form.Group>
-              </Form>
-            </Col>
-          </Row>
-          <Row>
-            <Col className="m-4">
-              <p>
-                {" "}
-                <span style={{ fontSize: "17px" }}> Insurance: 279,66 ₽</span>
-              </p>
-              <p>
-                Please note that the calculation may be not correct, since the
-                weight may change both up and down after packaging. The delivery
-                price will include mandatory insurance – 0.75% of the declared
-                value of the goods Sending SMS notifications is chargeable: 10
-                RUB per message.
-              </p>
-            </Col>
-          </Row>
-        </Card>
-
-        <div>
-          <Button className="btn btn-lg blockquote-primary mr-4">Save</Button>
-          <Button className="btn btn-lg btn-danger">Cancel</Button>
-        </div>
-      </>
-    )}
+          <div>
+            <Button className="btn btn-lg blockquote-primary mr-4">Save</Button>
+            <Button className="btn btn-lg btn-danger">Cancel</Button>
+          </div>
+        </>
+      )}
     </>
   );
 }

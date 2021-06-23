@@ -361,8 +361,8 @@ function IncomingPackage({ history }) {
                               )}
                             </ListGroupItem>
                             <ListGroupItem>
-                              <Row>
-                                <Col md={4}>
+                              <Row >
+                                <Col md={2}>
                                   <i className="far fa-edit m-2"></i>{" "}
                                   <LinkContainer
                                     to={`/users/package/${item._id}/edit`}>
@@ -371,11 +371,16 @@ function IncomingPackage({ history }) {
                                     </Button>
                                   </LinkContainer>
                                 </Col>
-                                <Col md={4}>
+                                <Col md={2}>
                                   <i className="fas fa-columns m-2"></i>{" "}
-                                  <Link> SPLIT</Link>
+                                  <LinkContainer
+                                    to={`/users/package/${item._id}/split`}>
+                                    <Button variant="secondary" className="btn-sm">
+                                      SPLIT
+                                    </Button>
+                                  </LinkContainer>
                                 </Col>
-                                <Col md={4}>
+                                <Col md={2}>
                                   <i className="fas fa-trash-alt m-2"></i>{" "}
                                   <Button
                                     variant="danger"

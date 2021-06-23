@@ -29,6 +29,7 @@ import AdminWarehouse from "screens/AdminWarehouse";
 import OutgoingPackageDetails from "screens/OutgoingPackageDetails";
 import OutgoingDetailsUser from "screens/OutgoingDetailsUser";
 import CreateRequest from "screens/CreateRequest";
+import SplitPackage from "screens/SplitPackage";
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
           <Route path='/admin/package/:_id/edit' component={EditPackageAdmin} exact />
           {/* <Route path='/users/package/:_id/outgoing' component={CreateOutgoingPackage} exact /> */}
           <Route path='/users/package/:_id/outgoing' component={CreateRequest} exact />
+          <Route path='/users/package/:_id/split' component={SplitPackage} exact />
           <Route path='/outgoing/detail/:_id' component={OutgoingPackageDetails} exact />
           <Route path='/outgoing/user/detail/:_id' component={OutgoingDetailsUser} exact />
           <Route path='/admin/outgoing' component={OutgoingPackageAdmin} exact />
