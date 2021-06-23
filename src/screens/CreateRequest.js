@@ -167,9 +167,18 @@ function CreateRequest({ match, params, history }) {
   return (
     <>
       {errorDetails && <Message variant="danger"> {error} </Message>}
-      {loadingDetails && <Loader />}
+      {loadingDetails ?
+      (
+      
+      <Loader /> 
+      
+      ): errorDetails ?(
+        <Message variant="danger"> {error} </Message>
+      ):(
+          
+      
+          <>
       <h2>Request for a package shipping</h2>
-      <>
         <h3>1. Package contents {product.length} products </h3>
         <Card className="mb-4">
           <ListGroup>
@@ -353,6 +362,7 @@ function CreateRequest({ match, params, history }) {
           <Button className="btn btn-lg btn-danger">Cancel</Button>
         </div>
       </>
+    )}
     </>
   );
 }
