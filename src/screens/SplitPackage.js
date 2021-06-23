@@ -18,10 +18,6 @@ import { getUserAddress } from "../actions/addressAction";
 function SplitPackage({ match, history }) {
   const packageId = match.params._id;
   const [packageName, setPackageName] = useState("");
-  const [outgoingPackageName, setOutgoingPackageName] = useState("");
-  const [productName, setProductName] = useState("");
-  const [productQuantity, setProductQuantity] = useState("");
-  const [Address, setAddress] = useState([]);
 
   const [product, setProduct] = useState([]);
   const [trackingNumber, setTrackingNumber] = useState("");
@@ -85,8 +81,7 @@ function SplitPackage({ match, history }) {
   const [inputListP, setInputListP] = useState([
     {
       productName: "",
-      productQuantity: "",
-      packageName: "",
+      productQuantity: 0,
     },
   ]);
   const [inputList1, setInputList1] = useState([
@@ -117,7 +112,7 @@ function SplitPackage({ match, history }) {
       {
         packageName: "",
         productName: "",
-        productQuantity: "",
+        productQuantity: 0,
       },
      
     ]);
@@ -126,12 +121,13 @@ function SplitPackage({ match, history }) {
     setInputListP([
       ...inputListP,
       {
-        packageName: "",
         productName: "",
-        productQuantity: "",
+        productQuantity: 0,
       },
     ]);
   };
+
+ 
 
   const handleRemoveClick = (index) => {
     const list = [...inputList1];
@@ -143,6 +139,13 @@ function SplitPackage({ match, history }) {
     list.splice(index, 1);
     setInputListP(list);
   };
+
+  const submitHandler=()=>{
+      console.log(inputListP);
+      
+  }
+
+
 
   return (
     <>
@@ -181,8 +184,7 @@ function SplitPackage({ match, history }) {
             </ListGroup>
           </Card>
 
-          {inputList1.map((x, i) => {
-            return (
+    
               <>
                 <Card className=" p-3">
                   <Row>
@@ -194,13 +196,13 @@ function SplitPackage({ match, history }) {
                             required
                             type="name"
                             placeholder="Enter Your Package name"
-                            value={x.packageName}
-                            onChange={(e) => handleInputChange(e, i)}
+                            value={packageName}
+                            onChange={setPackageName}
                           />
                         </Form.Group>
                       </Form>
                     </Col>
-                    {inputList1.length !== 1 && (
+                    {/* {inputList1.length !== 1 && (
                       <Col
                         md={4}
                         style={{ textAlign: "right", cursor: "pointer" }}>
@@ -208,7 +210,7 @@ function SplitPackage({ match, history }) {
                           class="far fa-trash-alt fa-2x"
                           onClick={() => handleRemoveClick(i)}></i>
                       </Col>
-                    )}
+                    )} */}
                   </Row>
 
                   <p>Package contents</p>
@@ -221,9 +223,13 @@ function SplitPackage({ match, history }) {
                         <Form.Label>Product</Form.Label>
                         <Form.Control
                           as="select"
-                          onSelect={(e) => handleInputChangeP(e, i)}>
+                          name="productName"
+                          type="text"
+                          onChange={(e) => handleInputChangeP(e, i)}
+                          >
+                        <option selected value="" hidden>choose</option>
                           {product.map((item) => (
-                            <option value={x.productName}>{item.name} </option>
+                            <option value={item.name} key={item.name}>{item.name} </option>
                           ))}
                         </Form.Control>
                       </Form.Group>
@@ -232,14 +238,13 @@ function SplitPackage({ match, history }) {
                       md={2}
                       style={{ textAlign: "right", marginTop: "18px" }}>
                       <Button>
-                        <i className="fas fa-minus"></i>
+                        <i className="fas fa-minus" onClick={x.productQuantity-1}></i>
                       </Button>
                     </Col>
                     <Col md={2}>
                       <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Quantity</Form.Label>
                         <Form.Control
-                          disabled
                           required
                           name="productQuantity"
                           type="number"
@@ -251,7 +256,7 @@ function SplitPackage({ match, history }) {
                     </Col>
                     <Col md={2} style={{ marginTop: "18px" }}>
                       <Button>
-                        <i className="fas fa-plus"></i>
+                        <i className="fas fa-plus" onClick={x.productQuantity+1}></i>
                       </Button>
                     </Col>
                     {inputListP.length !== 1 && (
@@ -264,25 +269,24 @@ function SplitPackage({ match, history }) {
                 
                   {inputListP.length - 1 === i && (
 
-                  <Link onClick={handleAddClickP}>+Add A Product </Link>
+                  <a style={{cursor:"pointer",color:"green"}} onClick={handleAddClickP}>+Add A Product </a>
                   )}
                   </>
                 )})}
                 </Card>
-                {inputList1.length - 1 === i && (
+                {/* {inputList1.length - 1 === i && (
                   <Link
                     variant="outline-success btn-block"
                     type="button">
                     {" "}
                     +Add A Package{" "}
                   </Link>
-                )}
+                )} */}
               </>
-            );
-          })}
+            
 
           <div className="m-4">
-            <Button className="btn btn-lg blockquote-primary mr-4">Save</Button>
+            <Button onClick={submitHandler} className="btn btn-lg blockquote-primary mr-4">Save</Button>
             <Button className="btn btn-lg btn-danger">Cancel</Button>
           </div>
         </>
