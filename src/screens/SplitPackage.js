@@ -103,6 +103,7 @@ function SplitPackage({ match, history }) {
     list[index][name] = value;
     setInputList(list);
   };
+
   const handleInputChangeP = (e, index) => {
     const { name, value } = e.target;
     const list = [...inputListP];
@@ -118,6 +119,7 @@ function SplitPackage({ match, history }) {
         productName: "",
         productQuantity: "",
       },
+     
     ]);
   };
   const handleAddClickP = () => {
@@ -209,10 +211,10 @@ function SplitPackage({ match, history }) {
                     )}
                   </Row>
 
+                  <p>Package contents</p>
                   {inputListP.map((x, i) => {
                       return(
                           <>
-                  <p>Package contents</p>
                   <Row>
                     <Col md={5}>
                       <Form.Group controlId="exampleForm.ControlInput1">
@@ -253,7 +255,7 @@ function SplitPackage({ match, history }) {
                       </Button>
                     </Col>
                     {inputListP.length !== 1 && (
-                    <Col md={1}>
+                    <Col md={1} style={{marginTop:"28px"}}>
                     <i class="fas fa-times-circle fa-2x"  onClick={() => handleRemoveClickP(i)}></i>
                     </Col>)}
             
@@ -269,7 +271,6 @@ function SplitPackage({ match, history }) {
                 </Card>
                 {inputList1.length - 1 === i && (
                   <Link
-                    onClick={handleAddClick}
                     variant="outline-success btn-block"
                     type="button">
                     {" "}
