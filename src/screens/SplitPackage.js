@@ -228,7 +228,7 @@ function SplitPackage({ match, history }) {
                     </Col>
                     <Col
                       md={2}
-                      style={{ textAlign: "right", marginTop: "29px" }}>
+                      style={{ textAlign: "right", marginTop: "18px" }}>
                       <Button>
                         <i className="fas fa-minus"></i>
                       </Button>
@@ -247,7 +247,7 @@ function SplitPackage({ match, history }) {
                         />
                       </Form.Group>
                     </Col>
-                    <Col md={2} style={{ marginTop: "29px" }}>
+                    <Col md={2} style={{ marginTop: "18px" }}>
                       <Button>
                         <i className="fas fa-plus"></i>
                       </Button>

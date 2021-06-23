@@ -261,9 +261,6 @@ function AddNewIncomingPck({ location, history }) {
                     </Row>
                   </Form>
                   <Col md={4}>
-                    {/* <Button href="" variant="outline-success btn-block" type="button">
-                +Add New Product
-              </Button> */}
                     {inputList.length !== 1 && (
                       <Button
                         className="mr10"
