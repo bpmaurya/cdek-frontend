@@ -243,7 +243,7 @@ function IncomingPackage({ history }) {
                                   </Col>
                                   <Col md={3} style={{ textAlign: "right" }}>
                                     {showProduct1.includes(item._id) ? (
-                                      <i className="fas fa-chevron-down mr-4"></i>
+                                      <i style={{color:"#1ab248"}} className="fas fa-chevron-down mr-4"></i>
                                     ) : (
                                       <i className="fas fa-chevron-up mr-4"></i>
                                     )}
@@ -262,18 +262,7 @@ function IncomingPackage({ history }) {
                                   </ListGroupItem>
                                   <>
                                     {item.product_package.map((item) => (
-                                      // <tr key={item._id}>
-                                      //   <td>{item.name}</td>
-                                      //   <td>${item.price}</td>
-                                      //   <td>{item.quantity}</td>
-                                      //   <td>
-                                      //     {" "}
-                                      //     ${" "}
-                                      //     {(
-                                      //       item.quantity * item.price
-                                      //     ).toFixed(2)}{" "}
-                                      //   </td>
-                                      // </tr>
+                                      
                                       <ListGroupItem>
                                         <Row>
                                           <Col md={3}>{item.name}</Col>

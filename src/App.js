@@ -28,6 +28,7 @@ import OutgoingPackageAdmin from "screens/OutgoingPackageListAdmin";
 import AdminWarehouse from "screens/AdminWarehouse";
 import OutgoingPackageDetails from "screens/OutgoingPackageDetails";
 import OutgoingDetailsUser from "screens/OutgoingDetailsUser";
+import CreateRequest from "screens/CreateRequest";
 
 
 function App() {
@@ -71,7 +72,8 @@ function App() {
           <Route path='/admin/shippingRate' component={ShippingRateScreen} exact />
           <Route path='/admin/add-shippingRate' component={AddShippingRate} exact />
           <Route path='/admin/package/:_id/edit' component={EditPackageAdmin} exact />
-          <Route path='/users/package/:_id/outgoing' component={CreateOutgoingPackage} exact />
+          {/* <Route path='/users/package/:_id/outgoing' component={CreateOutgoingPackage} exact /> */}
+          <Route path='/users/package/:_id/outgoing' component={CreateRequest} exact />
           <Route path='/outgoing/detail/:_id' component={OutgoingPackageDetails} exact />
           <Route path='/outgoing/user/detail/:_id' component={OutgoingDetailsUser} exact />
           <Route path='/admin/outgoing' component={OutgoingPackageAdmin} exact />
