@@ -166,7 +166,7 @@ function CreateRequest({ match, params, history }) {
 
   return (
     <>
-      {errorDetails && <Message variant="danger"> {error} </Message>}
+    
       {loadingDetails ?
       (
       
