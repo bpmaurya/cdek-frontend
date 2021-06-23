@@ -82,7 +82,66 @@ function SplitPackage({ match, history }) {
     }
   }, [history, success, successDetails, incomingDetails]);
 
-  const handleAddClick = () => {};
+  const [inputListP, setInputListP] = useState([
+    {
+      productName: "",
+      productQuantity: "",
+      packageName: "",
+    },
+  ]);
+  const [inputList1, setInputList1] = useState([
+    {
+      productName: "",
+      productQuantity: "",
+      packageName: "",
+    },
+  ]);
+
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
+  const handleInputChangeP = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputListP];
+    list[index][name] = value;
+    setInputListP(list);
+  };
+
+  const handleAddClick = () => {
+    setInputList1([
+      ...inputList1,
+      {
+        packageName: "",
+        productName: "",
+        productQuantity: "",
+      },
+    ]);
+  };
+  const handleAddClickP = () => {
+    setInputListP([
+      ...inputListP,
+      {
+        packageName: "",
+        productName: "",
+        productQuantity: "",
+      },
+    ]);
+  };
+
+  const handleRemoveClick = (index) => {
+    const list = [...inputList1];
+    list.splice(index, 1);
+    setInputList1(list);
+  };
+  const handleRemoveClickP = (index) => {
+    const list = [...inputListP];
+    list.splice(index, 1);
+    setInputListP(list);
+  };
+
   return (
     <>
       {loadingDetails ? (
@@ -120,60 +179,106 @@ function SplitPackage({ match, history }) {
             </ListGroup>
           </Card>
 
-          <Card className=" p-3">
-            <Form>
-              <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label>Package Name</Form.Label>
-                <Form.Control
-                  required
-                  type="name"
-                  placeholder="Enter Your Package name"
-                  value={packageName}
-                  onChange={(e) => setPackageName(e.target.value)}
-                />
-              </Form.Group>
-            </Form>
+          {inputList1.map((x, i) => {
+            return (
+              <>
+                <Card className=" p-3">
+                  <Row>
+                    <Col md={8}>
+                      <Form>
+                        <Form.Group controlId="exampleForm.ControlInput1">
+                          <Form.Label>Package Name</Form.Label>
+                          <Form.Control
+                            required
+                            type="name"
+                            placeholder="Enter Your Package name"
+                            value={x.packageName}
+                            onChange={(e) => handleInputChange(e, i)}
+                          />
+                        </Form.Group>
+                      </Form>
+                    </Col>
+                    {inputList1.length !== 1 && (
+                      <Col
+                        md={4}
+                        style={{ textAlign: "right", cursor: "pointer" }}>
+                        <i
+                          class="far fa-trash-alt fa-2x"
+                          onClick={() => handleRemoveClick(i)}></i>
+                      </Col>
+                    )}
+                  </Row>
 
-            <p>Package contents</p>
+                  {inputListP.map((x, i) => {
+                      return(
+                          <>
+                  <p>Package contents</p>
+                  <Row>
+                    <Col md={5}>
+                      <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Label>Product</Form.Label>
+                        <Form.Control
+                          as="select"
+                          onSelect={(e) => handleInputChangeP(e, i)}>
+                          {product.map((item) => (
+                            <option value={x.productName}>{item.name} </option>
+                          ))}
+                        </Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col
+                      md={2}
+                      style={{ textAlign: "right", marginTop: "29px" }}>
+                      <Button>
+                        <i className="fas fa-minus"></i>
+                      </Button>
+                    </Col>
+                    <Col md={2}>
+                      <Form.Group controlId="exampleForm.ControlInput1">
+                        <Form.Label>Quantity</Form.Label>
+                        <Form.Control
+                          disabled
+                          required
+                          name="productQuantity"
+                          type="number"
+                          placeholder="Product Quantity"
+                          value={x.productQuantity}
+                          onChange={(e) => handleInputChangeP(e, i)}
+                        />
+                      </Form.Group>
+                    </Col>
+                    <Col md={2} style={{ marginTop: "29px" }}>
+                      <Button>
+                        <i className="fas fa-plus"></i>
+                      </Button>
+                    </Col>
+                    {inputListP.length !== 1 && (
+                    <Col md={1}>
+                    <i class="fas fa-times-circle fa-2x"  onClick={() => handleRemoveClickP(i)}></i>
+                    </Col>)}
+            
+                  </Row>
 
-            <Row>
-              <Col md={6}>
-                <Form.Group controlId="exampleForm.ControlInput1">
-                  <Form.Label>Product</Form.Label>
-                  <Form.Control as="select">
-             {product.map(item=> <option>{item.name} </option>)}
-      
-    </Form.Control>
-                </Form.Group>
-              </Col>
-              <Col md={2} style={{textAlign:"right",marginTop:"29px"}}>
-                <Link>
-                  <i className="fas fa-minus"></i>
-                </Link>
-              </Col>
-              <Col md={2}>
-                <Form.Group controlId="exampleForm.ControlInput1">
-                  <Form.Label>Quantity</Form.Label>
-                  <Form.Control
-                    required
-                    disabled
-                    name="quantity"
-                    type="number"
-                    placeholder=""
-                    // value={x.productQuantity}
-                  />
-                </Form.Group>
-              </Col>
-              <Col md={2} style={{marginTop:"29px"}} >
-                <Link>
-                  <i className="fas fa-plus"></i>
-                </Link>
-              </Col>
-            </Row>
+                
+                  {inputListP.length - 1 === i && (
 
-            <Link onClick={handleAddClick}>+Add A Product </Link>
-          </Card>
-          <Link onClick={handleAddClick}>+Add A Package </Link>
+                  <Link onClick={handleAddClickP}>+Add A Product </Link>
+                  )}
+                  </>
+                )})}
+                </Card>
+                {inputList1.length - 1 === i && (
+                  <Link
+                    onClick={handleAddClick}
+                    variant="outline-success btn-block"
+                    type="button">
+                    {" "}
+                    +Add A Package{" "}
+                  </Link>
+                )}
+              </>
+            );
+          })}
 
           <div className="m-4">
             <Button className="btn btn-lg blockquote-primary mr-4">Save</Button>
